@@ -1327,7 +1327,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 12,
+            "line": 11,
             "description": "Clear the currently defined arrows",
             "itemtype": "method",
             "name": "clear",
@@ -1337,7 +1337,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 22,
+            "line": 21,
             "description": "Sets the targets for arrows to point",
             "itemtype": "method",
             "name": "setTargets",
@@ -1347,7 +1347,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 58,
+            "line": 57,
             "description": "Iterates over the arrows collection showing each arrow",
             "itemtype": "method",
             "name": "show",
@@ -1357,7 +1357,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 71,
+            "line": 70,
             "description": "Iterates over the arrows collection hiding each arrow",
             "itemtype": "method",
             "name": "hide",
@@ -1367,7 +1367,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 84,
+            "line": 83,
             "description": "Iterates over the arrows collection fading in each arrow",
             "itemtype": "method",
             "name": "fadeIn",
@@ -1377,7 +1377,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 97,
+            "line": 96,
             "description": "Iterates over the arrows collection fading out each arrow",
             "itemtype": "method",
             "name": "fadeOut",
@@ -1387,7 +1387,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 116,
+            "line": 115,
             "description": "Iterates over the arrows collection repositionating each arrow",
             "itemtype": "method",
             "name": "positionate",
@@ -1397,7 +1397,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 129,
+            "line": 128,
             "description": "Iterates over the arrows collection rendering each arrow",
             "itemtype": "method",
             "name": "render",
@@ -1407,7 +1407,7 @@
         },
         {
             "file": "src\\step\\arrows.js",
-            "line": 142,
+            "line": 141,
             "description": "A Polling function to check if arrows coordinates has changed",
             "itemtype": "method",
             "name": "pollForArrowsChanges",

@@ -908,7 +908,6 @@
     **/
     var Arrows = {};
 
-    zzz = Arrows;
     Arrows.arrows = [];
 
     /**
