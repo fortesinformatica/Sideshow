@@ -2,7 +2,7 @@
 #Bash script to combine, resolve requires, lint and minify the javascript files of a project
 #author: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]
 #date: 2013-11-24
-#version: 0.0.2
+#version: 0.0.3
 
 library_name="sideshow"
 
@@ -28,39 +28,27 @@ remove_previous_output_files(){
 
 resolve_dependencies(){
 	tmp_file_path="../tmp/${output_debug_file}.tmp"
-	requires_found=$(cat ${tmp_file_path} | grep "//= require")
-	requires=()
-	unique_requires=()
-	
-	while read -r line; do
-		req=("$line")
-		#remove the //=require directive and leaves only the required file name
-		req=${req#//= require }
-		requires+=($req)
-	done <<< "$requires_found"
-
-	#getting unique requires 
-	unique_requires=($(printf "%s\n" "${requires[@]}" | sort -u))
-	
 	tmp_file_content=`cat ${tmp_file_path}`
-	for req in "${unique_requires[@]}"
-	do
-		#gets the required file content
-		required_file_content=`cat ${req}.js`
-		#reproduces the original require directive
-		require_directive="//= require ${req}"
-		#replaces each require directive with the required file content
-		tmp_file_content=${tmp_file_content//$require_directive/$required_file_content}
-	done
+	resolved_file=""
 
-	#saves the file content to the temp file
-	echo "${tmp_file_content}" > $tmp_file_path
+	while IFS='' read -r line; do
+		require_pattern="//= require "
+		if [[ $line == *$require_pattern* ]]
+		then
+			trailed_line="$(echo $line | sed 's/^ *//g')"
+			req=${trailed_line#//= require }
+			required_file_content=`cat ${req}.js`
+
+			printf "%s\n" "$required_file_content"
+		else
+			printf "%s\n" "$line"
+		fi
+	done <<< "$tmp_file_content" > $tmp_file_path
 }
 
 combine_files(){
 	#combine the files for build inserting a new line before each (except for the first line)
 	gawk 'FNR==1 && NR!=1{print ""}1' ${files} > ../tmp/${output_debug_file}.tmp
-	#mincer --include ../src --output ../tmp teste.js
 }
 
 beautify_and_generate_debug_file(){
@@ -97,7 +85,7 @@ if [ "$mode" != "dev" ]; then
 	minify_files
 	
 	cd ..
-	echo "Generating Docs... (with YUIDoc)"
+	echo "Generating Docs (with YUIDoc)..."
 	yuidoc ./src
 	
 	cd ${original_folder}

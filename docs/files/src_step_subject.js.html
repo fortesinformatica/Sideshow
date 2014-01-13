@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\step\subject.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,104 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\step\subject.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+    /**
+    The current subject (the object being shown by the current wizard)
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
+    @class Subject
+    @static
+    **/
+    var Subject = {};
 
-    
+    /**
+    The current subject jQuery wrapped DOM element 
 
-    
-</div>
+    @@field obj
+    @static
+    @type Object
+    **/
+    Subject.obj = null;
 
+    /**
+    The current subject dimension information
 
+    @@field position
+    @static
+    @type Object
+    **/
+    Subject.dimension = {};
 
-<div class="box intro">
-    <p>The main class for Sideshow</p>
+    /**
+    The current subject positioning information
 
-</div>
+    @@field position
+    @static
+    @type Object
+    **/
+    Subject.position = {};
 
+    /**
+    The current subject border radius information
 
+    @@field borderRadius
+    @static
+    @type Object
+    **/
+    Subject.borderRadius = {};
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+    /**
+    Checks if the object has changed since the last checking
 
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
+    @method hasChanged
+    @return boolean
+    **/
+    Subject.hasChanged = function() {
+        if (!this.obj) return false;
 
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
+        return (this.obj.offset().left !== this.position.x) ||
+            (this.obj.offset().top !== this.position.y) ||
+            (this.obj.outerWidth() !== this.dimension.width) ||
+            (this.obj.outerHeight() !== this.dimension.height) ||
+            (parsePxValue(this.obj.css(&quot;border-top-left-radius&quot;)) !== this.borderRadius.leftTop) ||
+            (parsePxValue(this.obj.css(&quot;border-top-right-radius&quot;)) !== this.borderRadius.rightTop) ||
+            (parsePxValue(this.obj.css(&quot;border-bottom-left-radius&quot;)) !== this.borderRadius.leftBottom) ||
+            (parsePxValue(this.obj.css(&quot;border-bottom-right-radius&quot;)) !== this.borderRadius.rightBottom) ||
+            Screen.hasChanged();
+    };
 
-            
+    /**
+    Updates the information about the suject
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
+    @method updateInfo
+    @param {Object} config                                Dimension, positioning and border radius information
+    **/
+    Subject.updateInfo = function(config) {
+        if (config === undefined) {
+            this.position.x = this.obj.offset().left;
+            this.position.y = this.obj.offset().top;
+            this.dimension.width = this.obj.outerWidth();
+            this.dimension.height = this.obj.outerHeight();
+            this.borderRadius.leftTop = parsePxValue(this.obj.css(&quot;border-top-left-radius&quot;));
+            this.borderRadius.rightTop = parsePxValue(this.obj.css(&quot;border-top-right-radius&quot;));
+            this.borderRadius.leftBottom = parsePxValue(this.obj.css(&quot;border-bottom-left-radius&quot;));
+            this.borderRadius.rightBottom = parsePxValue(this.obj.css(&quot;border-bottom-right-radius&quot;));
+        } else {
+            this.position.x = config.position.x;
+            this.position.y = config.position.y;
+            this.dimension.width = config.dimension.width;
+            this.dimension.height = config.dimension.height;
+            this.borderRadius.leftTop = config.borderRadius.leftTop;
+            this.borderRadius.rightTop = config.borderRadius.rightTop;
+            this.borderRadius.leftBottom = config.borderRadius.leftBottom;
+            this.borderRadius.rightBottom = config.borderRadius.rightBottom;
+        }
 
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+        Screen.updateInfo();
+    };  
+    </pre>
 </div>
 
                     </div>

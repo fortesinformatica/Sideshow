@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\step\arrow.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,99 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\step\arrow.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+    /**
+    A single arrow for pointing individual items in current subject 
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
+    @class Arrow
+    **/
+    var Arrow = jazz.Class().extending(FadableItem);
 
-    
+    /**
+    The jQuery wrapped object which will be pointed by this arrow
 
-    
-</div>
+    @@field target
+    @type Object
+    **/
+    Arrow.field(&quot;target&quot;, {});
 
+    /**
+    Flag created to set if the arrow was visible once, this is used for recreating references to the targets DOM objects
 
+    @@field onceVisible
+    @type Object
+    **/
+    Arrow.field(&quot;onceVisible&quot;, false);
 
-<div class="box intro">
-    <p>The main class for Sideshow</p>
+    /**
+    Renders the Arrow
 
-</div>
+    @method render
+    **/
+    Arrow.method(&quot;render&quot;, function() {
+        this.$el = $(&quot;&lt;div&gt;&quot;)
+            .addClass(&quot;sideshow-subject-arrow&quot;)
+            .addClass(&quot;sideshow-hidden&quot;)
+            .addClass(&quot;sideshow-invisible&quot;);
+        this.callSuper(&quot;render&quot;);
+    });
 
+    /**
+    Positionates the Arrow according to its target
 
+    @method positionate
+    **/
+    Arrow.method(&quot;positionate&quot;, function() {
+        var target = this.target;
+        target.position = {
+            x: target.$el.offset().left,
+            y: target.$el.offset().top
+        };
+        target.dimension = {
+            width: target.$el.outerWidth(),
+            height: target.$el.outerHeight()
+        };
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+        this.$el.css(&quot;top&quot;, target.position.y - 30 + &quot;px&quot;)
+            .css(&quot;left&quot;, target.position.x + (parsePxValue(target.dimension.width) / 2) - 12 + &quot;px&quot;);
+    });
 
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
+    /**
+    Shows the Arrow 
 
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
+    @method show
+    **/
+    Arrow.method(&quot;show&quot;, function() {
+        this.callSuper(&quot;show&quot;);
+        this.positionate();
+    });
 
-            
+    /**
+    Does a fade in transition in the Arrow 
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
+    @method fadeIn
+    **/
+    Arrow.method(&quot;fadeIn&quot;, function() {
+        this.callSuper(&quot;fadeIn&quot;);
+        this.positionate();
+    });
 
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
+    /**
+    Checks if the arrow&#x27;s target position or dimension has changed
 
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+    @method hasChanged
+    @return boolean                                     
+    **/
+    Arrow.method(&quot;hasChanged&quot;, function() {
+        return (this.target.dimension.width !== this.target.$el.outerWidth() ||
+            this.target.dimension.height !== this.target.$el.outerHeight() ||
+            this.target.position.y !== this.target.$el.offset().top ||
+            this.target.position.x !== this.target.$el.offset().left);
+    });
+    </pre>
 </div>
 
                     </div>

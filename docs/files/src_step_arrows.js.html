@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\step\arrows.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,167 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\step\arrows.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+    /**
+    Class representing all the current shown arrows
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
+    @class Arrows
+    @static
+    **/
+    var Arrows = {};
 
-    
+    zzz = Arrows;
+    Arrows.arrows = [];
 
-    
-</div>
+    /**
+    Clear the currently defined arrows
 
+    @method clear
+    @static
+    **/
+    Arrows.clear = function() {
+        this.arrows = [];
+    };
 
+    /**
+    Sets the targets for arrows to point
 
-<div class="box intro">
-    <p>The main class for Sideshow</p>
+    @method setTargets
+    @static
+    **/
+    Arrows.setTargets = function(targets) {
+        if (targets.constructor === String) targets = $(targets);
 
-</div>
+        if (targets instanceof $ &amp;&amp; targets.length &gt; 0) {
+            targets.each(function() {
+                var arrow = Arrow.build();
+                arrow.target.$el = $(this);
+                if (arrow.target.$el.is(&quot;:visible&quot;)) {
+                    Arrows.arrows.push(arrow);
+                    arrow.onceVisible = true;
+                }
+            });
+        } else {
+            throw new SSException(&quot;150&quot;, &quot;Invalid targets.&quot;);
+        }
+    };
 
+    Arrows.recreateDOMReferences = function() {
+        for (var a = 0; a &lt; this.arrows.length; a++) {
+            var arrow = this.arrows[a];
+            arrow.$el.remove();
+        }
 
+        Arrows.clear();
+        Arrows.setTargets(currentWizard.currentStep.targets);
+        Arrows.render();
+        Arrows.positionate();
+        Arrows.show();
+    };
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+    /**
+    Iterates over the arrows collection showing each arrow
 
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
+    @method show
+    @static
+    **/
+    Arrows.show = function() {
+        for (var a = 0; a &lt; this.arrows.length; a++) {
+            var arrow = this.arrows[a];
+            arrow.show();
+        }
+    };
 
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
+    /**
+    Iterates over the arrows collection hiding each arrow
 
-            
+    @method hide
+    @static
+    **/
+    Arrows.hide = function() {
+        for (var a = 0; a &lt; this.arrows.length; a++) {
+            var arrow = this.arrows[a];
+            arrow.hide();
+        }
+    };
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
+    /**
+    Iterates over the arrows collection fading in each arrow
 
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
+    @method fadeIn
+    @static
+    **/
+    Arrows.fadeIn = function() {
+        for (var a = 0; a &lt; this.arrows.length; a++) {
+            var arrow = this.arrows[a];
+            arrow.fadeIn();
+        }
+    };
 
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
+    /**
+    Iterates over the arrows collection fading out each arrow
 
-            
+    @method fadeOut
+    @static
+    **/
+    Arrows.fadeOut = function() {
+        for (var a = 0; a &lt; this.arrows.length; a++) {
+            var arrow = this.arrows[a];
+            registerFadeOut(arrow);
+        }
 
-            
-        </div>
+        function registerFadeOut(arrow) {
+            arrow.fadeOut(function() {
+                arrow.destroy();
+            });
+        }
+    };
 
-        
+    /**
+    Iterates over the arrows collection repositionating each arrow
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
+    @method positionate
+    @static
+    **/
+    Arrows.positionate = function() {
+        for (var a = 0; a &lt; this.arrows.length; a++) {
+            var arrow = this.arrows[a];
+            arrow.positionate();
+        }
+    };
 
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+    /**
+    Iterates over the arrows collection rendering each arrow
 
-    
+    @method render
+    @static
+    **/
+    Arrows.render = function() {
+        for (var a = 0; a &lt; this.arrows.length; a++) {
+            var arrow = this.arrows[a];
+            arrow.render();
+        }
+    };
 
-    
+    /**
+    A Polling function to check if arrows coordinates has changed
 
-    
+    @method pollForArrowsChanges
+    **/
+    Arrows.pollForArrowsChanges = function() {
+        var brokenReference = false;
+        for (var a = 0; a &lt; this.arrows.length; a++) {
+            var arrow = this.arrows[a];
+            if (arrow.hasChanged()) arrow.positionate();
+            if (arrow.onceVisible &amp;&amp; !arrow.target.$el.is(&quot;:visible&quot;)) brokenReference = true;
+        }
 
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+        if (brokenReference) this.recreateDOMReferences();
+    };
+    </pre>
 </div>
 
                     </div>

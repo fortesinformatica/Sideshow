@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Mask.CornerPart - Sideshow</title>
+    <title>CompositeMask - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,33 +41,39 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/Arrow.html">Arrow</a></li>
+                <li><a href="../classes/CloseButton.html">CloseButton</a></li>
             
-                <li><a href="../classes/Arrows.html">Arrows</a></li>
+                <li><a href="../classes/CompositeMask.html">CompositeMask</a></li>
             
-                <li><a href="../classes/ControlVariables.html">ControlVariables</a></li>
-            
-                <li><a href="../classes/DetailsPanel.html">DetailsPanel</a></li>
+                <li><a href="../classes/CornerPart.html">CornerPart</a></li>
             
                 <li><a href="../classes/FadableItem.html">FadableItem</a></li>
             
                 <li><a href="../classes/HidableItem.html">HidableItem</a></li>
             
-                <li><a href="../classes/Mask.CloseButton.html">Mask.CloseButton</a></li>
+                <li><a href="../classes/Mask.Arrow.html">Mask.Arrow</a></li>
             
-                <li><a href="../classes/Mask.CompositeMask.html">Mask.CompositeMask</a></li>
+                <li><a href="../classes/Mask.Arrows.html">Mask.Arrows</a></li>
             
-                <li><a href="../classes/Mask.CornerPart.html">Mask.CornerPart</a></li>
+                <li><a href="../classes/Mask.ControlVariables.html">Mask.ControlVariables</a></li>
             
-                <li><a href="../classes/Mask.Part.html">Mask.Part</a></li>
+                <li><a href="../classes/Mask.DetailsPanel.html">Mask.DetailsPanel</a></li>
             
-                <li><a href="../classes/Mask.Polling.html">Mask.Polling</a></li>
+                <li><a href="../classes/Mask.StepDescription.html">Mask.StepDescription</a></li>
+            
+                <li><a href="../classes/Mask.StepDescriptionNextButton.html">Mask.StepDescriptionNextButton</a></li>
             
                 <li><a href="../classes/Mask.Subject.html">Mask.Subject</a></li>
             
                 <li><a href="../classes/Mask.SubjectMask.html">Mask.SubjectMask</a></li>
             
+                <li><a href="../classes/Mask.Wizard.html">Mask.Wizard</a></li>
+            
                 <li><a href="../classes/Mask.WizardMenu.html">Mask.WizardMenu</a></li>
+            
+                <li><a href="../classes/Part.html">Part</a></li>
+            
+                <li><a href="../classes/Polling.html">Polling</a></li>
             
                 <li><a href="../classes/Screen.html">Screen</a></li>
             
@@ -75,13 +81,7 @@
             
                 <li><a href="../classes/SSException.html">SSException</a></li>
             
-                <li><a href="../classes/StepDescription.html">StepDescription</a></li>
-            
-                <li><a href="../classes/StepDescriptionNextButton.html">StepDescriptionNextButton</a></li>
-            
                 <li><a href="../classes/VisualItem.html">VisualItem</a></li>
-            
-                <li><a href="../classes/Wizard.html">Wizard</a></li>
             
             </ul>
 
@@ -122,7 +122,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Mask.CornerPart Class</h1>
+                        <h1>CompositeMask Class</h1>
 <div class="box meta">
     
 
@@ -130,7 +130,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_main.js.html#l1813"><code>src\main.js:1813</code></a>
+            Defined in: <a href="../files/src_mask_composite_mask.js.html#l1"><code>src\mask\composite_mask.js:1</code></a>
         </div>
     
 
@@ -142,7 +142,7 @@
 
 
 <div class="box intro">
-    <p>A corner part composing the mask</p>
+    <p>Controls the mask surrounds the subject (the step focussed area)</p>
 
 </div>
 
@@ -171,10 +171,15 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_buildSVG">buildSVG</a>
+                                <a href="#method_init">init</a>
 
                                 
-                                    <span class="flag static">static</span>
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_pollForChanges">pollForChanges</a>
+
                                 
                                 
                             </li>
@@ -182,15 +187,6 @@
                             <li class="index-item method">
                                 <a href="#method_render">render</a>
 
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_SVGPathPointsTemplate">SVGPathPointsTemplate</a>
-
-                                
-                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
@@ -218,21 +214,11 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_buildSVG" class="method item">
-    <h3 class="name"><code>buildSVG</code></h3>
+                    <div id="method_init" class="method item">
+    <h3 class="name"><code>init</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>borderRadius</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -243,8 +229,6 @@
 
     
 
-    
-        <span class="flag static">static</span>
     
 
     
@@ -262,7 +246,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l1864"><code>src\main.js:1864</code></a>
+        <a href="../files/src_mask_composite_mask.js.html#l9"><code>src\mask\composite_mask.js:9</code></a>
         
         </p>
 
@@ -273,34 +257,65 @@
     </div>
 
     <div class="description">
-        <p>Renders the SVG for the corner part</p>
+        <p>Initializes the composite mask</p>
 
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
+    
+
+    
+</div>
+
+                
+                    <div id="method_pollForChanges" class="method item">
+    <h3 class="name"><code>pollForChanges</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
             
-                <li class="param">
-                    
-                        <code class="param-name">borderRadius</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The corner part border radius</p>
-
-                    </div>
-
-                    
-                </li>
+                
+                <p>
+                
+                Defined in
+                
             
-            </ul>
-        </div>
+        
+        
+        <a href="../files/src_mask_composite_mask.js.html#l119"><code>src\mask\composite_mask.js:119</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A Polling function to check if subject coordinates has changed</p>
+
+    </div>
+
     
 
     
@@ -317,10 +332,6 @@
     
 
     
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-        </span>
-    
 
     
 
@@ -345,7 +356,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l1886"><code>src\main.js:1886</code></a>
+        <a href="../files/src_mask_composite_mask.js.html#l32"><code>src\mask\composite_mask.js:32</code></a>
         
         </p>
 
@@ -356,115 +367,10 @@
     </div>
 
     <div class="description">
-        <p>Renders the mask corner part</p>
+        <p>Renders the composite mask</p>
 
     </div>
 
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-                    
-                    <p>The corner part jQuery wrapped DOM element</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_SVGPathPointsTemplate" class="method item">
-    <h3 class="name"><code>SVGPathPointsTemplate</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>borderRadius</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_main.js.html#l1853"><code>src\main.js:1853</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Formats the SVG path for the corner part</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">borderRadius</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The corner part border radius</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -488,6 +394,12 @@
             
                 <li class="arg">
                     
+                        <code>dimension</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
                         <code>borderRadius</code>
                     
                 </li>
@@ -521,7 +433,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l1902"><code>src\main.js:1902</code></a>
+        <a href="../files/src_mask_composite_mask.js.html#l52"><code>src\mask\composite_mask.js:52</code></a>
         
         </p>
 
@@ -532,7 +444,7 @@
     </div>
 
     <div class="description">
-        <p>Updates the positioning and border radius of the mask corner part</p>
+        <p>Updates the positioning and dimension of each part composing the whole mask, according to the subject coordinates</p>
 
     </div>
 
@@ -551,7 +463,23 @@
                     
 
                     <div class="param-description">
-                        <p>The positioning information</p>
+                        <p>An object representing the positioning info for the mask</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">dimension</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>An object representing the dimension info for the mask</p>
 
                     </div>
 
@@ -567,7 +495,7 @@
                     
 
                     <div class="param-description">
-                        <p>The border radius information</p>
+                        <p>An object representing the borderRadius info for the mask</p>
 
                     </div>
 

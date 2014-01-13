@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\interface_itens\fadable_item.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,67 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\interface_itens\fadable_item.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+    /**
+    A visual item which holds fading in and out capabilities
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
+    @class FadableItem
+    @@abstract
+    @extends HidableItem
+    **/
+    var FadableItem = jazz.Class().extending(HidableItem).abstract;
 
-    
+    /**
+    Does a fade in transition for the visual item
 
-    
-</div>
+    @method fadeIn
+    **/
+    FadableItem.method(&quot;fadeIn&quot;, function(callback, linearTimingFunction) {
+        var item = this;
+        item.status = AnimationStatus.FADING_IN;
 
+        if (!item.$el) this.render();
+        if (linearTimingFunction) item.$el.css(&quot;animation-timing-function&quot;, &quot;linear&quot;);
+        item.$el.removeClass(&quot;sideshow-hidden&quot;);
 
+        //Needed hack to get CSS transition to work properly
+        setTimeout(function() {
+            item.$el.removeClass(&quot;sideshow-invisible&quot;);
 
-<div class="box intro">
-    <p>The main class for Sideshow</p>
+            setTimeout(function() {
+                item.status = AnimationStatus.VISIBLE;
+                if (linearTimingFunction) item.$el.css(&quot;animation-timing-function&quot;, &quot;ease&quot;);
+                if (callback) callback();
+            }, longAnimationDuration);
+        }, 0); //&lt;-- Yeap, I&#x27;m really scheduling a timeout for 0 second... this is the dirty trick =)
+    });
 
-</div>
+    /**
+    Does a fade out transition for the visual item
 
+    @method fadeOut
+    **/
+    FadableItem.method(&quot;fadeOut&quot;, function(callback, linearTimingFunction) {
+        var item = this;
+        if (item.status != AnimationStatus.NOT_RENDERED) {
+            item.status = AnimationStatus.FADING_OUT;
 
+            if (linearTimingFunction) item.$el.css(&quot;animation-timing-function&quot;, &quot;linear&quot;);
+            item.$el.addClass(&quot;sideshow-invisible&quot;);
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+            setTimeout(function() {
+                item.$el.addClass(&quot;sideshow-hidden&quot;);
+                item.status = AnimationStatus.NOT_DISPLAYED;
+                if (linearTimingFunction) item.$el.css(&quot;animation-timing-function&quot;, &quot;ease&quot;);
+                if (callback) callback();
+            }, longAnimationDuration);
+        }
+    });
 
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+    </pre>
 </div>
 
                     </div>

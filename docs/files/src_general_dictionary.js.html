@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\general\dictionary.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,46 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\general\dictionary.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+    /**
+    Strings Dictionary
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
-
-    
-
-    
-</div>
-
-
-
-<div class="box intro">
-    <p>The main class for Sideshow</p>
-
-</div>
-
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+    @@object strings
+    **/
+    var strings = {
+        availableWizards: {
+            &quot;en&quot;: &quot;Available Tutorials&quot;,
+            &quot;pt-br&quot;: &quot;Tutoriais Disponíveis&quot;
+        },
+        relatedWizards: {
+            &quot;en&quot;: &quot;Related Wizards&quot;,
+            &quot;pt-br&quot;: &quot;Tutoriais Relacionados&quot;
+        },
+        noAvailableWizards: {
+            &quot;en&quot;: &quot;There&#x27;s no tutorials available.&quot;,
+            &quot;pt-br&quot;: &quot;Não há tutoriais disponíveis para esta tela.&quot;
+        },
+        close: {
+            &quot;en&quot;: &quot;Close&quot;,
+            &quot;pt-br&quot;: &quot;Fechar&quot;
+        },
+        estimatedTime: {
+            &quot;en&quot;: &quot;Estimated Time&quot;,
+            &quot;pt-br&quot;: &quot;Tempo Estimado&quot;
+        },
+        next: {
+            &quot;en&quot;: &quot;Next&quot;,
+            &quot;pt-br&quot;: &quot;Continuar&quot;
+        },
+        finishWizard: {
+            &quot;en&quot;: &quot;Finish Wizard&quot;,
+            &quot;pt-br&quot;: &quot;Concluir Tutorial&quot;
+        }
+    };
+    </pre>
 </div>
 
                     </div>

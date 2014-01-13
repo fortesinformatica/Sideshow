@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\step\step_description_next_button.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,66 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\step\step_description_next_button.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+	/**
+	Step next button 
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
+	@class StepDescriptionNextButton
+	@extends HidableItem
+	**/
+	var StepDescriptionNextButton = jazz.Class().extending(HidableItem);
 
-    
+	/**
+	The text for the next button
 
-    
-</div>
+	@@field _text
+	@private
+	**/
+	StepDescriptionNextButton.field(&quot;_text&quot;);
 
+	/**
+	Disables the next button
 
+	@method disable
+	**/
+	StepDescriptionNextButton.method(&quot;disable&quot;, function() {
+	    this.$el.attr(&quot;disabled&quot;, &quot;disabled&quot;);
+	});
 
-<div class="box intro">
-    <p>The main class for Sideshow</p>
+	/**
+	Enables the next button
 
-</div>
+	@method enable
+	**/
+	StepDescriptionNextButton.method(&quot;enable&quot;, function() {
+	    this.$el.attr(&quot;disabled&quot;, null);
+	});
 
+	/**
+	Sets the text for the next button
 
+	@method setText
+	@param {String} text                                  The text for the next button
+	**/
+	StepDescriptionNextButton.method(&quot;setText&quot;, function(text) {
+	    this._text = text;
+	    this.$el.text(text);
+	});
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+	/**
+	Renders the Next Button
 
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+	@method render
+	@param {Object} $stepDescriptionEl                    The jQuery wrapped DOM element for the Step Description panel
+	**/
+	StepDescriptionNextButton.method(&quot;render&quot;, function($stepDescriptionEl) {
+	    this.$el = $(&quot;&lt;button&gt;&quot;).addClass(&quot;sideshow-next-step-button&quot;);
+	    this.callSuper(&quot;render&quot;, $stepDescriptionEl);
+	});
+    </pre>
 </div>
 
                     </div>

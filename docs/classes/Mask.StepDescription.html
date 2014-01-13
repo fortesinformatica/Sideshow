@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Wizard - Sideshow</title>
+    <title>Mask.StepDescription - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,33 +41,39 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/Arrow.html">Arrow</a></li>
+                <li><a href="../classes/CloseButton.html">CloseButton</a></li>
             
-                <li><a href="../classes/Arrows.html">Arrows</a></li>
+                <li><a href="../classes/CompositeMask.html">CompositeMask</a></li>
             
-                <li><a href="../classes/ControlVariables.html">ControlVariables</a></li>
-            
-                <li><a href="../classes/DetailsPanel.html">DetailsPanel</a></li>
+                <li><a href="../classes/CornerPart.html">CornerPart</a></li>
             
                 <li><a href="../classes/FadableItem.html">FadableItem</a></li>
             
                 <li><a href="../classes/HidableItem.html">HidableItem</a></li>
             
-                <li><a href="../classes/Mask.CloseButton.html">Mask.CloseButton</a></li>
+                <li><a href="../classes/Mask.Arrow.html">Mask.Arrow</a></li>
             
-                <li><a href="../classes/Mask.CompositeMask.html">Mask.CompositeMask</a></li>
+                <li><a href="../classes/Mask.Arrows.html">Mask.Arrows</a></li>
             
-                <li><a href="../classes/Mask.CornerPart.html">Mask.CornerPart</a></li>
+                <li><a href="../classes/Mask.ControlVariables.html">Mask.ControlVariables</a></li>
             
-                <li><a href="../classes/Mask.Part.html">Mask.Part</a></li>
+                <li><a href="../classes/Mask.DetailsPanel.html">Mask.DetailsPanel</a></li>
             
-                <li><a href="../classes/Mask.Polling.html">Mask.Polling</a></li>
+                <li><a href="../classes/Mask.StepDescription.html">Mask.StepDescription</a></li>
+            
+                <li><a href="../classes/Mask.StepDescriptionNextButton.html">Mask.StepDescriptionNextButton</a></li>
             
                 <li><a href="../classes/Mask.Subject.html">Mask.Subject</a></li>
             
                 <li><a href="../classes/Mask.SubjectMask.html">Mask.SubjectMask</a></li>
             
+                <li><a href="../classes/Mask.Wizard.html">Mask.Wizard</a></li>
+            
                 <li><a href="../classes/Mask.WizardMenu.html">Mask.WizardMenu</a></li>
+            
+                <li><a href="../classes/Part.html">Part</a></li>
+            
+                <li><a href="../classes/Polling.html">Polling</a></li>
             
                 <li><a href="../classes/Screen.html">Screen</a></li>
             
@@ -75,13 +81,7 @@
             
                 <li><a href="../classes/SSException.html">SSException</a></li>
             
-                <li><a href="../classes/StepDescription.html">StepDescription</a></li>
-            
-                <li><a href="../classes/StepDescriptionNextButton.html">StepDescriptionNextButton</a></li>
-            
                 <li><a href="../classes/VisualItem.html">VisualItem</a></li>
-            
-                <li><a href="../classes/Wizard.html">Wizard</a></li>
             
             </ul>
 
@@ -122,15 +122,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Wizard Class</h1>
+                        <h1>Mask.StepDescription Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends <a href="..\classes\FadableItem.html" class="crosslink">FadableItem</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_main.js.html#l453"><code>src\main.js:453</code></a>
+            Defined in: <a href="../files/src_step_step_description.js.html#l1"><code>src\step\step_description.js:1</code></a>
         </div>
     
 
@@ -142,7 +146,7 @@
 
 
 <div class="box intro">
-    <p>Represents a tutorial</p>
+    <p>Represents a panel holding the step description</p>
 
 </div>
 
@@ -168,66 +172,80 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
-                            <li class="index-item method">
-                                <a href="#method_getStepPosition">getStepPosition</a>
+                            <li class="index-item method inherited">
+                                <a href="#method_destroy">destroy</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_fadeIn">fadeIn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_fadeOut">fadeOut</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_hide">hide</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_hideStep">hideStep</a>
+                                <a href="#method_positionate">positionate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_render">render</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_isAlreadyWatched">isAlreadyWatched</a>
+                                <a href="#method_setHTML">setHTML</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_isEligible">isEligible</a>
+                                <a href="#method_setStepPosition">setStepPosition</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_next">next</a>
+                                <a href="#method_setText">setText</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_play">play</a>
+                                <a href="#method_setTitle">setTitle</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_pollForCheckCompletedStep">pollForCheckCompletedStep</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_showStep">showStep</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_storyLine">storyLine</a>
+                            <li class="index-item method inherited">
+                                <a href="#method_show">show</a>
 
                                 
                                 
@@ -249,8 +267,326 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_getStepPosition" class="method item">
-    <h3 class="name"><code>getStepPosition</code></h3>
+                    <div id="method_destroy" class="method item inherited">
+    <h3 class="name"><code>destroy</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..\classes\VisualItem.html#method_destroy">VisualItem</a>:
+            
+        
+        
+        <a href="../files/src_interface_itens_visual_item.js.html#l35"><code>src\interface_itens\visual_item.js:35</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Destroys the item&#39;s DOM object</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_fadeIn" class="method item inherited">
+    <h3 class="name"><code>fadeIn</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..\classes\FadableItem.html#method_fadeIn">FadableItem</a>:
+            
+        
+        
+        <a href="../files/src_interface_itens_fadable_item.js.html#l10"><code>src\interface_itens\fadable_item.js:10</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Does a fade in transition for the visual item</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_fadeOut" class="method item inherited">
+    <h3 class="name"><code>fadeOut</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..\classes\FadableItem.html#method_fadeOut">FadableItem</a>:
+            
+        
+        
+        <a href="../files/src_interface_itens_fadable_item.js.html#l35"><code>src\interface_itens\fadable_item.js:35</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Does a fade out transition for the visual item</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_hide" class="method item inherited">
+    <h3 class="name"><code>hide</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..\classes\HidableItem.html#method_hide">HidableItem</a>:
+            
+        
+        
+        <a href="../files/src_interface_itens_hidable_item.js.html#l23"><code>src\interface_itens\hidable_item.js:23</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hides the visual item</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_positionate" class="method item">
+    <h3 class="name"><code>positionate</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_step_step_description.js.html#l130"><code>src\step\step_description.js:130</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Positionates the step description panel</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_render" class="method item">
+    <h3 class="name"><code>render</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="..\classes\VisualItem.html#method_render">
+                VisualItem
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="../files/src_step_step_description.js.html#l96"><code>src\step\step_description.js:96</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Renders the step description panel</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setHTML" class="method item">
+    <h3 class="name"><code>setHTML</code></h3>
 
     
         <div class="args">
@@ -258,7 +594,7 @@
             
                 <li class="arg">
                     
-                        <code>step</code>
+                        <code>text</code>
                     
                 </li>
             
@@ -291,7 +627,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l749"><code>src\main.js:749</code></a>
+        <a href="../files/src_step_step_description.js.html#l63"><code>src\step\step_description.js:63</code></a>
         
         </p>
 
@@ -302,7 +638,7 @@
     </div>
 
     <div class="description">
-        <p>Returns the position of the step passed as argument or (by default) the current step</p>
+        <p>Sets the HTML content for the step description panel</p>
 
     </div>
 
@@ -314,14 +650,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">step</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <code class="param-name">text</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The step object to get position</p>
+                        <p>The HTML content for step description panel</p>
 
                     </div>
 
@@ -338,8 +674,8 @@
 </div>
 
                 
-                    <div id="method_hideStep" class="method item">
-    <h3 class="name"><code>hideStep</code></h3>
+                    <div id="method_setStepPosition" class="method item">
+    <h3 class="name"><code>setStepPosition</code></h3>
 
     
         <div class="args">
@@ -347,7 +683,7 @@
             
                 <li class="arg">
                     
-                        <code>callback</code>
+                        <code>title</code>
                     
                 </li>
             
@@ -380,7 +716,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l735"><code>src\main.js:735</code></a>
+        <a href="../files/src_step_step_description.js.html#l85"><code>src\step\step_description.js:85</code></a>
         
         </p>
 
@@ -391,7 +727,7 @@
     </div>
 
     <div class="description">
-        <p>Hides the step</p>
+        <p>Sets the title for the step description panel</p>
 
     </div>
 
@@ -403,14 +739,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <code class="param-name">title</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>A callback function to be called in the ending of the hiding process</p>
+                        <p>The text for the step description panel</p>
 
                     </div>
 
@@ -427,154 +763,8 @@
 </div>
 
                 
-                    <div id="method_isAlreadyWatched" class="method item">
-    <h3 class="name"><code>isAlreadyWatched</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_main.js.html#l794"><code>src\main.js:794</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Checks if the current user already watched this wizard</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
-                    
-                    <p>A boolean indicating if the user watched this wizard</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_isEligible" class="method item">
-    <h3 class="name"><code>isEligible</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_main.js.html#l759"><code>src\main.js:759</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Checks if a wizard should be shown in the current context (running each evaluator defined for this wizard)</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
-                    
-                    <p>A boolean indicating if this wizard should be available in the current context</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_next" class="method item">
-    <h3 class="name"><code>next</code></h3>
+                    <div id="method_setText" class="method item">
+    <h3 class="name"><code>setText</code></h3>
 
     
         <div class="args">
@@ -582,7 +772,7 @@
             
                 <li class="arg">
                     
-                        <code>callback</code>
+                        <code>text</code>
                     
                 </li>
             
@@ -615,7 +805,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l706"><code>src\main.js:706</code></a>
+        <a href="../files/src_step_step_description.js.html#l52"><code>src\step\step_description.js:52</code></a>
         
         </p>
 
@@ -626,7 +816,7 @@
     </div>
 
     <div class="description">
-        <p>Shows the next step of the wizard</p>
+        <p>Sets the text for the step description panel</p>
 
     </div>
 
@@ -638,14 +828,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <code class="param-name">text</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>A callback function to be called</p>
+                        <p>The text for the step description panel</p>
 
                     </div>
 
@@ -662,118 +852,8 @@
 </div>
 
                 
-                    <div id="method_play" class="method item">
-    <h3 class="name"><code>play</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_main.js.html#l570"><code>src\main.js:570</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Runs the wizard</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_pollForCheckCompletedStep" class="method item">
-    <h3 class="name"><code>pollForCheckCompletedStep</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_main.js.html#l806"><code>src\main.js:806</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>A Polling function to check if the current step is completed</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_showStep" class="method item">
-    <h3 class="name"><code>showStep</code></h3>
+                    <div id="method_setTitle" class="method item">
+    <h3 class="name"><code>setTitle</code></h3>
 
     
         <div class="args">
@@ -781,13 +861,7 @@
             
                 <li class="arg">
                     
-                        <code>step</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
+                        <code>title</code>
                     
                 </li>
             
@@ -820,7 +894,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l614"><code>src\main.js:614</code></a>
+        <a href="../files/src_step_step_description.js.html#l74"><code>src\step\step_description.js:74</code></a>
         
         </p>
 
@@ -831,7 +905,7 @@
     </div>
 
     <div class="description">
-        <p>Shows a specific step</p>
+        <p>Sets the title for the step description panel</p>
 
     </div>
 
@@ -843,30 +917,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">step</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <code class="param-name">title</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The step to be shown</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback function to be called</p>
+                        <p>The text for the step description panel</p>
 
                     </div>
 
@@ -883,8 +941,8 @@
 </div>
 
                 
-                    <div id="method_storyLine" class="method item">
-    <h3 class="name"><code>storyLine</code></h3>
+                    <div id="method_show" class="method item">
+    <h3 class="name"><code>show</code></h3>
 
     
         <span class="paren">()</span>
@@ -906,16 +964,16 @@
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="..\classes\HidableItem.html#method_show">
+                HidableItem
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
-        <a href="../files/src_main.js.html#l561"><code>src\main.js:561</code></a>
+        <a href="../files/src_step_step_description.js.html#l120"><code>src\step\step_description.js:120</code></a>
         
         </p>
 
@@ -926,7 +984,7 @@
     </div>
 
     <div class="description">
-        <p>Sets the storyline for the wizard</p>
+        <p>Shows the step description panel</p>
 
     </div>
 

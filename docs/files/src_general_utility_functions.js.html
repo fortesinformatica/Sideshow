@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\general\utility_functions.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,100 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\general\utility_functions.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+    /**
+    Shows a warning  in a pre-defined format
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
+    @@function showWarning
+    @param {String} code                                  The warning code
+    @param {String} message                               The warning message
+    **/
+    function showWarning(code, message) {
+        console.warn(&quot;[SIDESHOW_W#&quot; + (&quot;00000000&quot; + code).substr(-8) + &quot;] &quot; + message);
+    }
 
-    
+    /**
+    Parses a string in the format &quot;#px&quot; in a number
 
-    
-</div>
+    @@function parsePxValue
+    @param {String} value                                 A value with/without a px unit
+    @return Number                                        The number value without unit 
+    **/
+    function parsePxValue(value) {
+        if (value.constructor !== String) return value;
+        var br = value === &quot;&quot; ? &quot;0&quot; : value;
+        return +br.replace(&quot;px&quot;, &quot;&quot;);
+    }
 
+    /**
+    Gets a string from the dictionary in the current language
 
+    @@function getString
+    @param {Object} stringKeyValuePair                    A string key-value pair in dictionary
+    @return String                                        The string value in the current language
+    **/
+    function getString(stringKeyValuePair) {
+        if (!(SS.config.language in stringKeyValuePair)) {
+            showWarning(&quot;2001&quot;, &quot;String not found for the selected language, getting the first available.&quot;);
+            return stringKeyValuePair[Object.keys(stringKeyValuePair)[0]];
+        }
 
-<div class="box intro">
-    <p>The main class for Sideshow</p>
+        return stringKeyValuePair[SS.config.language];
+    }
 
-</div>
+    /**
+    Registers hotkeys to be used when running Sideshow
 
+    @@function registerInnerHotkeys
+    **/
+    function registerInnerHotkeys() {
+        $(document).keyup(innerHotkeysListener);
+    }
 
+    /**
+    Unregisters hotkeys used when running Sideshow
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+    @@function Unregisters
+    **/
+    function unregisterInnerHotkeys() {
+        $(document).unbind(&quot;keyup&quot;, innerHotkeysListener);
+    }
 
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
+    function innerHotkeysListener(e) {
+        //Esc or F1
+        if (e.keyCode == 27 || e.keyCode == 112) SS.close();
+    }
 
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
+    /**
+    Registers global hotkeys
 
-            
+    @@function registerGlobalHotkeys
+    **/
+    function registerGlobalHotkeys() {
+        $(document).keyup(function(e) {
+            //F2
+            if (e.keyCode == 113) {
+                if (e.shiftKey) SS.start({
+                    listAll: true
+                });
+                else SS.start();
+            }
+        });
+    }
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
+    /**
+    Removes nodes created by Sideshow (except mask, which remains due to performance reasons when recalling Sideshow)
 
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
+    @@function removeDOMGarbage
+    **/
+    function removeDOMGarbage() {
+        $(&quot;[class*=\&quot;sideshow\&quot;]&quot;).not(&quot;.sideshow-mask-part, .sideshow-mask-corner-part, .sideshow-subject-mask&quot;).remove();
+    }
 
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+    </pre>
 </div>
 
                     </div>

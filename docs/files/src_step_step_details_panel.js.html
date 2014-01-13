@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\step\step_details_panel.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,86 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\step\step_details_panel.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+    /**
+    The panel that holds step description, is positionated over the biggest remaining space among the four parts of a composite mask
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
+    @class DetailsPanel
+    @@singleton
+    @extends FadableItem
+    **/
+    var DetailsPanel = jazz.Class().extending(FadableItem).singleton;
 
-    
+    /**
+    An object holding dimension information for the Details Panel
 
-    
-</div>
+    @@field dimension
+    @type Object
+    **/
+    DetailsPanel.field(&quot;dimension&quot;, {});
 
+    /**
+    An object holding positioning information for the Details Panel
 
+    @@field position
+    @type Object
+    **/
+    DetailsPanel.field(&quot;position&quot;, {});
 
-<div class="box intro">
-    <p>The main class for Sideshow</p>
+    /**
+    Renders the Details Panel
 
-</div>
+    @method render
+    **/
+    DetailsPanel.method(&quot;render&quot;, function() {
+        this.$el = $(&quot;&lt;div&gt;&quot;)
+            .addClass(&quot;sideshow-details-panel&quot;)
+            .addClass(&quot;sideshow-hidden&quot;);
+        this.callSuper(&quot;render&quot;);
+    });
 
+    /**
+    Positionates the panel automatically, calculating the biggest available area and putting the panel over there
 
+    @method positionate
+    **/
+    DetailsPanel.method(&quot;positionate&quot;, function() {
+        var parts = Mask.CompositeMask.singleInstance.parts;
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+        //Considering the four parts surrounding the current subject, gets the biggest one
+        var biggestSide = [
+            [parts.top, &quot;height&quot;],
+            [parts.right, &quot;width&quot;],
+            [parts.bottom, &quot;height&quot;],
+            [parts.left, &quot;width&quot;]
+        ].sort(function(a, b) {
+            return a[0].dimension[a[1]] &gt; b[0].dimension[b[1]];
+        }).slice(-1)[0];
 
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
+        if (biggestSide[1] == &quot;width&quot;) {
+            this.$el
+                .css(&quot;left&quot;, biggestSide[0].position.x).css(&quot;top&quot;, 0)
+                .css(&quot;height&quot;, Screen.dimension.height).css(&quot;width&quot;, biggestSide[0].dimension.width);
+        } else {
+            this.$el
+                .css(&quot;left&quot;, 0).css(&quot;top&quot;, biggestSide[0].position.y)
+                .css(&quot;height&quot;, biggestSide[0].dimension.height).css(&quot;width&quot;, Screen.dimension.width);
+        }
 
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
+        this.dimension = {
+            width: parsePxValue(this.$el.css(&quot;width&quot;)),
+            height: parsePxValue(this.$el.css(&quot;height&quot;))
+        };
 
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+        this.position = {
+            x: parsePxValue(this.$el.css(&quot;left&quot;)),
+            y: parsePxValue(this.$el.css(&quot;top&quot;))
+        };
+    });
+    </pre>
 </div>
 
                     </div>

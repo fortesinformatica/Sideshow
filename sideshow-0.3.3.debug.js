@@ -17,6 +17,7 @@
     //Jazz is needed
     if (jazz === undefined) throw new SSException("3", "Jazz is required for Sideshow to work.");
 
+
     var globalObjectName = "Sideshow",
         $body,
         pollingDuration = 200,
@@ -56,21 +57,14 @@
         @@enum AnimationStatus
         **/
         AnimationStatus = jazz.Enum("VISIBLE", "FADING_IN", "FADING_OUT", "NOT_DISPLAYED", "NOT_RENDERED", "TRANSPARENT");
-
-
-
-
-
-
-
     /**
-    A custom exception class for Sideshow
+	A custom exception class for Sideshow
 
-    @class SSException
-    @extends Error
-    @param {String} code                                  The error code
-    @param {String} message                               The error message
-    **/
+	@class SSException
+	@extends Error
+	@param {String} code                                  The error code
+	@param {String} message                               The error message
+	**/
     function SSException(code, message) {
         this.name = "SSException";
         this.message = "[SIDESHOW_E#" + ("00000000" + code).substr(-8) + "] " + message;
@@ -78,7 +72,6 @@
 
     SSException.prototype = new Error();
     SSException.prototype.constructor = SSException;
-
     /**
     Shows a warning  in a pre-defined format
 
@@ -103,12 +96,70 @@
         return +br.replace("px", "");
     }
 
+    /**
+    Gets a string from the dictionary in the current language
 
+    @@function getString
+    @param {Object} stringKeyValuePair                    A string key-value pair in dictionary
+    @return String                                        The string value in the current language
+    **/
+    function getString(stringKeyValuePair) {
+        if (!(SS.config.language in stringKeyValuePair)) {
+            showWarning("2001", "String not found for the selected language, getting the first available.");
+            return stringKeyValuePair[Object.keys(stringKeyValuePair)[0]];
+        }
 
+        return stringKeyValuePair[SS.config.language];
+    }
 
+    /**
+    Registers hotkeys to be used when running Sideshow
 
+    @@function registerInnerHotkeys
+    **/
+    function registerInnerHotkeys() {
+        $(document).keyup(innerHotkeysListener);
+    }
 
+    /**
+    Unregisters hotkeys used when running Sideshow
 
+    @@function Unregisters
+    **/
+    function unregisterInnerHotkeys() {
+        $(document).unbind("keyup", innerHotkeysListener);
+    }
+
+    function innerHotkeysListener(e) {
+        //Esc or F1
+        if (e.keyCode == 27 || e.keyCode == 112) SS.close();
+    }
+
+    /**
+    Registers global hotkeys
+
+    @@function registerGlobalHotkeys
+    **/
+    function registerGlobalHotkeys() {
+        $(document).keyup(function(e) {
+            //F2
+            if (e.keyCode == 113) {
+                if (e.shiftKey) SS.start({
+                    listAll: true
+                });
+                else SS.start();
+            }
+        });
+    }
+
+    /**
+    Removes nodes created by Sideshow (except mask, which remains due to performance reasons when recalling Sideshow)
+
+    @@function removeDOMGarbage
+    **/
+    function removeDOMGarbage() {
+        $("[class*=\"sideshow\"]").not(".sideshow-mask-part, .sideshow-mask-corner-part, .sideshow-subject-mask").remove();
+    }
     /**
     Strings Dictionary
 
@@ -144,69 +195,39 @@
             "pt-br": "Concluir Tutorial"
         }
     };
-
     /**
-    Gets a string from the dictionary in the current language
+	Sideshow Settings
 
-    @@function getString
-    @param {Object} stringKeyValuePair                    A string key-value pair in dictionary
-    @return String                                        The string value in the current language
-    **/
-    function getString(stringKeyValuePair) {
-        if (!(SS.config.language in stringKeyValuePair)) {
-            showWarning("2001", "String not found for the selected language, getting the first available.");
-            return stringKeyValuePair[Object.keys(stringKeyValuePair)[0]];
-        }
-
-        return stringKeyValuePair[SS.config.language];
-    }
-
-
-
-
-
-
-
-    /**
-    Sideshow Settings
-
-    @@object config
-    **/
+	@@object config
+	**/
     SS.config = {};
 
     /**
-    Application route to persists user preferences
+	Application route to persists user preferences
 
-    @@field userPreferencesRoute
-    @type String
-    @@unused
-    @@todo Implement persistence logic
-    **/
+	@@field userPreferencesRoute
+	@type String
+	@@unused
+	@@todo Implement persistence logic
+	**/
     SS.config.userPreferencesRoute = null;
 
     /**
-    Logged in user
+	Logged in user
 
-    @@field loggedInUser
-    @type String
-    @@unused
-    **/
+	@@field loggedInUser
+	@type String
+	@@unused
+	**/
     SS.config.loggedInUser = null;
 
     /**
-    Chosen language for sideshow interface
+	Chosen language for sideshow interface
 
-    @@field language
-    @type String
-    **/
+	@@field language
+	@type String
+	**/
     SS.config.language = "en";
-
-
-
-
-
-
-
     /**
     Stores the variables used in step evaluators 
 
@@ -302,77 +323,63 @@
     SS.ControlVariables.clear = function() {
         controlVariables = [];
     };
-
-
-
-
-
-
-
     /**
-    A visual item 
+	A visual item 
 
-    @class VisualItem
-    @@abstract
-    **/
+	@class VisualItem
+	@@abstract
+	**/
     var VisualItem = jazz.Class().abstract;
 
     /**
-    The jQuery wrapped DOM element for the visual item
+	The jQuery wrapped DOM element for the visual item
 
-    @@field $el
-    @type Object 
-    **/
+	@@field $el
+	@type Object 
+	**/
     VisualItem.field("$el");
 
     /**
-    The jQuery wrapped DOM element for the visual item
+	The jQuery wrapped DOM element for the visual item
 
-    @@field $el
-    @type AnimationStatus 
-    **/
+	@@field $el
+	@type AnimationStatus 
+	**/
     VisualItem.field("status", AnimationStatus.NOT_RENDERED);
 
     /**
-    Renders the item's DOM object
+	Renders the item's DOM object
 
-    @method render
-    **/
+	@method render
+	**/
     VisualItem.method("render", function($parent) {
         ($parent || $body).append(this.$el);
         this.status = AnimationStatus.NOT_DISPLAYED;
     });
 
     /**
-    Destroys the item's DOM object
+	Destroys the item's DOM object
 
-    @method destroy
-    **/
+	@method destroy
+	**/
     VisualItem.method("destroy", function() {
         this.$el.remove();
     });
-
-
-
-
-
-
-
     /**
-    A visual item which can be shown and hidden
+	A visual item which can be shown and hidden
 
-    @class HidableItem
-    @@abstract
-    @extends VisualItem
-    **/
+	@class HidableItem
+	@@abstract
+	@extends VisualItem
+	**/
     var HidableItem = jazz.Class().extending(VisualItem).abstract;
 
     /**
-    Shows the visual item
+	Shows the visual item
 
-    @method show
-    @param {boolean} displayButKeepTransparent            The item will hold space but keep invisible
-    **/
+	@method show
+	@param {boolean} displayButKeepTransparent            The item will hold space but keep invisible
+	**/
     HidableItem.method("show", function(displayButKeepTransparent) {
         if (!this.$el) this.render();
         if (!displayButKeepTransparent) this.$el.removeClass("sideshow-invisible");
@@ -381,22 +388,15 @@
     });
 
     /**
-    Hides the visual item
+	Hides the visual item
 
-    @method hide
-    **/
+	@method hide
+	**/
     HidableItem.method("hide", function(keepHoldingSpace) {
         if (!keepHoldingSpace) this.$el.addClass("sideshow-hidden");
         this.$el.addClass("sideshow-invisible");
         this.status = AnimationStatus.NOT_DISPLAYED;
     });
-
-
-
-
-
-
-
     /**
     A visual item which holds fading in and out capabilities
 
@@ -452,13 +452,6 @@
             }, longAnimationDuration);
         }
     });
-
-
-
-
-
-
-
     /**
     Represents a tutorial
 
@@ -832,13 +825,6 @@
             }
         }
     });
-
-
-
-
-
-
-
     /**
     The panel that holds step description, is positionated over the biggest remaining space among the four parts of a composite mask
 
@@ -914,13 +900,6 @@
             y: parsePxValue(this.$el.css("top"))
         };
     });
-
-
-
-
-
-
-
     /**
     Class representing all the current shown arrows
 
@@ -1077,13 +1056,6 @@
 
         if (brokenReference) this.recreateDOMReferences();
     };
-
-
-
-
-
-
-
     /**
     A single arrow for pointing individual items in current subject 
 
@@ -1172,11 +1144,6 @@
             this.target.position.y !== this.target.$el.offset().top ||
             this.target.position.x !== this.target.$el.offset().left);
     });
-
-
-
-
-
     /**
     Represents a panel holding the step description
 
@@ -1337,121 +1304,100 @@
         this.$el.css("left", this.position.x);
         this.$el.css("top", this.position.y);
     });
-
-
-
-
-
-
-
     /**
-    Step next button 
+	Step next button 
 
-    @class StepDescriptionNextButton
-    @extends HidableItem
-    **/
+	@class StepDescriptionNextButton
+	@extends HidableItem
+	**/
     var StepDescriptionNextButton = jazz.Class().extending(HidableItem);
 
     /**
-    The text for the next button
+	The text for the next button
 
-    @@field _text
-    @private
-    **/
+	@@field _text
+	@private
+	**/
     StepDescriptionNextButton.field("_text");
 
     /**
-    Disables the next button
+	Disables the next button
 
-    @method disable
-    **/
+	@method disable
+	**/
     StepDescriptionNextButton.method("disable", function() {
         this.$el.attr("disabled", "disabled");
     });
 
     /**
-    Enables the next button
+	Enables the next button
 
-    @method enable
-    **/
+	@method enable
+	**/
     StepDescriptionNextButton.method("enable", function() {
         this.$el.attr("disabled", null);
     });
 
     /**
-    Sets the text for the next button
+	Sets the text for the next button
 
-    @method setText
-    @param {String} text                                  The text for the next button
-    **/
+	@method setText
+	@param {String} text                                  The text for the next button
+	**/
     StepDescriptionNextButton.method("setText", function(text) {
         this._text = text;
         this.$el.text(text);
     });
 
     /**
-    Renders the Next Button
+	Renders the Next Button
 
-    @method render
-    @param {Object} $stepDescriptionEl                    The jQuery wrapped DOM element for the Step Description panel
-    **/
+	@method render
+	@param {Object} $stepDescriptionEl                    The jQuery wrapped DOM element for the Step Description panel
+	**/
     StepDescriptionNextButton.method("render", function($stepDescriptionEl) {
         this.$el = $("<button>").addClass("sideshow-next-step-button");
         this.callSuper("render", $stepDescriptionEl);
     });
-
-
-
-
-
-
-
     /**
-    Represents the current available area in the browser
+	Represents the current available area in the browser
 
-    @class Screen
-    @static
-    **/
+	@class Screen
+	@static
+	**/
     var Screen = {};
 
     /**
-    Object holding dimension information for the screen
+	Object holding dimension information for the screen
 
-    @@field
-    @static
-    @type Object
-    **/
+	@@field
+	@static
+	@type Object
+	**/
     Screen.dimension = {};
 
     /**
-    Checks if the screen dimension information has changed
+	Checks if the screen dimension information has changed
 
-    @method hasChanged
-    @static
-    @return boolean
-    **/
+	@method hasChanged
+	@static
+	@return boolean
+	**/
     Screen.hasChanged = function() {
         return ($body.outerWidth() !== this.dimension.width) ||
             ($body.outerHeight() !== this.dimension.height);
     };
 
     /**
-    Updates the dimension information for the screen 
+	Updates the dimension information for the screen 
 
-    @method updateInfo
-    @static
-    **/
+	@method updateInfo
+	@static
+	**/
     Screen.updateInfo = function() {
         this.dimension.width = $body.outerWidth();
         this.dimension.height = $body.outerHeight();
     };
-
-
-
-
-
-
-
     /**
     The current subject (the object being shown by the current wizard)
 
@@ -1545,46 +1491,38 @@
 
         Screen.updateInfo();
     };
-
-
-
-
-
-
-
     /**
-    Namespace to hold classes for mask control
+	Namespace to hold classes for mask control
 
-    @namespace Mask
-    **/
+	@namespace Mask
+	**/
     var Mask = {};
-
     /**
-    Controls the mask that covers the subject during a step transition
+	Controls the mask that covers the subject during a step transition
 
-    @class SubjectMask
-    @@singleton
-    **/
+	@class SubjectMask
+	@@singleton
+	**/
     Mask.SubjectMask = jazz.Class().extending(FadableItem).singleton;
 
     /**
-    Renders the subject mask
+	Renders the subject mask
 
-    @method render
-    **/
+	@method render
+	**/
     Mask.SubjectMask.method("render", function() {
         this.$el = $("<div>").addClass("sideshow-subject-mask");
         this.callSuper("render");
     });
 
     /**
-    Updates the dimension, positioning and border radius of the subject mask
+	Updates the dimension, positioning and border radius of the subject mask
 
-    @method update
-    @param {Object} position                              The positioning information 
-    @param {Object} dimension                             The dimension information 
-    @param {Object} borderRadius                          The border radius information 
-    **/
+	@method update
+	@param {Object} position                              The positioning information 
+	@param {Object} dimension                             The dimension information 
+	@param {Object} borderRadius                          The border radius information 
+	**/
     Mask.SubjectMask.method("update", function(position, dimension, borderRadius) {
         this.$el
             .css("left", position.x)
@@ -1593,13 +1531,6 @@
             .css("height", dimension.height)
             .css("border-radius", borderRadius.leftTop + "px " + borderRadius.rightTop + "px " + borderRadius.leftBottom + "px " + borderRadius.rightBottom + "px ");
     });
-
-
-
-
-
-
-
     /**
     Controls the mask surrounds the subject (the step focussed area)
 
@@ -1754,13 +1685,6 @@
         this.position = position;
         this.dimension = dimension;
     }).extending(VisualItem);
-
-
-
-
-
-
-
     /**
     @@alias Part
     @@to Mask.CompositeMask.Part
@@ -1812,13 +1736,6 @@
             .css("width", dimension.width)
             .css("height", dimension.height);
     });
-
-
-
-
-
-
-
     /**
     A corner part composing the mask
 
@@ -1924,13 +1841,6 @@
 
         $(this.$el).find("path").attr("d", CornerPart.SVGPathPointsTemplate(borderRadius));
     };
-
-
-
-
-
-
-
     /**
     Controls the polling functions needed by Sideshow
 
@@ -2035,13 +1945,6 @@
             }, pollingDuration);
         }
     };
-
-
-
-
-
-
-
     /**
     The main menu, where the available wizards are listed
 
@@ -2140,65 +2043,6 @@
     WizardMenu.setTitle = function(title) {
         this.$el.find(".sideshow-wizard-menu-title").text(title);
     };
-
-
-
-
-
-    /**
-    Registers hotkeys to be used when running Sideshow
-
-    @@function registerInnerHotkeys
-    **/
-    function registerInnerHotkeys() {
-        $(document).keyup(innerHotkeysListener);
-    }
-
-    /**
-    Unregisters hotkeys used when running Sideshow
-
-    @@function Unregisters
-    **/
-    function unregisterInnerHotkeys() {
-        $(document).unbind("keyup", innerHotkeysListener);
-    }
-
-    function innerHotkeysListener(e) {
-        //Esc or F1
-        if (e.keyCode == 27 || e.keyCode == 112) SS.close();
-    }
-
-    /**
-    Registers global hotkeys
-
-    @@function registerGlobalHotkeys
-    **/
-    function registerGlobalHotkeys() {
-        $(document).keyup(function(e) {
-            //F2
-            if (e.keyCode == 113) {
-                if (e.shiftKey) SS.start({
-                    listAll: true
-                });
-                else SS.start();
-            }
-        });
-    }
-
-
-
-
-
-
-    /**
-    Removes nodes created by Sideshow (except mask, which remains due to performance reasons when recalling Sideshow)
-
-    @@function removeDOMGarbage
-    **/
-    function removeDOMGarbage() {
-        $("[class*=\"sideshow\"]").not(".sideshow-mask-part, .sideshow-mask-corner-part, .sideshow-subject-mask").remove();
-    }
-
     /**
     Initializes Sideshow
 
@@ -2369,7 +2213,7 @@
     @return {Array}                                       The eligible wizards list
     @static
     **/
-    SS.getElegibleWizards = function getElegibleWizards(onlyNew) {
+    SS.getElegibleWizards = function(onlyNew) {
         var eligibleWizards = [];
         var somethingNew = false;
         for (var w = 0; w < wizards.length; w++) {
@@ -2477,8 +2321,6 @@
             flags.running = true;
         }
     };
-
-
 
     //Tries to register the Global Access Point
     if (global[globalObjectName] === undefined) {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Mask.Polling - Sideshow</title>
+    <title>Mask.Arrows - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,33 +41,39 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/Arrow.html">Arrow</a></li>
+                <li><a href="../classes/CloseButton.html">CloseButton</a></li>
             
-                <li><a href="../classes/Arrows.html">Arrows</a></li>
+                <li><a href="../classes/CompositeMask.html">CompositeMask</a></li>
             
-                <li><a href="../classes/ControlVariables.html">ControlVariables</a></li>
-            
-                <li><a href="../classes/DetailsPanel.html">DetailsPanel</a></li>
+                <li><a href="../classes/CornerPart.html">CornerPart</a></li>
             
                 <li><a href="../classes/FadableItem.html">FadableItem</a></li>
             
                 <li><a href="../classes/HidableItem.html">HidableItem</a></li>
             
-                <li><a href="../classes/Mask.CloseButton.html">Mask.CloseButton</a></li>
+                <li><a href="../classes/Mask.Arrow.html">Mask.Arrow</a></li>
             
-                <li><a href="../classes/Mask.CompositeMask.html">Mask.CompositeMask</a></li>
+                <li><a href="../classes/Mask.Arrows.html">Mask.Arrows</a></li>
             
-                <li><a href="../classes/Mask.CornerPart.html">Mask.CornerPart</a></li>
+                <li><a href="../classes/Mask.ControlVariables.html">Mask.ControlVariables</a></li>
             
-                <li><a href="../classes/Mask.Part.html">Mask.Part</a></li>
+                <li><a href="../classes/Mask.DetailsPanel.html">Mask.DetailsPanel</a></li>
             
-                <li><a href="../classes/Mask.Polling.html">Mask.Polling</a></li>
+                <li><a href="../classes/Mask.StepDescription.html">Mask.StepDescription</a></li>
+            
+                <li><a href="../classes/Mask.StepDescriptionNextButton.html">Mask.StepDescriptionNextButton</a></li>
             
                 <li><a href="../classes/Mask.Subject.html">Mask.Subject</a></li>
             
                 <li><a href="../classes/Mask.SubjectMask.html">Mask.SubjectMask</a></li>
             
+                <li><a href="../classes/Mask.Wizard.html">Mask.Wizard</a></li>
+            
                 <li><a href="../classes/Mask.WizardMenu.html">Mask.WizardMenu</a></li>
+            
+                <li><a href="../classes/Part.html">Part</a></li>
+            
+                <li><a href="../classes/Polling.html">Polling</a></li>
             
                 <li><a href="../classes/Screen.html">Screen</a></li>
             
@@ -75,13 +81,7 @@
             
                 <li><a href="../classes/SSException.html">SSException</a></li>
             
-                <li><a href="../classes/StepDescription.html">StepDescription</a></li>
-            
-                <li><a href="../classes/StepDescriptionNextButton.html">StepDescriptionNextButton</a></li>
-            
                 <li><a href="../classes/VisualItem.html">VisualItem</a></li>
-            
-                <li><a href="../classes/Wizard.html">Wizard</a></li>
             
             </ul>
 
@@ -122,7 +122,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Mask.Polling Class</h1>
+                        <h1>Mask.Arrows Class</h1>
 <div class="box meta">
     
 
@@ -130,7 +130,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_main.js.html#l1925"><code>src\main.js:1925</code></a>
+            Defined in: <a href="../files/src_step_arrows.js.html#l1"><code>src\step\arrows.js:1</code></a>
         </div>
     
 
@@ -142,7 +142,7 @@
 
 
 <div class="box intro">
-    <p>Controls the polling functions needed by Sideshow</p>
+    <p>Class representing all the current shown arrows</p>
 
 </div>
 
@@ -180,7 +180,7 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_dequeue">dequeue</a>
+                                <a href="#method_fadeIn">fadeIn</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -189,7 +189,7 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_doPolling">doPolling</a>
+                                <a href="#method_fadeOut">fadeOut</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -198,7 +198,7 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_enqueue">enqueue</a>
+                                <a href="#method_hide">hide</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -207,7 +207,14 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_start">start</a>
+                                <a href="#method_pollForArrowsChanges">pollForArrowsChanges</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_positionate">positionate</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -216,7 +223,25 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_stop">stop</a>
+                                <a href="#method_render">render</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setTargets">setTargets</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_show">show</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -274,7 +299,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l1997"><code>src\main.js:1997</code></a>
+        <a href="../files/src_step_arrows.js.html#l12"><code>src\step\arrows.js:12</code></a>
         
         </p>
 
@@ -285,7 +310,7 @@
     </div>
 
     <div class="description">
-        <p>Clear the polling queue</p>
+        <p>Clear the currently defined arrows</p>
 
     </div>
 
@@ -297,99 +322,8 @@
 </div>
 
                 
-                    <div id="method_dequeue" class="method item">
-    <h3 class="name"><code>dequeue</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>fn</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_main.js.html#l1965"><code>src\main.js:1965</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Removes a polling function from the queue</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">fn</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The polling function to dequeue</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_doPolling" class="method item">
-    <h3 class="name"><code>doPolling</code></h3>
+                    <div id="method_fadeIn" class="method item">
+    <h3 class="name"><code>fadeIn</code></h3>
 
     
         <span class="paren">()</span>
@@ -422,7 +356,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l2011"><code>src\main.js:2011</code></a>
+        <a href="../files/src_step_arrows.js.html#l84"><code>src\step\arrows.js:84</code></a>
         
         </p>
 
@@ -433,7 +367,7 @@
     </div>
 
     <div class="description">
-        <p>Starts the polling process</p>
+        <p>Iterates over the arrows collection fading in each arrow</p>
 
     </div>
 
@@ -445,99 +379,8 @@
 </div>
 
                 
-                    <div id="method_enqueue" class="method item">
-    <h3 class="name"><code>enqueue</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>fn</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_main.js.html#l1951"><code>src\main.js:1951</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Pushes a polling function in the queue</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">fn</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The polling function to enqueue</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_start" class="method item">
-    <h3 class="name"><code>start</code></h3>
+                    <div id="method_fadeOut" class="method item">
+    <h3 class="name"><code>fadeOut</code></h3>
 
     
         <span class="paren">()</span>
@@ -570,7 +413,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l1976"><code>src\main.js:1976</code></a>
+        <a href="../files/src_step_arrows.js.html#l97"><code>src\step\arrows.js:97</code></a>
         
         </p>
 
@@ -581,7 +424,7 @@
     </div>
 
     <div class="description">
-        <p>Unlocks the polling and starts the checking process</p>
+        <p>Iterates over the arrows collection fading out each arrow</p>
 
     </div>
 
@@ -593,8 +436,8 @@
 </div>
 
                 
-                    <div id="method_stop" class="method item">
-    <h3 class="name"><code>stop</code></h3>
+                    <div id="method_hide" class="method item">
+    <h3 class="name"><code>hide</code></h3>
 
     
         <span class="paren">()</span>
@@ -627,7 +470,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l1987"><code>src\main.js:1987</code></a>
+        <a href="../files/src_step_arrows.js.html#l71"><code>src\step\arrows.js:71</code></a>
         
         </p>
 
@@ -638,7 +481,290 @@
     </div>
 
     <div class="description">
-        <p>Stops the polling process</p>
+        <p>Iterates over the arrows collection hiding each arrow</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_pollForArrowsChanges" class="method item">
+    <h3 class="name"><code>pollForArrowsChanges</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_step_arrows.js.html#l142"><code>src\step\arrows.js:142</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A Polling function to check if arrows coordinates has changed</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_positionate" class="method item">
+    <h3 class="name"><code>positionate</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_step_arrows.js.html#l116"><code>src\step\arrows.js:116</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Iterates over the arrows collection repositionating each arrow</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_render" class="method item">
+    <h3 class="name"><code>render</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_step_arrows.js.html#l129"><code>src\step\arrows.js:129</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Iterates over the arrows collection rendering each arrow</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setTargets" class="method item">
+    <h3 class="name"><code>setTargets</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_step_arrows.js.html#l22"><code>src\step\arrows.js:22</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the targets for arrows to point</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_show" class="method item">
+    <h3 class="name"><code>show</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_step_arrows.js.html#l58"><code>src\step\arrows.js:58</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Iterates over the arrows collection showing each arrow</p>
 
     </div>
 

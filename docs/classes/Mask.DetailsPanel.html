@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Arrow - Sideshow</title>
+    <title>Mask.DetailsPanel - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,33 +41,39 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/Arrow.html">Arrow</a></li>
+                <li><a href="../classes/CloseButton.html">CloseButton</a></li>
             
-                <li><a href="../classes/Arrows.html">Arrows</a></li>
+                <li><a href="../classes/CompositeMask.html">CompositeMask</a></li>
             
-                <li><a href="../classes/ControlVariables.html">ControlVariables</a></li>
-            
-                <li><a href="../classes/DetailsPanel.html">DetailsPanel</a></li>
+                <li><a href="../classes/CornerPart.html">CornerPart</a></li>
             
                 <li><a href="../classes/FadableItem.html">FadableItem</a></li>
             
                 <li><a href="../classes/HidableItem.html">HidableItem</a></li>
             
-                <li><a href="../classes/Mask.CloseButton.html">Mask.CloseButton</a></li>
+                <li><a href="../classes/Mask.Arrow.html">Mask.Arrow</a></li>
             
-                <li><a href="../classes/Mask.CompositeMask.html">Mask.CompositeMask</a></li>
+                <li><a href="../classes/Mask.Arrows.html">Mask.Arrows</a></li>
             
-                <li><a href="../classes/Mask.CornerPart.html">Mask.CornerPart</a></li>
+                <li><a href="../classes/Mask.ControlVariables.html">Mask.ControlVariables</a></li>
             
-                <li><a href="../classes/Mask.Part.html">Mask.Part</a></li>
+                <li><a href="../classes/Mask.DetailsPanel.html">Mask.DetailsPanel</a></li>
             
-                <li><a href="../classes/Mask.Polling.html">Mask.Polling</a></li>
+                <li><a href="../classes/Mask.StepDescription.html">Mask.StepDescription</a></li>
+            
+                <li><a href="../classes/Mask.StepDescriptionNextButton.html">Mask.StepDescriptionNextButton</a></li>
             
                 <li><a href="../classes/Mask.Subject.html">Mask.Subject</a></li>
             
                 <li><a href="../classes/Mask.SubjectMask.html">Mask.SubjectMask</a></li>
             
+                <li><a href="../classes/Mask.Wizard.html">Mask.Wizard</a></li>
+            
                 <li><a href="../classes/Mask.WizardMenu.html">Mask.WizardMenu</a></li>
+            
+                <li><a href="../classes/Part.html">Part</a></li>
+            
+                <li><a href="../classes/Polling.html">Polling</a></li>
             
                 <li><a href="../classes/Screen.html">Screen</a></li>
             
@@ -75,13 +81,7 @@
             
                 <li><a href="../classes/SSException.html">SSException</a></li>
             
-                <li><a href="../classes/StepDescription.html">StepDescription</a></li>
-            
-                <li><a href="../classes/StepDescriptionNextButton.html">StepDescriptionNextButton</a></li>
-            
                 <li><a href="../classes/VisualItem.html">VisualItem</a></li>
-            
-                <li><a href="../classes/Wizard.html">Wizard</a></li>
             
             </ul>
 
@@ -122,15 +122,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Arrow Class</h1>
+                        <h1>Mask.DetailsPanel Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends <a href="..\classes\FadableItem.html" class="crosslink">FadableItem</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_main.js.html#l1078"><code>src\main.js:1078</code></a>
+            Defined in: <a href="../files/src_step_step_details_panel.js.html#l1"><code>src\step\step_details_panel.js:1</code></a>
         </div>
     
 
@@ -142,7 +146,7 @@
 
 
 <div class="box intro">
-    <p>A single arrow for pointing individual items in current subject</p>
+    <p>The panel that holds step description, is positionated over the biggest remaining space among the four parts of a composite mask</p>
 
 </div>
 
@@ -168,17 +172,31 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
+                                <a href="#method_destroy">destroy</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
                                 <a href="#method_fadeIn">fadeIn</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_hasChanged">hasChanged</a>
+                            <li class="index-item method inherited">
+                                <a href="#method_fadeOut">fadeOut</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_hide">hide</a>
 
                                 
                                 
@@ -191,14 +209,14 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
                                 <a href="#method_render">render</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
                                 <a href="#method_show">show</a>
 
                                 
@@ -221,7 +239,59 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_fadeIn" class="method item">
+                    <div id="method_destroy" class="method item inherited">
+    <h3 class="name"><code>destroy</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..\classes\VisualItem.html#method_destroy">VisualItem</a>:
+            
+        
+        
+        <a href="../files/src_interface_itens_visual_item.js.html#l35"><code>src\interface_itens\visual_item.js:35</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Destroys the item&#39;s DOM object</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_fadeIn" class="method item inherited">
     <h3 class="name"><code>fadeIn</code></h3>
 
     
@@ -245,15 +315,12 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..\classes\FadableItem.html#method_fadeIn">FadableItem</a>:
             
         
         
-        <a href="../files/src_main.js.html#l1144"><code>src\main.js:1144</code></a>
+        <a href="../files/src_interface_itens_fadable_item.js.html#l10"><code>src\interface_itens\fadable_item.js:10</code></a>
         
         </p>
 
@@ -264,7 +331,7 @@
     </div>
 
     <div class="description">
-        <p>Does a fade in transition in the Arrow</p>
+        <p>Does a fade in transition for the visual item</p>
 
     </div>
 
@@ -276,17 +343,13 @@
 </div>
 
                 
-                    <div id="method_hasChanged" class="method item">
-    <h3 class="name"><code>hasChanged</code></h3>
+                    <div id="method_fadeOut" class="method item inherited">
+    <h3 class="name"><code>fadeOut</code></h3>
 
     
         <span class="paren">()</span>
     
 
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
     
 
     
@@ -304,15 +367,12 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..\classes\FadableItem.html#method_fadeOut">FadableItem</a>:
             
         
         
-        <a href="../files/src_main.js.html#l1154"><code>src\main.js:1154</code></a>
+        <a href="../files/src_interface_itens_fadable_item.js.html#l35"><code>src\interface_itens\fadable_item.js:35</code></a>
         
         </p>
 
@@ -323,24 +383,64 @@
     </div>
 
     <div class="description">
-        <p>Checks if the arrow&#39;s target position or dimension has changed</p>
+        <p>Does a fade out transition for the visual item</p>
 
     </div>
 
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                
-                    
-                    <p>boolean</p>
+    
+</div>
 
                 
-            </div>
-        </div>
+                    <div id="method_hide" class="method item inherited">
+    <h3 class="name"><code>hide</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="..\classes\HidableItem.html#method_hide">HidableItem</a>:
+            
+        
+        
+        <a href="../files/src_interface_itens_hidable_item.js.html#l23"><code>src\interface_itens\hidable_item.js:23</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hides the visual item</p>
+
+    </div>
+
+    
+
     
 
     
@@ -379,7 +479,7 @@
             
         
         
-        <a href="../files/src_main.js.html#l1114"><code>src\main.js:1114</code></a>
+        <a href="../files/src_step_step_details_panel.js.html#l38"><code>src\step\step_details_panel.js:38</code></a>
         
         </p>
 
@@ -390,7 +490,7 @@
     </div>
 
     <div class="description">
-        <p>Positionates the Arrow according to its target</p>
+        <p>Positionates the panel automatically, calculating the biggest available area and putting the panel over there</p>
 
     </div>
 
@@ -425,16 +525,16 @@
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="..\classes\VisualItem.html#method_render">
+                VisualItem
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
-        <a href="../files/src_main.js.html#l1101"><code>src\main.js:1101</code></a>
+        <a href="../files/src_step_step_details_panel.js.html#l26"><code>src\step\step_details_panel.js:26</code></a>
         
         </p>
 
@@ -445,7 +545,7 @@
     </div>
 
     <div class="description">
-        <p>Renders the Arrow</p>
+        <p>Renders the Details Panel</p>
 
     </div>
 
@@ -457,11 +557,21 @@
 </div>
 
                 
-                    <div id="method_show" class="method item">
+                    <div id="method_show" class="method item inherited">
     <h3 class="name"><code>show</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>displayButKeepTransparent</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -481,15 +591,12 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="..\classes\HidableItem.html#method_show">HidableItem</a>:
             
         
         
-        <a href="../files/src_main.js.html#l1134"><code>src\main.js:1134</code></a>
+        <a href="../files/src_interface_itens_hidable_item.js.html#l10"><code>src\interface_itens\hidable_item.js:10</code></a>
         
         </p>
 
@@ -500,10 +607,34 @@
     </div>
 
     <div class="description">
-        <p>Shows the Arrow</p>
+        <p>Shows the visual item</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">displayButKeepTransparent</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The item will hold space but keep invisible</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     

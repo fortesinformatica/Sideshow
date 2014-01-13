@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SS - Sideshow</title>
+    <title>src\wizard\wizard_control_variables.js - Sideshow</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -122,131 +122,107 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SS Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: src\wizard\wizard_control_variables.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+    /**
+    Stores the variables used in step evaluators 
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_general_variables.js.html#l6"><code>src\general\variables.js:6</code></a>
-        </div>
-    
+    @class ControlVariables
+    @static
+    **/
+    SS.ControlVariables = {};
 
-    
+    /**
+    Sets a variable value
 
-    
-</div>
+    @method set
+    @param {String} name                                  The variable name
+    @param {String} value                                 The variable value
+    @return {String}                                      A formatted key=value pair representing the defined variable 
+    **/
+    SS.ControlVariables.set = function(name, value) {
+        var variable = {};
+        if (this.isDefined(name)) {
+            variable = this.getNameValuePair(name);
+        } else controlVariables.push(variable);
 
+        variable.name = name;
+        variable.value = value;
+        return name + &quot;=&quot; + value;
+    };
 
+    /**
+    Sets a variable if not defined yet
 
-<div class="box intro">
-    <p>The main class for Sideshow</p>
+    @method setIfUndefined
+    @param {String} name                                  The variable name
+    @param {String} value                                 The variable value
+    @return {String}                                      A formatted key=value pair representing the defined variable 
+    **/
+    SS.ControlVariables.setIfUndefined = function(name, value) {
+        if (!this.isDefined(name)) return this.set(name, value);
+    };
 
-</div>
+    /**
+    Checks if some variable is already defined
 
+    @method isDefined
+    @param {String} name                                  The variable name
+    @return {boolean}                                     A boolean indicating if the variable is already defined
+    **/
+    SS.ControlVariables.isDefined = function(name) {
+        return this.getNameValuePair(name) !== undefined;
+    };
 
+    /**
+    Gets a variable value
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+    @method get
+    @param {String} name                                  The variable name
+    @return {any}                                         The variable value
+    **/
+    SS.ControlVariables.get = function(name) {
+        var pair = this.getNameValuePair(name);
+        return pair ? pair.value : undefined;
+    };
 
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
+    /**
+    Gets a pair with name and value 
 
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
+    @method getNameValuePair
+    @param {String} name                                  The variable name
+    @return {Object}                                      A pair with the variable name and value
+    **/
+    SS.ControlVariables.getNameValuePair = function(name) {
+        for (var i = 0; i &lt; controlVariables.length; i++) {
+            var variable = controlVariables[i];
+            if (variable.name === name) return variable;
+        }
+    };
 
-            
+    /**
+    Remove some variable from the control variables collection
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
+    @method remove
+    @param {String} name                                  The variable name
+    @return {Object}                                      A pair with the removed variable name and value
+    **/
+    SS.ControlVariables.remove = function(name) {
+        return controlVariables.splice(controlVariables.indexOf(this.getNameValuePair(name)), 1);
+    };
 
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_VERSION">VERSION</a>
+    /**
+    Clear the control variables collection 
 
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
+    @method clear
+    **/
+    SS.ControlVariables.clear = function() {
+        controlVariables = [];
+    };
 
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_general_variables.js.html#l13"><code>src\general\variables.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The current Sideshow version</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+    </pre>
 </div>
 
                     </div>
