@@ -1,0 +1,2114 @@
+{
+    "project": {
+        "name": "Sideshow",
+        "description": "An incredible Javascript interactive help Library",
+        "version": "0.3.3",
+        "url": "http://github.com/fortesinformatica/sideshow",
+        "logo": "http://github.com/fortesinformatica/sideshow/examples/images/sideshow-logo.svg"
+    },
+    "files": {
+        "src\\copyright_info.js": {
+            "name": "src\\copyright_info.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\main.js": {
+            "name": "src\\main.js",
+            "modules": {},
+            "classes": {
+                "SS": 1,
+                "SSException": 1,
+                "ControlVariables": 1,
+                "VisualItem": 1,
+                "HidableItem": 1,
+                "FadableItem": 1,
+                "Wizard": 1,
+                "DetailsPanel": 1,
+                "Arrows": 1,
+                "Arrow": 1,
+                "StepDescription": 1,
+                "StepDescriptionNextButton": 1,
+                "Screen": 1,
+                "Mask.Subject": 1,
+                "Mask.SubjectMask": 1,
+                "Mask.CompositeMask": 1,
+                "Mask.Part": 1,
+                "Mask.CornerPart": 1,
+                "Mask.Polling": 1,
+                "Mask.WizardMenu": 1,
+                "Mask.CloseButton": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mask": 1
+            }
+        }
+    },
+    "modules": {},
+    "classes": {
+        "SS": {
+            "name": "SS",
+            "shortname": "SS",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 16,
+            "description": "The main class for Sideshow",
+            "static": 1
+        },
+        "SSException": {
+            "name": "SSException",
+            "shortname": "SSException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 57,
+            "description": "A custom exception class for Sideshow",
+            "extends": "Error",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "The error code",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "description": "The error message",
+                    "type": "String"
+                }
+            ]
+        },
+        "ControlVariables": {
+            "name": "ControlVariables",
+            "shortname": "ControlVariables",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 201,
+            "description": "Stores the variables used in step evaluators",
+            "static": 1
+        },
+        "VisualItem": {
+            "name": "VisualItem",
+            "shortname": "VisualItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 303,
+            "description": "A visual item"
+        },
+        "HidableItem": {
+            "name": "HidableItem",
+            "shortname": "HidableItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 352,
+            "description": "A visual item which can be shown and hidden",
+            "extends": "VisualItem"
+        },
+        "FadableItem": {
+            "name": "FadableItem",
+            "shortname": "FadableItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 391,
+            "description": "A visual item which holds fading in and out capabilities",
+            "extends": "HidableItem"
+        },
+        "Wizard": {
+            "name": "Wizard",
+            "shortname": "Wizard",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 453,
+            "description": "Represents a tutorial",
+            "params": [
+                {
+                    "name": "wizardConfig",
+                    "description": "The wizard configuration object",
+                    "type": "Object"
+                }
+            ]
+        },
+        "DetailsPanel": {
+            "name": "DetailsPanel",
+            "shortname": "DetailsPanel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 833,
+            "description": "The panel that holds step description, is positionated over the biggest remaining space among the four parts of a composite mask",
+            "extends": "FadableItem"
+        },
+        "Arrows": {
+            "name": "Arrows",
+            "shortname": "Arrows",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 915,
+            "description": "Class representing all the current shown arrows",
+            "static": 1
+        },
+        "Arrow": {
+            "name": "Arrow",
+            "shortname": "Arrow",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 1078,
+            "description": "A single arrow for pointing individual items in current subject"
+        },
+        "StepDescription": {
+            "name": "StepDescription",
+            "shortname": "StepDescription",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 1171,
+            "description": "Represents a panel holding the step description",
+            "extends": "FadableItem"
+        },
+        "StepDescriptionNextButton": {
+            "name": "StepDescriptionNextButton",
+            "shortname": "StepDescriptionNextButton",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 1338,
+            "description": "Step next button",
+            "extends": "HidableItem"
+        },
+        "Screen": {
+            "name": "Screen",
+            "shortname": "Screen",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\main.js",
+            "line": 1400,
+            "description": "Represents the current available area in the browser",
+            "static": 1
+        },
+        "Mask.Subject": {
+            "name": "Mask.Subject",
+            "shortname": "Subject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mask",
+            "file": "src\\main.js",
+            "line": 1446,
+            "description": "The current subject (the object being shown by the current wizard)",
+            "static": 1
+        },
+        "Mask.SubjectMask": {
+            "name": "Mask.SubjectMask",
+            "shortname": "SubjectMask",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mask",
+            "file": "src\\main.js",
+            "line": 1553,
+            "description": "Controls the mask that covers the subject during a step transition"
+        },
+        "Mask.CompositeMask": {
+            "name": "Mask.CompositeMask",
+            "shortname": "CompositeMask",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mask",
+            "file": "src\\main.js",
+            "line": 1594,
+            "description": "Controls the mask surrounds the subject (the step focussed area)"
+        },
+        "Mask.Part": {
+            "name": "Mask.Part",
+            "shortname": "Part",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mask",
+            "file": "src\\main.js",
+            "line": 1736,
+            "description": "A part composing the mask",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "The positioning information",
+                    "type": "Object"
+                },
+                {
+                    "name": "dimension",
+                    "description": "The dimension information",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Mask.CornerPart": {
+            "name": "Mask.CornerPart",
+            "shortname": "CornerPart",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mask",
+            "file": "src\\main.js",
+            "line": 1813,
+            "description": "A corner part composing the mask",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "The positioning information",
+                    "type": "Object"
+                },
+                {
+                    "name": "dimension",
+                    "description": "The dimension information",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Mask.Polling": {
+            "name": "Mask.Polling",
+            "shortname": "Polling",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mask",
+            "file": "src\\main.js",
+            "line": 1925,
+            "description": "Controls the polling functions needed by Sideshow",
+            "static": 1
+        },
+        "Mask.WizardMenu": {
+            "name": "Mask.WizardMenu",
+            "shortname": "WizardMenu",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mask",
+            "file": "src\\main.js",
+            "line": 2036,
+            "description": "The main menu, where the available wizards are listed",
+            "static": 1
+        },
+        "Mask.CloseButton": {
+            "name": "Mask.CloseButton",
+            "shortname": "CloseButton",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mask",
+            "file": "src\\main.js",
+            "line": 2421,
+            "description": "The close button for the wizard",
+            "extends": "FadableItem"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src\\copyright_info.js",
+            "line": 1,
+            "license": "Sideshow - An incredible Javascript interactive help Library\nVersion: 0.3.3\nDate: 2014-01-10 \nAuthor: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]\nAvailable under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)",
+            "class": "SS"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 23,
+            "description": "The current Sideshow version",
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "String",
+            "class": "SS"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 44,
+            "description": "Possible statuses for an animation",
+            "class": "SS"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 73,
+            "description": "Shows a warning  in a pre-defined format",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "The warning code",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "description": "The warning message",
+                    "type": "String"
+                }
+            ],
+            "class": "SSException"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 84,
+            "description": "Parses a string in the format \"#px\" in a number",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "A value with/without a px unit",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Number                                        The number value without unit"
+            },
+            "class": "SSException"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 103,
+            "description": "Strings Dictionary",
+            "class": "SSException"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 139,
+            "description": "Gets a string from the dictionary in the current language",
+            "params": [
+                {
+                    "name": "stringKeyValuePair",
+                    "description": "A string key-value pair in dictionary",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "String                                        The string value in the current language"
+            },
+            "class": "SSException"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 161,
+            "description": "Sideshow Settings",
+            "class": "SSException"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 168,
+            "description": "Application route to persists user preferences",
+            "type": "String",
+            "class": "SSException"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 178,
+            "description": "Logged in user",
+            "type": "String",
+            "class": "SSException"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 187,
+            "description": "Chosen language for sideshow interface",
+            "type": "String",
+            "class": "SSException"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 209,
+            "description": "Sets a variable value",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The variable name",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The variable value",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A formatted key=value pair representing the defined variable",
+                "type": "String"
+            },
+            "class": "ControlVariables"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 228,
+            "description": "Sets a variable if not defined yet",
+            "itemtype": "method",
+            "name": "setIfUndefined",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The variable name",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The variable value",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A formatted key=value pair representing the defined variable",
+                "type": "String"
+            },
+            "class": "ControlVariables"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 240,
+            "description": "Checks if some variable is already defined",
+            "itemtype": "method",
+            "name": "isDefined",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The variable name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A boolean indicating if the variable is already defined",
+                "type": "Boolean"
+            },
+            "class": "ControlVariables"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 251,
+            "description": "Gets a variable value",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The variable name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The variable value",
+                "type": "Any"
+            },
+            "class": "ControlVariables"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 263,
+            "description": "Gets a pair with name and value",
+            "itemtype": "method",
+            "name": "getNameValuePair",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The variable name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A pair with the variable name and value",
+                "type": "Object"
+            },
+            "class": "ControlVariables"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 277,
+            "description": "Remove some variable from the control variables collection",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The variable name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A pair with the removed variable name and value",
+                "type": "Object"
+            },
+            "class": "ControlVariables"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 288,
+            "description": "Clear the control variables collection",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "ControlVariables"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 311,
+            "description": "The jQuery wrapped DOM element for the visual item",
+            "type": "Object",
+            "class": "VisualItem"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 319,
+            "description": "The jQuery wrapped DOM element for the visual item",
+            "type": "AnimationStatus",
+            "class": "VisualItem"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 327,
+            "description": "Renders the item's DOM object",
+            "itemtype": "method",
+            "name": "render",
+            "class": "VisualItem"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 337,
+            "description": "Destroys the item's DOM object",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "VisualItem"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 361,
+            "description": "Shows the visual item",
+            "itemtype": "method",
+            "name": "show",
+            "params": [
+                {
+                    "name": "displayButKeepTransparent",
+                    "description": "The item will hold space but keep invisible",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "HidableItem"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 374,
+            "description": "Hides the visual item",
+            "itemtype": "method",
+            "name": "hide",
+            "class": "HidableItem"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 400,
+            "description": "Does a fade in transition for the visual item",
+            "itemtype": "method",
+            "name": "fadeIn",
+            "class": "FadableItem"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 425,
+            "description": "Does a fade out transition for the visual item",
+            "itemtype": "method",
+            "name": "fadeOut",
+            "class": "FadableItem"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 472,
+            "description": "A function to prepare the environment for running a wizard (e.g. redirecting to some screen)",
+            "type": "Function",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 480,
+            "description": "An object with listeners to this wizard (e.g. beforeWizardStarts, afterWizardEnds)",
+            "type": "Object",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 488,
+            "description": "A configuration flag that defines if the step position (e.g. 2/10, 3/15, 12/12) will be shown",
+            "type": "boolean",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 496,
+            "description": "An array with related wizards names. These wizards are listed after the ending of the current wizard.",
+            "type": "Array",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 504,
+            "description": "The wizard unique name (used internally as an identifier)",
+            "type": "String",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 512,
+            "description": "The wizard title (will be shown in the list of available wizards)",
+            "type": "String",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 520,
+            "description": "The wizard description (will be shown in the list of available wizards)",
+            "type": "String",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 528,
+            "description": "The wizard estimated completion time (will be shown in the list of available wizards)",
+            "type": "String",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 536,
+            "description": "A collection of rules to infer whether a wizard should be available in a specific screen",
+            "type": "Array",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 544,
+            "description": "The sequence of steps for this wizard",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 553,
+            "description": "Points to the current step object in a playing wizard",
+            "type": "Object",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 561,
+            "description": "Sets the storyline for the wizard",
+            "itemtype": "method",
+            "name": "storyLine",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 570,
+            "description": "Runs the wizard",
+            "itemtype": "method",
+            "name": "play",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 614,
+            "description": "Shows a specific step",
+            "itemtype": "method",
+            "name": "showStep",
+            "params": [
+                {
+                    "name": "step",
+                    "description": "The step to be shown",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "A callback function to be called",
+                    "type": "Function"
+                }
+            ],
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 706,
+            "description": "Shows the next step of the wizard",
+            "itemtype": "method",
+            "name": "next",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "A callback function to be called",
+                    "type": "Function"
+                }
+            ],
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 735,
+            "description": "Hides the step",
+            "itemtype": "method",
+            "name": "hideStep",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "A callback function to be called in the ending of the hiding process",
+                    "type": "Function"
+                }
+            ],
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 749,
+            "description": "Returns the position of the step passed as argument or (by default) the current step",
+            "itemtype": "method",
+            "name": "getStepPosition",
+            "params": [
+                {
+                    "name": "step",
+                    "description": "The step object to get position",
+                    "type": "Object"
+                }
+            ],
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 759,
+            "description": "Checks if a wizard should be shown in the current context (running each evaluator defined for this wizard)",
+            "itemtype": "method",
+            "name": "isEligible",
+            "return": {
+                "description": "A boolean indicating if this wizard should be available in the current context",
+                "type": "Boolean"
+            },
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 794,
+            "description": "Checks if the current user already watched this wizard",
+            "itemtype": "method",
+            "name": "isAlreadyWatched",
+            "return": {
+                "description": "A boolean indicating if the user watched this wizard",
+                "type": "Boolean"
+            },
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 806,
+            "description": "A Polling function to check if the current step is completed",
+            "itemtype": "method",
+            "name": "pollForCheckCompletedStep",
+            "class": "Wizard"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 842,
+            "description": "An object holding dimension information for the Details Panel",
+            "type": "Object",
+            "class": "DetailsPanel"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 850,
+            "description": "An object holding positioning information for the Details Panel",
+            "type": "Object",
+            "class": "DetailsPanel"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 858,
+            "description": "Renders the Details Panel",
+            "itemtype": "method",
+            "name": "render",
+            "class": "DetailsPanel"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 870,
+            "description": "Positionates the panel automatically, calculating the biggest available area and putting the panel over there",
+            "itemtype": "method",
+            "name": "positionate",
+            "class": "DetailsPanel"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 926,
+            "description": "Clear the currently defined arrows",
+            "itemtype": "method",
+            "name": "clear",
+            "static": 1,
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 936,
+            "description": "Sets the targets for arrows to point",
+            "itemtype": "method",
+            "name": "setTargets",
+            "static": 1,
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 972,
+            "description": "Iterates over the arrows collection showing each arrow",
+            "itemtype": "method",
+            "name": "show",
+            "static": 1,
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 985,
+            "description": "Iterates over the arrows collection hiding each arrow",
+            "itemtype": "method",
+            "name": "hide",
+            "static": 1,
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 998,
+            "description": "Iterates over the arrows collection fading in each arrow",
+            "itemtype": "method",
+            "name": "fadeIn",
+            "static": 1,
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1011,
+            "description": "Iterates over the arrows collection fading out each arrow",
+            "itemtype": "method",
+            "name": "fadeOut",
+            "static": 1,
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1030,
+            "description": "Iterates over the arrows collection repositionating each arrow",
+            "itemtype": "method",
+            "name": "positionate",
+            "static": 1,
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1043,
+            "description": "Iterates over the arrows collection rendering each arrow",
+            "itemtype": "method",
+            "name": "render",
+            "static": 1,
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1056,
+            "description": "A Polling function to check if arrows coordinates has changed",
+            "itemtype": "method",
+            "name": "pollForArrowsChanges",
+            "class": "Arrows"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1085,
+            "description": "The jQuery wrapped object which will be pointed by this arrow",
+            "type": "Object",
+            "class": "Arrow"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1093,
+            "description": "Flag created to set if the arrow was visible once, this is used for recreating references to the targets DOM objects",
+            "type": "Object",
+            "class": "Arrow"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1101,
+            "description": "Renders the Arrow",
+            "itemtype": "method",
+            "name": "render",
+            "class": "Arrow"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1114,
+            "description": "Positionates the Arrow according to its target",
+            "itemtype": "method",
+            "name": "positionate",
+            "class": "Arrow"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1134,
+            "description": "Shows the Arrow",
+            "itemtype": "method",
+            "name": "show",
+            "class": "Arrow"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1144,
+            "description": "Does a fade in transition in the Arrow",
+            "itemtype": "method",
+            "name": "fadeIn",
+            "class": "Arrow"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1154,
+            "description": "Checks if the arrow's target position or dimension has changed",
+            "itemtype": "method",
+            "name": "hasChanged",
+            "return": {
+                "description": "boolean"
+            },
+            "class": "Arrow"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1182,
+            "description": "The step description text content",
+            "type": "String",
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1190,
+            "description": "The title text for the step description panel",
+            "type": "String",
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1198,
+            "description": "An object holding dimension information for the Step Description panel",
+            "type": "Object",
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1206,
+            "description": "An object holding positioning information for the Step Description panel",
+            "type": "Object",
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1214,
+            "description": "An object representing the next button for a step description panel",
+            "type": "Object",
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1222,
+            "description": "Sets the text for the step description panel",
+            "itemtype": "method",
+            "name": "setText",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "The text for the step description panel",
+                    "type": "String"
+                }
+            ],
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1233,
+            "description": "Sets the HTML content for the step description panel",
+            "itemtype": "method",
+            "name": "setHTML",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "The HTML content for step description panel",
+                    "type": "String"
+                }
+            ],
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1244,
+            "description": "Sets the title for the step description panel",
+            "itemtype": "method",
+            "name": "setTitle",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "The text for the step description panel",
+                    "type": "String"
+                }
+            ],
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1255,
+            "description": "Sets the title for the step description panel",
+            "itemtype": "method",
+            "name": "setStepPosition",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "The text for the step description panel",
+                    "type": "String"
+                }
+            ],
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1266,
+            "description": "Renders the step description panel",
+            "itemtype": "method",
+            "name": "render",
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1290,
+            "description": "Shows the step description panel",
+            "itemtype": "method",
+            "name": "show",
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1300,
+            "description": "Positionates the step description panel",
+            "itemtype": "method",
+            "name": "positionate",
+            "class": "StepDescription"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1346,
+            "description": "The text for the next button",
+            "access": "private",
+            "tagname": "",
+            "class": "StepDescriptionNextButton"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1354,
+            "description": "Disables the next button",
+            "itemtype": "method",
+            "name": "disable",
+            "class": "StepDescriptionNextButton"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1363,
+            "description": "Enables the next button",
+            "itemtype": "method",
+            "name": "enable",
+            "class": "StepDescriptionNextButton"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1372,
+            "description": "Sets the text for the next button",
+            "itemtype": "method",
+            "name": "setText",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "The text for the next button",
+                    "type": "String"
+                }
+            ],
+            "class": "StepDescriptionNextButton"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1383,
+            "description": "Renders the Next Button",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "$stepDescriptionEl",
+                    "description": "The jQuery wrapped DOM element for the Step Description panel",
+                    "type": "Object"
+                }
+            ],
+            "class": "StepDescriptionNextButton"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1408,
+            "description": "Object holding dimension information for the screen",
+            "static": 1,
+            "type": "Object",
+            "class": "Screen"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1417,
+            "description": "Checks if the screen dimension information has changed",
+            "itemtype": "method",
+            "name": "hasChanged",
+            "static": 1,
+            "return": {
+                "description": "boolean"
+            },
+            "class": "Screen"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1429,
+            "description": "Updates the dimension information for the screen",
+            "itemtype": "method",
+            "name": "updateInfo",
+            "static": 1,
+            "class": "Screen"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1454,
+            "description": "The current subject jQuery wrapped DOM element",
+            "static": 1,
+            "type": "Object",
+            "class": "Subject"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1463,
+            "description": "The current subject dimension information",
+            "static": 1,
+            "type": "Object",
+            "class": "Subject"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1472,
+            "description": "The current subject positioning information",
+            "static": 1,
+            "type": "Object",
+            "class": "Subject"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1481,
+            "description": "The current subject border radius information",
+            "static": 1,
+            "type": "Object",
+            "class": "Subject"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1490,
+            "description": "Checks if the object has changed since the last checking",
+            "itemtype": "method",
+            "name": "hasChanged",
+            "return": {
+                "description": "boolean"
+            },
+            "class": "Subject"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1510,
+            "description": "Updates the information about the suject",
+            "itemtype": "method",
+            "name": "updateInfo",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Dimension, positioning and border radius information",
+                    "type": "Object"
+                }
+            ],
+            "class": "Subject"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1546,
+            "description": "Namespace to hold classes for mask control",
+            "class": "Mask.Subject",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1561,
+            "description": "Renders the subject mask",
+            "itemtype": "method",
+            "name": "render",
+            "class": "Mask.SubjectMask",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1571,
+            "description": "Updates the dimension, positioning and border radius of the subject mask",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "The positioning information",
+                    "type": "Object"
+                },
+                {
+                    "name": "dimension",
+                    "description": "The dimension information",
+                    "type": "Object"
+                },
+                {
+                    "name": "borderRadius",
+                    "description": "The border radius information",
+                    "type": "Object"
+                }
+            ],
+            "class": "Mask.SubjectMask",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1602,
+            "description": "Initializes the composite mask",
+            "itemtype": "method",
+            "name": "init",
+            "class": "Mask.CompositeMask",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1617,
+            "description": "The parts composing the mask",
+            "type": "Object",
+            "class": "Mask.CompositeMask",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1625,
+            "description": "Renders the composite mask",
+            "itemtype": "method",
+            "name": "render",
+            "class": "Mask.CompositeMask",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1645,
+            "description": "Updates the positioning and dimension of each part composing the whole mask, according to the subject coordinates",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "An object representing the positioning info for the mask",
+                    "type": "Object"
+                },
+                {
+                    "name": "dimension",
+                    "description": "An object representing the dimension info for the mask",
+                    "type": "Object"
+                },
+                {
+                    "name": "borderRadius",
+                    "description": "An object representing the borderRadius info for the mask",
+                    "type": "Object"
+                }
+            ],
+            "class": "Mask.CompositeMask",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1712,
+            "description": "A Polling function to check if subject coordinates has changed",
+            "itemtype": "method",
+            "name": "pollForChanges",
+            "class": "Mask.CompositeMask",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1755,
+            "class": "Mask.Part",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1761,
+            "description": "An object holding positioning information for the mask part",
+            "type": "Object",
+            "class": "Mask.Part",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1769,
+            "description": "An object holding dimension information for the mask part",
+            "type": "Object",
+            "class": "Mask.Part",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1777,
+            "description": "Renders the mask part",
+            "itemtype": "method",
+            "name": "render",
+            "class": "Mask.Part",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1790,
+            "description": "Updates the dimension and positioning of the subject mask part",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "The positioning information",
+                    "type": "Object"
+                },
+                {
+                    "name": "dimension",
+                    "description": "The dimension information",
+                    "type": "Object"
+                }
+            ],
+            "class": "Mask.Part",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1823,
+            "class": "Mask.CornerPart",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1829,
+            "description": "An object holding positioning information for the mask corner part",
+            "type": "Object",
+            "class": "Mask.CornerPart",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1837,
+            "description": "An object holding dimension information for the mask corner part",
+            "type": "Object",
+            "class": "Mask.CornerPart",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1845,
+            "description": "An object holding border radius information for the mask corner part",
+            "type": "Object",
+            "class": "Mask.CornerPart",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1853,
+            "description": "Formats the SVG path for the corner part",
+            "itemtype": "method",
+            "name": "SVGPathPointsTemplate",
+            "params": [
+                {
+                    "name": "borderRadius",
+                    "description": "The corner part border radius",
+                    "type": "Number"
+                }
+            ],
+            "static": 1,
+            "class": "Mask.CornerPart",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1864,
+            "description": "Renders the SVG for the corner part",
+            "itemtype": "method",
+            "name": "buildSVG",
+            "params": [
+                {
+                    "name": "borderRadius",
+                    "description": "The corner part border radius",
+                    "type": "Number"
+                }
+            ],
+            "static": 1,
+            "class": "Mask.CornerPart",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1886,
+            "description": "Renders the mask corner part",
+            "itemtype": "method",
+            "name": "render",
+            "return": {
+                "description": "The corner part jQuery wrapped DOM element",
+                "type": "Object"
+            },
+            "class": "Mask.CornerPart",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1902,
+            "description": "Updates the positioning and border radius of the mask corner part",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "The positioning information",
+                    "type": "Object"
+                },
+                {
+                    "name": "borderRadius",
+                    "description": "The border radius information",
+                    "type": "Object"
+                }
+            ],
+            "class": "Mask.CornerPart",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1933,
+            "description": "The polling functions queue",
+            "type": "Object",
+            "static": 1,
+            "class": "Mask.Polling",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1942,
+            "description": "A flag that controls if the polling is locked",
+            "type": "boolean",
+            "static": 1,
+            "class": "Mask.Polling",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1951,
+            "description": "Pushes a polling function in the queue",
+            "itemtype": "method",
+            "name": "enqueue",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "The polling function to enqueue",
+                    "type": "Function"
+                }
+            ],
+            "static": 1,
+            "class": "Mask.Polling",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1965,
+            "description": "Removes a polling function from the queue",
+            "itemtype": "method",
+            "name": "dequeue",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "The polling function to dequeue",
+                    "type": "Function"
+                }
+            ],
+            "static": 1,
+            "class": "Mask.Polling",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1976,
+            "description": "Unlocks the polling and starts the checking process",
+            "itemtype": "method",
+            "name": "start",
+            "static": 1,
+            "class": "Mask.Polling",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1987,
+            "description": "Stops the polling process",
+            "itemtype": "method",
+            "name": "stop",
+            "static": 1,
+            "class": "Mask.Polling",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 1997,
+            "description": "Clear the polling queue",
+            "itemtype": "method",
+            "name": "clear",
+            "static": 1,
+            "class": "Mask.Polling",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2011,
+            "description": "Starts the polling process",
+            "itemtype": "method",
+            "name": "doPolling",
+            "static": 1,
+            "class": "Mask.Polling",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2044,
+            "description": "Renders the wizard menu",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "wizards",
+                    "description": "The wizards list",
+                    "type": "Array"
+                }
+            ],
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2096,
+            "description": "Shows the wizard menu",
+            "itemtype": "method",
+            "name": "show",
+            "params": [
+                {
+                    "name": "wizards",
+                    "description": "The wizards list",
+                    "type": "Array"
+                }
+            ],
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2115,
+            "description": "Hides the wizard menu",
+            "itemtype": "method",
+            "name": "hide",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "The callback to be called after hiding the menu",
+                    "type": "Function"
+                }
+            ],
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2139,
+            "description": "Registers hotkeys to be used when running Sideshow",
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2148,
+            "description": "Unregisters hotkeys used when running Sideshow",
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2162,
+            "description": "Registers global hotkeys",
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2184,
+            "description": "Removes nodes created by Sideshow (except mask, which remains due to performance reasons when recalling Sideshow)",
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2193,
+            "description": "Initializes Sideshow",
+            "itemtype": "method",
+            "name": "init",
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2208,
+            "description": "Receives a function with just a multiline comment as body and converts to a here-document string",
+            "itemtype": "method",
+            "name": "heredoc",
+            "params": [
+                {
+                    "name": "A",
+                    "description": "function without body but a multiline comment",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "A multiline string",
+                "type": "String"
+            },
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2220,
+            "description": "Stops and Closes Sideshow",
+            "itemtype": "method",
+            "name": "closes",
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2293,
+            "description": "A trick to use the composite mask to simulate the behavior of a solid mask, setting an empty subject",
+            "itemtype": "method",
+            "name": "setEmptySubject",
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2320,
+            "description": "Sets the current subject",
+            "itemtype": "method",
+            "name": "setSubject",
+            "params": [
+                {
+                    "name": "subj",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2341,
+            "description": "Registers a wizard",
+            "itemtype": "method",
+            "name": "registerWizard",
+            "params": [
+                {
+                    "name": "wizardConfig",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The wizard instance",
+                "type": "Object"
+            },
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2355,
+            "description": "Registers a wizard",
+            "itemtype": "method",
+            "name": "registerWizard",
+            "params": [
+                {
+                    "name": "onlyNew",
+                    "description": "Checks only recently added wizards",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The eligible wizards list",
+                "type": "Array"
+            },
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2377,
+            "description": "Checks if there are eligible wizards, if exists, shows the wizard menu",
+            "itemtype": "method",
+            "name": "showWizardsList",
+            "params": [
+                {
+                    "name": "onlyNew",
+                    "description": "Checks only recently added wizards",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "Returns a boolean indicating whether there is some wizard available",
+                "type": "Boolean"
+            },
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2396,
+            "description": "Shows a list with the related wizards",
+            "itemtype": "method",
+            "name": "showRelatedWizardsList",
+            "params": [
+                {
+                    "name": "completedWizard",
+                    "description": "The recently completed wizard",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns a boolean indicating whether there is some related wizard available",
+                "type": "Boolean"
+            },
+            "static": 1,
+            "class": "Mask.WizardMenu",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2430,
+            "description": "Renders the close button",
+            "itemtype": "method",
+            "name": "render",
+            "class": "Mask.CloseButton",
+            "namespace": "Mask"
+        },
+        {
+            "file": "src\\main.js",
+            "line": 2445,
+            "description": "Starts Sideshow",
+            "itemtype": "method",
+            "name": "start",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The config object for Sideshow",
+                    "type": "Object"
+                }
+            ],
+            "class": "Mask.CloseButton",
+            "namespace": "Mask"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: license",
+            "line": " src\\copyright_info.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\copyright_info.js:1"
+        },
+        {
+            "message": "Missing item type\nPossible statuses for an animation",
+            "line": " src\\main.js:44"
+        },
+        {
+            "message": "Missing item type\nShows a warning  in a pre-defined format",
+            "line": " src\\main.js:73"
+        },
+        {
+            "message": "Missing item type\nParses a string in the format \"#px\" in a number",
+            "line": " src\\main.js:84"
+        },
+        {
+            "message": "Missing item type\nStrings Dictionary",
+            "line": " src\\main.js:103"
+        },
+        {
+            "message": "Missing item type\nGets a string from the dictionary in the current language",
+            "line": " src\\main.js:139"
+        },
+        {
+            "message": "Missing item type\nSideshow Settings",
+            "line": " src\\main.js:161"
+        },
+        {
+            "message": "Missing item type\nApplication route to persists user preferences",
+            "line": " src\\main.js:168"
+        },
+        {
+            "message": "Missing item type\nLogged in user",
+            "line": " src\\main.js:178"
+        },
+        {
+            "message": "Missing item type\nChosen language for sideshow interface",
+            "line": " src\\main.js:187"
+        },
+        {
+            "message": "Missing item type\nThe jQuery wrapped DOM element for the visual item",
+            "line": " src\\main.js:311"
+        },
+        {
+            "message": "Missing item type\nThe jQuery wrapped DOM element for the visual item",
+            "line": " src\\main.js:319"
+        },
+        {
+            "message": "Missing item type\nA function to prepare the environment for running a wizard (e.g. redirecting to some screen)",
+            "line": " src\\main.js:472"
+        },
+        {
+            "message": "Missing item type\nAn object with listeners to this wizard (e.g. beforeWizardStarts, afterWizardEnds)",
+            "line": " src\\main.js:480"
+        },
+        {
+            "message": "Missing item type\nA configuration flag that defines if the step position (e.g. 2/10, 3/15, 12/12) will be shown",
+            "line": " src\\main.js:488"
+        },
+        {
+            "message": "Missing item type\nAn array with related wizards names. These wizards are listed after the ending of the current wizard.",
+            "line": " src\\main.js:496"
+        },
+        {
+            "message": "Missing item type\nThe wizard unique name (used internally as an identifier)",
+            "line": " src\\main.js:504"
+        },
+        {
+            "message": "Missing item type\nThe wizard title (will be shown in the list of available wizards)",
+            "line": " src\\main.js:512"
+        },
+        {
+            "message": "Missing item type\nThe wizard description (will be shown in the list of available wizards)",
+            "line": " src\\main.js:520"
+        },
+        {
+            "message": "Missing item type\nThe wizard estimated completion time (will be shown in the list of available wizards)",
+            "line": " src\\main.js:528"
+        },
+        {
+            "message": "Missing item type\nA collection of rules to infer whether a wizard should be available in a specific screen",
+            "line": " src\\main.js:536"
+        },
+        {
+            "message": "Missing item type\nThe sequence of steps for this wizard",
+            "line": " src\\main.js:544"
+        },
+        {
+            "message": "Missing item type\nPoints to the current step object in a playing wizard",
+            "line": " src\\main.js:553"
+        },
+        {
+            "message": "Missing item type\nAn object holding dimension information for the Details Panel",
+            "line": " src\\main.js:842"
+        },
+        {
+            "message": "Missing item type\nAn object holding positioning information for the Details Panel",
+            "line": " src\\main.js:850"
+        },
+        {
+            "message": "Missing item type\nThe jQuery wrapped object which will be pointed by this arrow",
+            "line": " src\\main.js:1085"
+        },
+        {
+            "message": "Missing item type\nFlag created to set if the arrow was visible once, this is used for recreating references to the targets DOM objects",
+            "line": " src\\main.js:1093"
+        },
+        {
+            "message": "Missing item type\nThe step description text content",
+            "line": " src\\main.js:1182"
+        },
+        {
+            "message": "Missing item type\nThe title text for the step description panel",
+            "line": " src\\main.js:1190"
+        },
+        {
+            "message": "Missing item type\nAn object holding dimension information for the Step Description panel",
+            "line": " src\\main.js:1198"
+        },
+        {
+            "message": "Missing item type\nAn object holding positioning information for the Step Description panel",
+            "line": " src\\main.js:1206"
+        },
+        {
+            "message": "Missing item type\nAn object representing the next button for a step description panel",
+            "line": " src\\main.js:1214"
+        },
+        {
+            "message": "Missing item type\nThe text for the next button",
+            "line": " src\\main.js:1346"
+        },
+        {
+            "message": "Missing item type\nObject holding dimension information for the screen",
+            "line": " src\\main.js:1408"
+        },
+        {
+            "message": "Missing item type\nThe current subject jQuery wrapped DOM element",
+            "line": " src\\main.js:1454"
+        },
+        {
+            "message": "Missing item type\nThe current subject dimension information",
+            "line": " src\\main.js:1463"
+        },
+        {
+            "message": "Missing item type\nThe current subject positioning information",
+            "line": " src\\main.js:1472"
+        },
+        {
+            "message": "Missing item type\nThe current subject border radius information",
+            "line": " src\\main.js:1481"
+        },
+        {
+            "message": "Missing item type\nNamespace to hold classes for mask control",
+            "line": " src\\main.js:1546"
+        },
+        {
+            "message": "Missing item type\nThe parts composing the mask",
+            "line": " src\\main.js:1617"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\main.js:1755"
+        },
+        {
+            "message": "Missing item type\nAn object holding positioning information for the mask part",
+            "line": " src\\main.js:1761"
+        },
+        {
+            "message": "Missing item type\nAn object holding dimension information for the mask part",
+            "line": " src\\main.js:1769"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src\\main.js:1823"
+        },
+        {
+            "message": "Missing item type\nAn object holding positioning information for the mask corner part",
+            "line": " src\\main.js:1829"
+        },
+        {
+            "message": "Missing item type\nAn object holding dimension information for the mask corner part",
+            "line": " src\\main.js:1837"
+        },
+        {
+            "message": "Missing item type\nAn object holding border radius information for the mask corner part",
+            "line": " src\\main.js:1845"
+        },
+        {
+            "message": "Missing item type\nThe polling functions queue",
+            "line": " src\\main.js:1933"
+        },
+        {
+            "message": "Missing item type\nA flag that controls if the polling is locked",
+            "line": " src\\main.js:1942"
+        },
+        {
+            "message": "Missing item type\nRegisters hotkeys to be used when running Sideshow",
+            "line": " src\\main.js:2139"
+        },
+        {
+            "message": "Missing item type\nUnregisters hotkeys used when running Sideshow",
+            "line": " src\\main.js:2148"
+        },
+        {
+            "message": "Missing item type\nRegisters global hotkeys",
+            "line": " src\\main.js:2162"
+        },
+        {
+            "message": "Missing item type\nRemoves nodes created by Sideshow (except mask, which remains due to performance reasons when recalling Sideshow)",
+            "line": " src\\main.js:2184"
+        }
+    ]
+}
