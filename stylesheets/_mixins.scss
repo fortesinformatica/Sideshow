@@ -17,3 +17,33 @@
     font-size: $size;
   }
 }
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+}
+
+@mixin animation($name, $duration, $timing-function: linear, $iteration-count: 1, $fill-mode: none){
+  @include prefixify(animation-name, $name);
+  @include prefixify(animation-duration, $duration);
+  @include prefixify(animation-timing-function, $timing-function);
+  @include prefixify(animation-iteration-count, $iteration-count);
+  @include prefixify(animation-fill-mode, $fill-mode);
+}
+
+@mixin prefixify($property, $value){
+  -webkit-#{$property}: $value;
+  -moz-#{$property}: $value;
+  -o-#{$property}: $value;
+  #{$property}: $value;
+}
