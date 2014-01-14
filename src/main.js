@@ -8,6 +8,9 @@
     //Jazz is needed
     if (jazz === undefined) throw new SSException("3", "Jazz is required for Sideshow to work.");
 
+    //Pagedown (the Markdown parser used by Sideshow) is needed
+    if (markdown === undefined) throw new SSException("4", "Pagedown (the Markdown parser used by Sideshow) is required for Sideshow to work.");
+
 
     //= require general/variables
     //= require general/exception

@@ -1,6 +1,6 @@
 #Sideshow
 
-[Sideshow Logo](https://raw2.github.com/fortesinformatica/sideshow/master/examples/images/sideshow-logo.svg)
+[Sideshow Logo](https://raw2.github.com/fortesinformatica/sideshow/master/examples/images/sideshow-logo.png)
 ========
 ![Google Analytics Beacon](https://ga-beacon.appspot.com/UA-34593010-2/Sideshow/README)
 ![Version](https://badge.fury.io/gh/fortesinformatica/Sideshow.png)

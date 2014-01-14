@@ -2,7 +2,7 @@
 $sideshow-light-color: #FFF !default;
 $sideshow-standout-color: #DA4435 !default;
 
-$sideshow-mask-background-color: #444 !default;
+$sideshow-mask-background-color: #222 !default;
 $sideshow-step-description-background-color: #777 !default;
 $sideshow-step-description-title-color: #888 !default;
 $sideshow-step-position-color: #CCC !default;
@@ -11,6 +11,7 @@ $sideshow-wizard-menu-item-foreground-color: $sideshow-light-color !default;
 $sideshow-wizard-menu-title-color: $sideshow-light-color !default;
 $sideshow-wizard-menu-item-hover-foreground-color: $sideshow-standout-color !default;
 $sideshow-subject-arrow-color: $sideshow-standout-color !default;
+$sideshow-close-button-foreground-color: $sideshow-light-color !default;
 
 //Animation
 $sideshow-default-transition-duration: 300ms !default;
@@ -27,5 +28,5 @@ $sideshow-default-semibold-font-family: OpenSans Semibold !default;
 $sideshow-enable-whole-opensans-family: false !default;
 
 //Others
-$sideshow-mask-opacity: 0.8 !default;
+$sideshow-mask-opacity: 0.9 !default;
 $sideshow-fonts-path: "../fonts" !default;

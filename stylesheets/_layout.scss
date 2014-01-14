@@ -183,7 +183,7 @@
 	ul{
 		li{
 			@include clearfix;
-			
+			list-style-type: none;
 			cursor: pointer;
 			opacity: 0;
 			position: relative;
@@ -205,12 +205,17 @@
 				
 			h2{
 				@include transition(color $sideshow-default-transition-duration ease);
+				font-family: $sideshow-default-semibold-font-family;
+				font-size: 12px;
+				font-weight: normal;
 				text-transform: uppercase;
 				color: $sideshow-wizard-menu-item-foreground-color;
+				margin: 0;
 			}
 
 			.sideshow-wizard-menu-item-description{
 				color: $sideshow-wizard-menu-item-foreground-color;
+				font-size: 12px;
 			}
 
 			.sideshow-wizard-menu-item-estimated-time{
@@ -224,6 +229,9 @@
 				height: 50px;
 				width: 80px;
 				margin-right: 10px;
+				&:before{
+					margin-right: 3px;
+				}
 			}
 
 			&:hover{
@@ -271,12 +279,15 @@
 	@include icon-font-size($sideshow-medium-font-size);
 	@include text-shadow(0 0 5px #030, 0 0 3px #000, 0 2px 3px #000);
 	@include transition(text-shadow $sideshow-default-transition-duration ease);
+	border-width: 0;
 	background-color: transparent!important;
 	z-index: 15005;
 	position: fixed;
+	color: $sideshow-close-button-foreground-color;
 	font-size: $sideshow-medium-font-size;
-	bottom: 21px;
-	right: 21px;
+	bottom: 25px;
+	right: 25px;
+	cursor: pointer;
 	&:hover{
 		@include text-shadow(0 0 10px #030, 0 0 6px #000, 0 2px 5px #000, 0 0 7px #000);
 		background-color: transparent!important;
@@ -285,6 +296,9 @@
 	}
 	&:active{
 		outline-width: 0!important;
+	}
+	&:before{
+		margin-right: 5px;
 	}
 }
 
