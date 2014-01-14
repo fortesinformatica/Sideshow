@@ -1,0 +1,19 @@
+@mixin absolute-full-size($spacement: 0){
+  position: absolute;
+  top: $spacement;
+  bottom: $spacement;
+  left: $spacement;
+  right: $spacement;
+}
+
+@mixin only-icon-button{
+  &:before{
+    margin-right: 0!important;
+  }
+}
+
+@mixin icon-font-size($size){
+  &:before{
+    font-size: $size;
+  }
+}

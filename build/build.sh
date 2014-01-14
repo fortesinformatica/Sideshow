@@ -52,11 +52,11 @@ combine_files(){
 }
 
 beautify_and_generate_debug_file(){
-	js-beautify --file ../tmp/${output_debug_file}.tmp --outfile ../${output_debug_file} --indent-size 4 --indent-char " " --preserve-newlines 
+	js-beautify --file ../tmp/${output_debug_file}.tmp --outfile ../distr/${output_debug_file} --indent-size 4 --indent-char " " --preserve-newlines 
 }
 
 minify_files(){
-	uglifyjs ../${output_debug_file} --output ../${output_minified_file} --compressor --coments
+	uglifyjs ../distr/${output_debug_file} --output ../distr/${output_minified_file} --compressor --coments
 }
 
 clear

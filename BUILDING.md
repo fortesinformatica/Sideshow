@@ -1,4 +1,8 @@
 #Building
+
+*Important Note* 
+All output files (.debug and .min js files + the Sideshow stylesheet) are generated under the distr folder. 
+
 ##Prerequisites
 
 ###Node.js Modules
@@ -38,6 +42,7 @@ OR
 
 ##How to compile stylesheets
 ```
-#in stylesheets/SCSS folder
+#in stylesheets folder
 compass watch .
 ```
+
