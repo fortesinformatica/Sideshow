@@ -171,7 +171,11 @@
                 var wiz = wizards[w];
                 var $wiz = $(&quot;&lt;li&gt;&quot;);
                 var $wizTitle = $(&quot;&lt;h2&gt;&quot;).text(wiz.title);
-                var $wizDescription = $(&quot;&lt;span&gt;&quot;).addClass(&quot;sideshow-wizard-menu-item-description&quot;).text(wiz.description);
+                
+                var description = wiz.description;
+                description.length &gt; 100 &amp;&amp; (description = description.substr(0, 100) + &quot;...&quot;);
+
+                var $wizDescription = $(&quot;&lt;span&gt;&quot;).addClass(&quot;sideshow-wizard-menu-item-description&quot;).text(description);
                 var $wizEstimatedTime = $(&quot;&lt;span&gt;&quot;).addClass(&quot;sideshow-wizard-menu-item-estimated-time&quot;).text(wiz.estimatedTime);
                 $wiz.append($wizEstimatedTime, $wizTitle, $wizDescription);
                 $wizardsList.append($wiz);

@@ -269,7 +269,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\general\\global_object.js",
-            "line": 229,
+            "line": 232,
             "description": "The close button for the wizard",
             "extends": "FadableItem"
         },
@@ -308,7 +308,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\general\\variables.js",
-            "line": 6,
+            "line": 8,
             "description": "The main class for Sideshow",
             "static": 1
         },
@@ -371,7 +371,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\mask\\composite_mask.js",
-            "line": 143,
+            "line": 181,
             "description": "A part composing the mask",
             "params": [
                 {
@@ -600,7 +600,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 16,
+            "line": 18,
             "description": "Receives a function with just a multiline comment as body and converts to a here-document string",
             "itemtype": "method",
             "name": "heredoc",
@@ -620,7 +620,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 28,
+            "line": 30,
             "description": "Stops and Closes Sideshow",
             "itemtype": "method",
             "name": "closes",
@@ -629,7 +629,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 101,
+            "line": 103,
             "description": "A trick to use the composite mask to simulate the behavior of a solid mask, setting an empty subject",
             "itemtype": "method",
             "name": "setEmptySubject",
@@ -638,7 +638,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 128,
+            "line": 130,
             "description": "Sets the current subject",
             "itemtype": "method",
             "name": "setSubject",
@@ -654,7 +654,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 149,
+            "line": 152,
             "description": "Registers a wizard",
             "itemtype": "method",
             "name": "registerWizard",
@@ -674,7 +674,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 163,
+            "line": 166,
             "description": "Registers a wizard",
             "itemtype": "method",
             "name": "registerWizard",
@@ -694,7 +694,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 185,
+            "line": 188,
             "description": "Checks if there are eligible wizards, if exists, shows the wizard menu",
             "itemtype": "method",
             "name": "showWizardsList",
@@ -714,7 +714,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 204,
+            "line": 207,
             "description": "Shows a list with the related wizards",
             "itemtype": "method",
             "name": "showRelatedWizardsList",
@@ -734,7 +734,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 238,
+            "line": 241,
             "description": "Renders the close button",
             "itemtype": "method",
             "name": "render",
@@ -742,7 +742,7 @@
         },
         {
             "file": "src\\general\\global_object.js",
-            "line": 253,
+            "line": 256,
             "description": "Starts Sideshow",
             "itemtype": "method",
             "name": "start",
@@ -777,35 +777,48 @@
             "description": "Pushes a polling function in the queue",
             "itemtype": "method",
             "name": "enqueue",
-            "params": [
-                {
-                    "name": "fn",
-                    "description": "The polling function to enqueue",
-                    "type": "Function"
-                }
-            ],
-            "static": 1,
-            "class": "Polling"
-        },
-        {
-            "file": "src\\general\\polling.js",
-            "line": 41,
-            "description": "Removes a polling function from the queue",
-            "itemtype": "method",
-            "name": "dequeue",
-            "params": [
-                {
-                    "name": "fn",
-                    "description": "The polling function to dequeue",
-                    "type": "Function"
-                }
-            ],
             "static": 1,
             "class": "Polling"
         },
         {
             "file": "src\\general\\polling.js",
             "line": 52,
+            "description": "Removes a polling function from the queue",
+            "itemtype": "method",
+            "name": "dequeue",
+            "static": 1,
+            "class": "Polling"
+        },
+        {
+            "file": "src\\general\\polling.js",
+            "line": 62,
+            "description": "Enables an specific polling function",
+            "itemtype": "method",
+            "name": "enable",
+            "static": 1,
+            "class": "Polling"
+        },
+        {
+            "file": "src\\general\\polling.js",
+            "line": 72,
+            "description": "Disables an specific polling function, but preserving it in the polling queue",
+            "itemtype": "method",
+            "name": "disable",
+            "static": 1,
+            "class": "Polling"
+        },
+        {
+            "file": "src\\general\\polling.js",
+            "line": 82,
+            "description": "Gets the position of a polling function in the queue based on its name or the function itself",
+            "itemtype": "method",
+            "name": "getFunctionIndex",
+            "static": 1,
+            "class": "Polling"
+        },
+        {
+            "file": "src\\general\\polling.js",
+            "line": 99,
             "description": "Unlocks the polling and starts the checking process",
             "itemtype": "method",
             "name": "start",
@@ -814,7 +827,7 @@
         },
         {
             "file": "src\\general\\polling.js",
-            "line": 63,
+            "line": 110,
             "description": "Stops the polling process",
             "itemtype": "method",
             "name": "stop",
@@ -823,7 +836,7 @@
         },
         {
             "file": "src\\general\\polling.js",
-            "line": 73,
+            "line": 120,
             "description": "Clear the polling queue",
             "itemtype": "method",
             "name": "clear",
@@ -832,7 +845,7 @@
         },
         {
             "file": "src\\general\\polling.js",
-            "line": 87,
+            "line": 134,
             "description": "Starts the polling process",
             "itemtype": "method",
             "name": "doPolling",
@@ -944,7 +957,7 @@
         },
         {
             "file": "src\\general\\variables.js",
-            "line": 13,
+            "line": 15,
             "description": "The current Sideshow version",
             "itemtype": "property",
             "name": "VERSION",
@@ -953,7 +966,7 @@
         },
         {
             "file": "src\\general\\variables.js",
-            "line": 34,
+            "line": 36,
             "description": "Possible statuses for an animation",
             "class": "SS"
         },
@@ -1052,6 +1065,26 @@
         {
             "file": "src\\mask\\composite_mask.js",
             "line": 52,
+            "description": "Checks if the subject is fully visible, if not, scrolls 'til it became fully visible",
+            "itemtype": "method",
+            "name": "scrollIfNecessary",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "An object representing the positioning info for the mask",
+                    "type": "Object"
+                },
+                {
+                    "name": "dimension",
+                    "description": "An object representing the dimension info for the mask",
+                    "type": "Object"
+                }
+            ],
+            "class": "CompositeMask"
+        },
+        {
+            "file": "src\\mask\\composite_mask.js",
+            "line": 84,
             "description": "Updates the positioning and dimension of each part composing the whole mask, according to the subject coordinates",
             "itemtype": "method",
             "name": "update",
@@ -1076,10 +1109,18 @@
         },
         {
             "file": "src\\mask\\composite_mask.js",
-            "line": 119,
+            "line": 150,
             "description": "A Polling function to check if subject coordinates has changed",
             "itemtype": "method",
-            "name": "pollForChanges",
+            "name": "pollForSubjectChanges",
+            "class": "CompositeMask"
+        },
+        {
+            "file": "src\\mask\\composite_mask.js",
+            "line": 169,
+            "description": "A Polling function to check if screen dimension has changed",
+            "itemtype": "method",
+            "name": "pollForScreenChanges",
             "class": "CompositeMask"
         },
         {
@@ -1833,7 +1874,7 @@
         },
         {
             "file": "src\\wizard\\wizard.js",
-            "line": 254,
+            "line": 257,
             "description": "Shows the next step of the wizard",
             "itemtype": "method",
             "name": "next",
@@ -1849,7 +1890,7 @@
         },
         {
             "file": "src\\wizard\\wizard.js",
-            "line": 283,
+            "line": 289,
             "description": "Hides the step",
             "itemtype": "method",
             "name": "hideStep",
@@ -1865,7 +1906,7 @@
         },
         {
             "file": "src\\wizard\\wizard.js",
-            "line": 297,
+            "line": 304,
             "description": "Returns the position of the step passed as argument or (by default) the current step",
             "itemtype": "method",
             "name": "getStepPosition",
@@ -1881,7 +1922,7 @@
         },
         {
             "file": "src\\wizard\\wizard.js",
-            "line": 307,
+            "line": 314,
             "description": "Checks if a wizard should be shown in the current context (running each evaluator defined for this wizard)",
             "itemtype": "method",
             "name": "isEligible",
@@ -1894,7 +1935,7 @@
         },
         {
             "file": "src\\wizard\\wizard.js",
-            "line": 342,
+            "line": 349,
             "description": "Checks if the current user already watched this wizard",
             "itemtype": "method",
             "name": "isAlreadyWatched",
@@ -1907,7 +1948,7 @@
         },
         {
             "file": "src\\wizard\\wizard.js",
-            "line": 354,
+            "line": 361,
             "description": "A Polling function to check if the current step is completed",
             "itemtype": "method",
             "name": "pollForCheckCompletedStep",
@@ -2072,7 +2113,7 @@
         },
         {
             "file": "src\\wizard\\wizard_menu.js",
-            "line": 61,
+            "line": 65,
             "description": "Shows the wizard menu",
             "itemtype": "method",
             "name": "show",
@@ -2089,7 +2130,7 @@
         },
         {
             "file": "src\\wizard\\wizard_menu.js",
-            "line": 80,
+            "line": 84,
             "description": "Hides the wizard menu",
             "itemtype": "method",
             "name": "hide",
@@ -2179,7 +2220,7 @@
         },
         {
             "message": "Missing item type\nPossible statuses for an animation",
-            "line": " src\\general\\variables.js:34"
+            "line": " src\\general\\variables.js:36"
         },
         {
             "message": "Missing item type\nThe jQuery wrapped DOM element for the visual item",

@@ -189,6 +189,15 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_disable">disable</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_doPolling">doPolling</a>
 
                                 
@@ -198,7 +207,25 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_enable">enable</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_enqueue">enqueue</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getFunctionIndex">getFunctionIndex</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -274,7 +301,7 @@
             
         
         
-        <a href="../files/src_general_polling.js.html#l73"><code>src\general\polling.js:73</code></a>
+        <a href="../files/src_general_polling.js.html#l120"><code>src\general\polling.js:120</code></a>
         
         </p>
 
@@ -301,17 +328,7 @@
     <h3 class="name"><code>dequeue</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>fn</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -341,7 +358,7 @@
             
         
         
-        <a href="../files/src_general_polling.js.html#l41"><code>src\general\polling.js:41</code></a>
+        <a href="../files/src_general_polling.js.html#l52"><code>src\general\polling.js:52</code></a>
         
         </p>
 
@@ -357,29 +374,62 @@
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
+    
+
+    
+</div>
+
+                
+                    <div id="method_disable" class="method item">
+    <h3 class="name"><code>disable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
             
-                <li class="param">
-                    
-                        <code class="param-name">fn</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The polling function to dequeue</p>
-
-                    </div>
-
-                    
-                </li>
+                
+                <p>
+                
+                Defined in
+                
             
-            </ul>
-        </div>
+        
+        
+        <a href="../files/src_general_polling.js.html#l72"><code>src\general\polling.js:72</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Disables an specific polling function, but preserving it in the polling queue</p>
+
+    </div>
+
     
 
     
@@ -422,7 +472,7 @@
             
         
         
-        <a href="../files/src_general_polling.js.html#l87"><code>src\general\polling.js:87</code></a>
+        <a href="../files/src_general_polling.js.html#l134"><code>src\general\polling.js:134</code></a>
         
         </p>
 
@@ -445,21 +495,68 @@
 </div>
 
                 
+                    <div id="method_enable" class="method item">
+    <h3 class="name"><code>enable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_general_polling.js.html#l62"><code>src\general\polling.js:62</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Enables an specific polling function</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_enqueue" class="method item">
     <h3 class="name"><code>enqueue</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>fn</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -505,29 +602,62 @@
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
+    
+
+    
+</div>
+
+                
+                    <div id="method_getFunctionIndex" class="method item">
+    <h3 class="name"><code>getFunctionIndex</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
             
-                <li class="param">
-                    
-                        <code class="param-name">fn</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The polling function to enqueue</p>
-
-                    </div>
-
-                    
-                </li>
+                
+                <p>
+                
+                Defined in
+                
             
-            </ul>
-        </div>
+        
+        
+        <a href="../files/src_general_polling.js.html#l82"><code>src\general\polling.js:82</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the position of a polling function in the queue based on its name or the function itself</p>
+
+    </div>
+
     
 
     
@@ -570,7 +700,7 @@
             
         
         
-        <a href="../files/src_general_polling.js.html#l52"><code>src\general\polling.js:52</code></a>
+        <a href="../files/src_general_polling.js.html#l99"><code>src\general\polling.js:99</code></a>
         
         </p>
 
@@ -627,7 +757,7 @@
             
         
         
-        <a href="../files/src_general_polling.js.html#l63"><code>src\general\polling.js:63</code></a>
+        <a href="../files/src_general_polling.js.html#l110"><code>src\general\polling.js:110</code></a>
         
         </p>
 

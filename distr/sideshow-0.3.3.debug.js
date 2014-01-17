@@ -1236,7 +1236,7 @@
     **/
     StepDescription.method("setTitle", function(title) {
         this.title = title;
-        this.$el.find("h2").text(title);
+        this.$el.find("h2:first").text(title);
     });
 
     /**

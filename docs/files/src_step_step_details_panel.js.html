@@ -178,7 +178,7 @@
             [parts.bottom, &quot;height&quot;],
             [parts.left, &quot;width&quot;]
         ].sort(function(a, b) {
-            return a[0].dimension[a[1]] &gt; b[0].dimension[b[1]];
+            return a[0].dimension[a[1]] - b[0].dimension[b[1]];
         }).slice(-1)[0];
 
         if (biggestSide[1] == &quot;width&quot;) {

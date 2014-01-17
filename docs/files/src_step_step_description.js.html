@@ -207,7 +207,7 @@
     **/
     StepDescription.method(&quot;setTitle&quot;, function(title) {
         this.title = title;
-        this.$el.find(&quot;h2&quot;).text(title);
+        this.$el.find(&quot;h2:first&quot;).text(title);
     });
 
     /**
@@ -250,9 +250,9 @@
 
     @method show
     **/
-    StepDescription.method(&quot;show&quot;, function() {
-        this.callSuper(&quot;show&quot;);
-        this.positionate();
+    StepDescription.method(&quot;show&quot;, function(displayButKeepTransparent) {
+        this.callSuper(&quot;show&quot;, displayButKeepTransparent);
+        //this.positionate();
     });
 
     /**
@@ -265,26 +265,31 @@
 
         if (dp.dimension.width &gt;= 900)
             this.dimension.width = 900;
-        else if (dp.dimension.width &lt;= 500)
-            this.dimension.width = 500;
         else
             this.dimension.width = dp.dimension.width * 0.9;
 
         this.$el.css(&quot;width&quot;, this.dimension.width);
 
+        var paddingLeftRight = (parsePxValue(this.$el.css(&quot;padding-left&quot;)) + parsePxValue(this.$el.css(&quot;padding-right&quot;))) / 2;
+        var paddingTopBottom = (parsePxValue(this.$el.css(&quot;padding-top&quot;)) + parsePxValue(this.$el.css(&quot;padding-bottom&quot;))) / 2;
+
         this.dimension.height = parsePxValue(this.$el.outerHeight());
 
         //Checks if the description dimension overflow the available space in the details panel
-        if (this.dimension.height &gt; dp.dimension.height || this.dimension.width &gt; dp.dimension.width) {
-            this.position.x = (Subject.dimension.width - this.dimension.width) / 2;
-            this.position.y = (Subject.dimension.height - this.dimension.height) / 2;
+        if (this.dimension.height &gt; dp.dimension.height || this.dimension.width &lt; 400) {
+            this.dimension.width = $window.width() * 0.9;
+            this.$el.css(&quot;width&quot;, this.dimension.width);
+            this.dimension.height = parsePxValue(this.$el.outerHeight());
+
+            this.position.x = ($window.width() - this.dimension.width) / 2;
+            this.position.y = ($window.height() - this.dimension.height) / 2;
         } else {
             this.position.x = (dp.dimension.width - this.dimension.width) / 2;
             this.position.y = (dp.dimension.height - this.dimension.height) / 2;
         }
 
-        this.$el.css(&quot;left&quot;, this.position.x);
-        this.$el.css(&quot;top&quot;, this.position.y);
+        this.$el.css(&quot;left&quot;, this.position.x - paddingLeftRight);
+        this.$el.css(&quot;top&quot;, this.position.y - paddingTopBottom);
     });
 
     </pre>
