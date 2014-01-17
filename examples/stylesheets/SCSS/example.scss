@@ -6,11 +6,15 @@
 
 @import "../../../stylesheets/font-awesome-4.0.3";
 
-//Layout rules
-body{
-	margin: 0;
-}
+//Variables
+$sideshow-example-base-color: #E4E4E4 !default; 
+$sideshow-example-base-color-dark: darken($sideshow-example-base-color, 20) !default; 
+$sideshow-example-base-color-darkest: darken($sideshow-example-base-color, 40) !default; 
+$sideshow-example-secondary-color: #C30 !default; 
+$sideshow-example-secondary-color-dark: darken($sideshow-example-secondary-color, 15) !default; 
+$sideshow-example-secondary-color-lighter: lighten($sideshow-example-secondary-color, 10) !default;
 
+//Layout rules
 *{
 	font-family: OpenSans Light;
 }
@@ -18,8 +22,12 @@ body{
 header{
 	width: 100%;
 	height: 350px;
-	padding-top: 50px;
-	background-color: #C2D36D;
+	padding-top: 20px;
+	background-color: $sideshow-example-base-color;
+}
+
+body{
+	padding-bottom: 40px;
 }
 
 #header_content{
@@ -28,17 +36,18 @@ header{
 
 #introducing_sideshow{
 	position: absolute;
+	z-index: 10;
 	right: 0;
 	top: 80px;
 	width: 330px;
 	text-align: right;
-	color: #1D6900;
+	color: $sideshow-example-secondary-color-dark;
 }
 
 #introducing_sideshow em{
 	color: #FFF;
 	font-style: normal;
-	background-color: #939;
+	background-color: $sideshow-example-secondary-color;
 	line-height: 25px;
 }
 
@@ -58,7 +67,7 @@ header img{
 	@include transition(background-color 300ms ease, border-bottom-width 100ms ease);
 	@include fa-play;
 
-	border: solid 1px darken(#C2D36D, 80){
+	border: solid 1px darken($sideshow-example-base-color, 80){
 		bottom-width: 5px;
 	};
 	font-size: 26px;
@@ -66,28 +75,34 @@ header img{
 		right: 15px;
 		left: 20px;
 	};
-	background-color: #606;
+	background-color: $sideshow-example-secondary-color-dark;
 	color: #FFF;
 	position: absolute;
 	left: 0;
 	bottom: 50px;
+
 	&:before{
 		margin-right: 10px;
+		font-size: 26px;
 	}
+
 	&:after{
 		content: '';
 		display: inline-block;
 		width: 5px;
 	}
+
 	&:hover{
-		background-color: #222;
+		background-color: $sideshow-example-secondary-color;
 		&:after{
 			content: "!";
 		}
 	}
+
 	&:active{
 		background-color: #777;
 		border-bottom-width: 1px;
+		outline-width: 0;
 	}
 }
 
@@ -96,6 +111,7 @@ header img{
 	top: 0; 
 	right: 0; 
 	border: 0;
+	z-index: 9;
 }
 
 .browsehappy{
@@ -132,26 +148,146 @@ footer{
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	right: 10px;
+	right: 0;
+	padding-right: 10px;
 	height: 30px;
-	background-color: #FFF; 
+	background-color: rgba(#FFF, 0.8); 
 	font-size: 12px;
 	text-align: right;
 	a{
 		font-family: OpenSans Semibold;
-		color: #606;
+		color: #333;
 		text-decoration: none;
 	}
 }
 
+/*Fake content*/
+
 #bttf{
 	width: 500px;
-	img{
+	display: inline-block;
+	figure{
+		height: 195px;
 		width: 195px;
 		float: left;
+		margin: 0{
+			right: 10px;
+		}
+	}
+}
+
+#dr_brown{
+	width: 195px;
+}
+
+#red_square{
+	@include border-radius(4px);
+	position: absolute;
+	left: 230px;
+	top: 50px;
+	background-color: rgba(#700, 0.7);
+	width: 195px;
+	height: 195px;
+	padding: 25px;
+	display: none;
+}
+
+#survey{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 50px;
+	#first_name{
+		width: 220px; 
+	}
+
+	#last_name{
+		width: 220px; 
+	}
+
+	#email{
+		width: 280px; 
+	}
+}
+
+#godfather1{
+	img{
+		float: left;
+		width: 280px;
 		margin: {
 			right: 10px;
 			bottom: 10px;
 		}
+	}
+
+	.columns-text{
+		display: block;
+		-webkit-columns: 3;
+		-webkit-column-width: 120px; 
+		-webkit-column-gap: 15px;
+		-webkit-column-count: 3;
+		-moz-columns: 3;
+		-moz-column-width: 120px; 
+		-moz-column-gap: 15px;
+		-moz-column-count: 3;
+		columns: 3;
+		column-width: 120px; 
+		column-gap: 15px;
+		column-count: 3;
+		p:first-of-type{
+			&:first-letter{
+				font-size: 65px;
+				font-family: georgia;
+				float: left;
+				line-height: 60px;
+			}
+			margin-top: 0;
+		}
+	}
+}
+
+#wrapper{
+	input[type=text]{
+		@include border-radius(3px);
+		border: solid 1px $sideshow-example-base-color-dark;
+		padding: 5px;
+	}
+
+	button{
+		@include border-radius(3px);
+		font-family: OpenSans Semibold;
+		border: solid 1px $sideshow-example-secondary-color-dark;
+		padding: 5px;
+		margin: 0;
+		background-color: $sideshow-example-secondary-color-lighter;
+		color: #FFF;
+	}
+
+	hr{
+		border-width: 0;
+		border-top: double 4px $sideshow-example-base-color-dark;
+		width: 60%;
+		margin:{
+			top: 30px;
+			bottom: 30px;
+		}
+	}
+}
+
+fieldset {
+	padding: 0; 
+	border: 0;
+	
+	label{
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	ul{
+		padding: 0;
+	}
+
+	> ul > li{
+		list-style-type: none;
+		margin-bottom: 15px;
 	}
 }

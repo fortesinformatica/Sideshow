@@ -17,10 +17,15 @@
     //Jazz is needed
     if (jazz === undefined) throw new SSException("3", "Jazz is required for Sideshow to work.");
 
+    //Pagedown (the Markdown parser used by Sideshow) is needed
+    if (markdown === undefined) throw new SSException("4", "Pagedown (the Markdown parser used by Sideshow) is required for Sideshow to work.");
+
 
     var globalObjectName = "Sideshow",
+        $window,
         $body,
-        pollingDuration = 200,
+        $document,
+        pollingDuration = 150,
         longAnimationDuration = 600,
 
         /** 
@@ -118,7 +123,7 @@
     @@function registerInnerHotkeys
     **/
     function registerInnerHotkeys() {
-        $(document).keyup(innerHotkeysListener);
+        $document.keyup(innerHotkeysListener);
     }
 
     /**
@@ -127,7 +132,7 @@
     @@function Unregisters
     **/
     function unregisterInnerHotkeys() {
-        $(document).unbind("keyup", innerHotkeysListener);
+        $document.unbind("keyup", innerHotkeysListener);
     }
 
     function innerHotkeysListener(e) {
@@ -141,7 +146,7 @@
     @@function registerGlobalHotkeys
     **/
     function registerGlobalHotkeys() {
-        $(document).keyup(function(e) {
+        $document.keyup(function(e) {
             //F2
             if (e.keyCode == 113) {
                 if (e.shiftKey) SS.start({
@@ -428,7 +433,7 @@
                 if (linearTimingFunction) item.$el.css("animation-timing-function", "ease");
                 if (callback) callback();
             }, longAnimationDuration);
-        }, 0); //<-- Yeap, I'm really scheduling a timeout for 0 second... this is the dirty trick =)
+        }, 20); //<-- Yeap, I'm really scheduling a timeout for 20 milliseconds... this is a dirty trick =)
     });
 
     /**
@@ -577,11 +582,11 @@
     Wizard.method("play", function() {
         var wiz = this;
 
-        Polling.enqueue(function() {
-            Mask.CompositeMask.singleInstance.pollForChanges();
+        Polling.enqueue("check_composite_mask_subject_changes", function() {
+            Mask.CompositeMask.singleInstance.pollForSubjectChanges();
         });
 
-        Polling.enqueue(function() {
+        Polling.enqueue("check_arrow_changes", function() {
             Arrows.pollForArrowsChanges();
         });
 
@@ -602,10 +607,10 @@
         flags.changingStep = true;
         this.showStep(steps[0], function() {
             //Releases the polling for checking any changes in the current subject
-            flags.lockMaskUpdate = false;
+            //flags.lockMaskUpdate = false;
 
             //Register the function that checks the completing of a step in the polling queue
-            Polling.enqueue(function() {
+            Polling.enqueue("check_completed_step", function() {
                 wiz.pollForCheckCompletedStep();
             });
         });
@@ -651,6 +656,7 @@
                 SS.setEmptySubject();
             //Updates the mask
             Mask.CompositeMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
+
             var sm = Mask.SubjectMask.singleInstance;
             sm.fadeOut(function() {
                 if (step.lockSubject) sm.show(true);
@@ -675,11 +681,10 @@
                 var nextStep = this._storyline.steps[this.getStepPosition() + 1];
                 if (nextStep) {
                     description.nextButton.setText(getString(strings.next) + ": " + this._storyline.steps[this.getStepPosition() + 1].title);
-                    description.nextButton.show();
                 } else {
                     description.nextButton.setText(getString(strings.finishWizard));
-                    description.nextButton.show();
                 }
+                description.nextButton.show();
 
                 if (step.autoContinue === false) description.nextButton.disable();
             } else {
@@ -695,9 +700,12 @@
 
             //Step Description is shown, but is transparent yet (since we need to know its dimension to positionate it properly)
             description.show(true);
-            description.positionate();
-            //Do a simple fade in for the description box
-            description.fadeIn();
+            if (!Mask.CompositeMask.singleInstance.scrollIfNecessary(Subject.position, Subject.dimension)) {
+                description.positionate();
+                //Do a simple fade in for the description box
+                description.fadeIn();
+            }
+
 
             //If a callback is passed, call it    
             if (callback) callback();
@@ -714,7 +722,7 @@
     Wizard.method("next", function(callback, nextStep) {
         if (!flags.changingStep || flags.skippingStep) {
             flags.changingStep = true;
-
+            var currentStep = this.currentStep;
             nextStep = nextStep || this._storyline.steps[this.getStepPosition(this.currentStep) + 1];
             var self = this;
 
@@ -723,6 +731,9 @@
                     if (callback) callback();
                 });
                 else {
+                    if (currentStep && currentStep.listeners && currentStep.listeners.afterStep)
+                        currentStep.listeners.afterStep();
+
                     var completedWizard = currentWizard;
                     currentWizard = null;
                     var listeners = self.listeners;
@@ -745,6 +756,7 @@
             DetailsPanel.singleInstance.hide();
         });
         Arrows.fadeOut();
+        Mask.SubjectMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
         Mask.SubjectMask.singleInstance.fadeIn(callback);
     });
 
@@ -877,7 +889,7 @@
             [parts.bottom, "height"],
             [parts.left, "width"]
         ].sort(function(a, b) {
-            return a[0].dimension[a[1]] > b[0].dimension[b[1]];
+            return a[0].dimension[a[1]] - b[0].dimension[b[1]];
         }).slice(-1)[0];
 
         if (biggestSide[1] == "width") {
@@ -1099,8 +1111,8 @@
     Arrow.method("positionate", function() {
         var target = this.target;
         target.position = {
-            x: target.$el.offset().left,
-            y: target.$el.offset().top
+            x: target.$el.offset().left - $window.scrollLeft(),
+            y: target.$el.offset().top - $window.scrollTop()
         };
         target.dimension = {
             width: target.$el.outerWidth(),
@@ -1140,8 +1152,8 @@
     Arrow.method("hasChanged", function() {
         return (this.target.dimension.width !== this.target.$el.outerWidth() ||
             this.target.dimension.height !== this.target.$el.outerHeight() ||
-            this.target.position.y !== this.target.$el.offset().top ||
-            this.target.position.x !== this.target.$el.offset().left);
+            this.target.position.y !== (this.target.$el.offset().top - $window.scrollTop()) ||
+            this.target.position.x !== (this.target.$el.offset().left - $window.scrollLeft()));
     });
     /**
     Represents a panel holding the step description
@@ -1267,9 +1279,9 @@
 
     @method show
     **/
-    StepDescription.method("show", function() {
-        this.callSuper("show");
-        this.positionate();
+    StepDescription.method("show", function(displayButKeepTransparent) {
+        this.callSuper("show", displayButKeepTransparent);
+        //this.positionate();
     });
 
     /**
@@ -1282,26 +1294,31 @@
 
         if (dp.dimension.width >= 900)
             this.dimension.width = 900;
-        else if (dp.dimension.width <= 500)
-            this.dimension.width = 500;
         else
             this.dimension.width = dp.dimension.width * 0.9;
 
         this.$el.css("width", this.dimension.width);
 
+        var paddingLeftRight = (parsePxValue(this.$el.css("padding-left")) + parsePxValue(this.$el.css("padding-right"))) / 2;
+        var paddingTopBottom = (parsePxValue(this.$el.css("padding-top")) + parsePxValue(this.$el.css("padding-bottom"))) / 2;
+
         this.dimension.height = parsePxValue(this.$el.outerHeight());
 
         //Checks if the description dimension overflow the available space in the details panel
-        if (this.dimension.height > dp.dimension.height || this.dimension.width > dp.dimension.width) {
-            this.position.x = (Subject.dimension.width - this.dimension.width) / 2;
-            this.position.y = (Subject.dimension.height - this.dimension.height) / 2;
+        if (this.dimension.height > dp.dimension.height || this.dimension.width < 400) {
+            this.dimension.width = $window.width() * 0.9;
+            this.$el.css("width", this.dimension.width);
+            this.dimension.height = parsePxValue(this.$el.outerHeight());
+
+            this.position.x = ($window.width() - this.dimension.width) / 2;
+            this.position.y = ($window.height() - this.dimension.height) / 2;
         } else {
             this.position.x = (dp.dimension.width - this.dimension.width) / 2;
             this.position.y = (dp.dimension.height - this.dimension.height) / 2;
         }
 
-        this.$el.css("left", this.position.x);
-        this.$el.css("top", this.position.y);
+        this.$el.css("left", this.position.x - paddingLeftRight);
+        this.$el.css("top", this.position.y - paddingTopBottom);
     });
     /**
 	Step next button 
@@ -1383,8 +1400,8 @@
 	@return boolean
 	**/
     Screen.hasChanged = function() {
-        return ($body.outerWidth() !== this.dimension.width) ||
-            ($body.outerHeight() !== this.dimension.height);
+        return ($window.width() !== this.dimension.width) ||
+            ($window.height() !== this.dimension.height);
     };
 
     /**
@@ -1394,8 +1411,8 @@
 	@static
 	**/
     Screen.updateInfo = function() {
-        this.dimension.width = $body.outerWidth();
-        this.dimension.height = $body.outerHeight();
+        this.dimension.width = $window.width();
+        this.dimension.height = $window.height();
     };
     /**
     The current subject (the object being shown by the current wizard)
@@ -1450,8 +1467,8 @@
     Subject.hasChanged = function() {
         if (!this.obj) return false;
 
-        return (this.obj.offset().left !== this.position.x) ||
-            (this.obj.offset().top !== this.position.y) ||
+        return (this.obj.offset().left - $window.scrollLeft() !== this.position.x) ||
+            (this.obj.offset().top - $window.scrollTop() !== this.position.y) ||
             (this.obj.outerWidth() !== this.dimension.width) ||
             (this.obj.outerHeight() !== this.dimension.height) ||
             (parsePxValue(this.obj.css("border-top-left-radius")) !== this.borderRadius.leftTop) ||
@@ -1469,8 +1486,8 @@
     **/
     Subject.updateInfo = function(config) {
         if (config === undefined) {
-            this.position.x = this.obj.offset().left;
-            this.position.y = this.obj.offset().top;
+            this.position.x = this.obj.offset().left - $window.scrollLeft();
+            this.position.y = this.obj.offset().top - $window.scrollTop();
             this.dimension.width = this.obj.outerWidth();
             this.dimension.height = this.obj.outerHeight();
             this.borderRadius.leftTop = parsePxValue(this.obj.css("border-top-left-radius"));
@@ -1489,6 +1506,13 @@
         }
 
         Screen.updateInfo();
+    };
+
+    Subject.isSubjectVisible = function(position, dimension) {
+        if ((position.y + dimension.height) > $window.height() || position.y < 0) {
+            return false;
+        }
+        return true;
     };
     /**
 	Namespace to hold classes for mask control
@@ -1582,6 +1606,38 @@
     });
 
     /**
+    Checks if the subject is fully visible, if not, scrolls 'til it became fully visible
+
+    @method scrollIfNecessary
+    @param {Object} position                              An object representing the positioning info for the mask
+    @param {Object} dimension                             An object representing the dimension info for the mask
+    **/
+    Mask.CompositeMask.method("scrollIfNecessary", function(position, dimension) {
+        function doSmoothScroll(scrollTop, callback) {
+            $body.animate({
+                scrollTop: scrollTop
+            }, 300, callback);
+        }
+
+        if (!Subject.isSubjectVisible(position, dimension)) {
+            var description = StepDescription.singleInstance;
+            var y = dimension.height > ($window.height() - 50) ? position.y : position.y - 25;
+            y += $window.scrollTop();
+
+            doSmoothScroll(y, function() {
+                setTimeout(function() {
+                    DetailsPanel.singleInstance.positionate();
+                    description.positionate();
+                    description.fadeIn();
+                }, 300);
+            });
+
+            return true;
+        }
+        return false;
+    });
+
+    /**
     Updates the positioning and dimension of each part composing the whole mask, according to the subject coordinates
 
     @method update
@@ -1591,7 +1647,6 @@
     **/
     Mask.CompositeMask.method("update", function(position, dimension, borderRadius) {
         Mask.SubjectMask.singleInstance.update(position, dimension, borderRadius);
-
         //Aliases
         var left = position.x,
             top = position.y,
@@ -1604,7 +1659,7 @@
             x: 0,
             y: 0
         }, {
-            width: $body.width(),
+            width: $window.width(),
             height: top
         });
         this.parts.left.update({
@@ -1618,15 +1673,15 @@
             x: left + width,
             y: top
         }, {
-            width: $body.width() - (left + width),
+            width: $window.width() - (left + width),
             height: height
         });
         this.parts.bottom.update({
             x: 0,
             y: top + height
         }, {
-            width: $body.width(),
-            height: $body.height() - (top + height)
+            width: $window.width(),
+            height: $window.height() - (top + height)
         });
 
         //Updates the Rounded corners
@@ -1651,9 +1706,9 @@
     /**
     A Polling function to check if subject coordinates has changed
 
-    @method pollForChanges
+    @method pollForSubjectChanges
     **/
-    Mask.CompositeMask.method("pollForChanges", function() {
+    Mask.CompositeMask.method("pollForSubjectChanges", function() {
         if (!flags.lockMaskUpdate) {
             if (currentWizard && currentWizard.currentStep.subject) {
                 var subject = $(currentWizard.currentStep.subject);
@@ -1665,7 +1720,14 @@
                 this.update(Subject.position, Subject.dimension, Subject.borderRadius);
             }
         }
+    });
 
+    /**
+    A Polling function to check if screen dimension has changed
+
+    @method pollForScreenChanges
+    **/
+    Mask.CompositeMask.method("pollForScreenChanges", function() {
         if (Screen.hasChanged()) {
             Screen.updateInfo();
             this.update(Subject.position, Subject.dimension, Subject.borderRadius);
@@ -1870,12 +1932,26 @@
     Pushes a polling function in the queue
 
     @method enqueue
-    @param {Function} fn                                  The polling function to enqueue
     @static
     **/
-    Polling.enqueue = function(fn) {
-        if (this.queue.indexOf(fn) < 0) {
-            this.queue.push(fn);
+    Polling.enqueue = function() {
+        var firstArg = arguments[0];
+        var fn;
+        var name = "";
+
+        if (typeof firstArg == "function")
+            fn = firstArg;
+        else {
+            name = arguments[0];
+            fn = arguments[1];
+        }
+
+        if (this.getFunctionIndex(fn) < 0 && (name === "" || this.getFunctionIndex(name) < 0)) {
+            this.queue.push({
+                name: name,
+                fn: fn,
+                enabled: true
+            });
         } else
             throw new SSException("301", "The function is already in the polling queue.");
     };
@@ -1884,12 +1960,52 @@
     Removes a polling function from the queue
 
     @method dequeue
-    @param {Function} fn                                  The polling function to dequeue
     @static
     **/
-    Polling.dequeue = function(fn) {
-        this.queue.splice(this.queue.indexOf(fn), 1);
+    Polling.dequeue = function() {
+        this.queue.splice(this.getFunctionIndex(arguments[0]), 1);
     };
+
+    /**
+    Enables an specific polling function
+
+    @method enable
+    @static
+    **/
+    Polling.enable = function() {
+        this.queue[this.getFunctionIndex(arguments[0])].enabled = true;
+    }
+
+    /**
+    Disables an specific polling function, but preserving it in the polling queue 
+
+    @method disable
+    @static
+    **/
+    Polling.disable = function() {
+        this.queue[this.getFunctionIndex(arguments[0])].enabled = false;
+    }
+
+    /**
+    Gets the position of a polling function in the queue based on its name or the function itself
+
+    @method getFunctionIndex
+    @static
+    **/
+    Polling.getFunctionIndex = function() {
+        var firstArg = arguments[0];
+
+        if (typeof firstArg == "function")
+            return this.queue.map(function(p) {
+                return p.fn;
+            }).indexOf(firstArg);
+        else if (typeof firstArg == "string")
+            return this.queue.map(function(p) {
+                return p.name;
+            }).indexOf(firstArg);
+
+        throw new SSException("302", "Invalid argument for getFunctionIndex method. Expected a string (the polling function name) or a function (the polling function itself).");
+    }
 
     /**
     Unlocks the polling and starts the checking process
@@ -1938,7 +2054,7 @@
             setTimeout(function() {
                 for (var fn = 0; fn < Polling.queue.length; fn++) {
                     var pollingFunction = Polling.queue[fn];
-                    pollingFunction();
+                    pollingFunction.enabled && pollingFunction.fn();
                 }
                 Polling.doPolling();
             }, pollingDuration);
@@ -1989,7 +2105,11 @@
                 var wiz = wizards[w];
                 var $wiz = $("<li>");
                 var $wizTitle = $("<h2>").text(wiz.title);
-                var $wizDescription = $("<span>").addClass("sideshow-wizard-menu-item-description").text(wiz.description);
+
+                var description = wiz.description;
+                description.length > 100 && (description = description.substr(0, 100) + "...");
+
+                var $wizDescription = $("<span>").addClass("sideshow-wizard-menu-item-description").text(description);
                 var $wizEstimatedTime = $("<span>").addClass("sideshow-wizard-menu-item-estimated-time").text(wiz.estimatedTime);
                 $wiz.append($wizEstimatedTime, $wizTitle, $wizDescription);
                 $wizardsList.append($wiz);
@@ -2049,6 +2169,8 @@
     @static
     **/
     SS.init = function() {
+        $window = $(global);
+        $document = $(global.document);
         $body = $("body", global.document);
         registerGlobalHotkeys();
         Polling.start();
@@ -2183,6 +2305,7 @@
             if (subj.length === 1) {
                 Subject.obj = subj;
                 Subject.updateInfo();
+                flags.lockMaskUpdate = false;
             } else
                 throw new SSException("101", "A subject must have only one element. Multiple elements by step will be supported in future versions of Sideshow.");
         } else {
@@ -2318,6 +2441,10 @@
 
             registerInnerHotkeys();
             flags.running = true;
+
+            Polling.enqueue("check_composite_mask_screen_changes", function() {
+                Mask.CompositeMask.singleInstance.pollForScreenChanges();
+            });
         }
     };
 

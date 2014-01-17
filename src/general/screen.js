@@ -23,8 +23,8 @@
 	@return boolean
 	**/
 	Screen.hasChanged = function() {
-	    return ($body.outerWidth() !== this.dimension.width) ||
-	        ($body.outerHeight() !== this.dimension.height);
+	    return ($window.width() !== this.dimension.width) ||
+	        ($window.height() !== this.dimension.height);
 	};
 
 	/**
@@ -34,6 +34,6 @@
 	@static
 	**/
 	Screen.updateInfo = function() {
-	    this.dimension.width = $body.outerWidth();
-	    this.dimension.height = $body.outerHeight();
+	    this.dimension.width = $window.width();
+	    this.dimension.height = $window.height();
 	};  

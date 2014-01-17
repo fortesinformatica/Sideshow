@@ -51,8 +51,8 @@
     Subject.hasChanged = function() {
         if (!this.obj) return false;
 
-        return (this.obj.offset().left !== this.position.x) ||
-            (this.obj.offset().top !== this.position.y) ||
+        return (this.obj.offset().left - $window.scrollLeft() !== this.position.x) ||
+            (this.obj.offset().top - $window.scrollTop() !== this.position.y) ||
             (this.obj.outerWidth() !== this.dimension.width) ||
             (this.obj.outerHeight() !== this.dimension.height) ||
             (parsePxValue(this.obj.css("border-top-left-radius")) !== this.borderRadius.leftTop) ||
@@ -70,8 +70,8 @@
     **/
     Subject.updateInfo = function(config) {
         if (config === undefined) {
-            this.position.x = this.obj.offset().left;
-            this.position.y = this.obj.offset().top;
+            this.position.x = this.obj.offset().left - $window.scrollLeft();
+            this.position.y = this.obj.offset().top - $window.scrollTop();
             this.dimension.width = this.obj.outerWidth();
             this.dimension.height = this.obj.outerHeight();
             this.borderRadius.leftTop = parsePxValue(this.obj.css("border-top-left-radius"));
@@ -91,3 +91,10 @@
 
         Screen.updateInfo();
     };  
+
+    Subject.isSubjectVisible = function(position, dimension){
+        if((position.y + dimension.height) > $window.height() || position.y < 0){
+            return false;
+        }
+        return true;
+    };

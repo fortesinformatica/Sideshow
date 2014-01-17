@@ -13,11 +13,29 @@
 	background-color: $sideshow-mask-background-color;
 }
 
+%sideshow-button{
+	@include border-radius(3px);
+	@include transition(background-color $sideshow-fast-transition-duration ease);
+	background-color: $sideshow-button-background-color;
+	border: solid 1px darken($sideshow-button-background-color, 10);
+	padding: 5px;
+	text-transform: uppercase;
+	color: $sideshow-button-foreground-color;
+	&:hover{
+		background-color: darken($sideshow-button-background-color, 10);
+	}
+	&:disabled{
+		background-color: #BBB !important; //No fade effects here
+		border-color: #999;
+	}
+}
+
 //Masks a subject
 //@extends %sideshow-mask
 .sideshow-subject-mask{
 	@extend %sideshow-mask;
 	@include absolute-full-size;
+	position: fixed;
 	z-index: 14999;
 	width: 0;
 	height: 0;
@@ -88,6 +106,7 @@
 	display: inline-block;
 	background-color: rgba($sideshow-step-description-background-color, 0.7);
 	padding: 21px;
+	font-size: 14px;
 
 	//The step title
 	h2{
@@ -113,10 +132,15 @@
 		display: block;
 		color: $sideshow-step-text-color;
 		line-height: $sideshow-default-font-size + 10px;
+
+		code{
+			font-family: monospace, courier;
+		}
 	}
 
 	//The "next/finish" button
 	.sideshow-next-step-button{
+		@extend %sideshow-button;
 		@include fa-play;
 		float: right;
 		margin-top: 10px;
@@ -148,7 +172,7 @@
 	color: $sideshow-subject-arrow-color;
 	position: fixed;
 	z-index: 15003;
-	opacity: 0.7;
+	opacity: 0.8;
 	@include animation( $name: sideshow-subject-arrow-animation, 
 						$duration: $sideshow-long-transition-duration, 
 						$timing-function: ease, 
@@ -160,8 +184,8 @@
 	@include absolute-full-size;
 	position: fixed;
 	margin: auto;
-	width: 900px;
-	height: 550px;
+	width: 750px;
+	height: 400px;
 	z-index: 15002;
 
 	//The initial menu title
@@ -177,10 +201,13 @@
 		font-size: 32px;
 		font-family: $sideshow-default-light-font-family;
 		position: relative;
+		font-weight: normal;
 	}
 
 	//The initial menu tutorial list
 	ul{
+		padding: 0;
+		margin: 0;
 		li{
 			@include clearfix;
 			list-style-type: none;
@@ -195,7 +222,9 @@
 								$fill-mode: forwards);
 
 	    	height: 50px;
+	    	overflow: hidden;
 			margin-top: 20px;
+
 			@for $i from 1 through 15{
 		    	&:nth-child(#{$i}){
 		    		animation-delay: 300ms + ($i * 300ms);
@@ -205,7 +234,7 @@
 				
 			h2{
 				@include transition(color $sideshow-default-transition-duration ease);
-				font-family: $sideshow-default-semibold-font-family;
+				font-family: $sideshow-default-light-font-family;
 				font-size: 12px;
 				font-weight: normal;
 				text-transform: uppercase;
@@ -229,14 +258,15 @@
 				height: 50px;
 				width: 80px;
 				margin-right: 10px;
+				position: relative;
 				&:before{
-					margin-right: 3px;
+					margin-right: 5px;
 				}
 			}
 
 			&:hover{
 				h2{
-					color: lighten($sideshow-wizard-menu-item-hover-foreground-color, 20);
+					color: $sideshow-wizard-menu-item-hover-foreground-color;
 				}
 				.sideshow-wizard-menu-item-estimated-time{
 					border-right: solid 20px $sideshow-wizard-menu-item-foreground-color;
@@ -288,6 +318,7 @@
 	bottom: 25px;
 	right: 25px;
 	cursor: pointer;
+	text-transform: uppercase;
 	&:hover{
 		@include text-shadow(0 0 10px #030, 0 0 6px #000, 0 2px 5px #000, 0 0 7px #000);
 		background-color: transparent!important;
@@ -314,4 +345,9 @@
 	position: relative;
 	height: 50px;
 	margin-top: 20px;
+}
+
+body{
+	margin: 0;
+	height: 100%;
 }

@@ -50,7 +50,7 @@
             [parts.bottom, "height"],
             [parts.left, "width"]
         ].sort(function(a, b) {
-            return a[0].dimension[a[1]] > b[0].dimension[b[1]];
+            return a[0].dimension[a[1]] - b[0].dimension[b[1]];
         }).slice(-1)[0];
 
         if (biggestSide[1] == "width") {

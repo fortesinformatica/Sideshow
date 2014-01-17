@@ -123,11 +123,11 @@
     Wizard.method("play", function() {
         var wiz = this;
 
-        Polling.enqueue(function() {
-            Mask.CompositeMask.singleInstance.pollForChanges();
+        Polling.enqueue("check_composite_mask_subject_changes", function() {
+            Mask.CompositeMask.singleInstance.pollForSubjectChanges();
         });
 
-        Polling.enqueue(function() {
+        Polling.enqueue("check_arrow_changes", function() {
             Arrows.pollForArrowsChanges();
         });
 
@@ -148,10 +148,10 @@
         flags.changingStep = true;
         this.showStep(steps[0], function() {
             //Releases the polling for checking any changes in the current subject
-            flags.lockMaskUpdate = false;
+            //flags.lockMaskUpdate = false;
 
             //Register the function that checks the completing of a step in the polling queue
-            Polling.enqueue(function() {
+            Polling.enqueue("check_completed_step", function() {
                 wiz.pollForCheckCompletedStep();
             });
         });
@@ -197,6 +197,7 @@
                 SS.setEmptySubject();
             //Updates the mask
             Mask.CompositeMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
+
             var sm = Mask.SubjectMask.singleInstance;
             sm.fadeOut(function() {
                 if (step.lockSubject) sm.show(true);
@@ -221,11 +222,10 @@
                 var nextStep = this._storyline.steps[this.getStepPosition() + 1];
                 if (nextStep) {
                     description.nextButton.setText(getString(strings.next) + ": " + this._storyline.steps[this.getStepPosition() + 1].title);
-                    description.nextButton.show();
                 } else {
                     description.nextButton.setText(getString(strings.finishWizard));
-                    description.nextButton.show();
                 }
+                description.nextButton.show();
 
                 if (step.autoContinue === false) description.nextButton.disable();
             } else {
@@ -241,9 +241,12 @@
 
             //Step Description is shown, but is transparent yet (since we need to know its dimension to positionate it properly)
             description.show(true);
-            description.positionate();
-            //Do a simple fade in for the description box
-            description.fadeIn();
+            if(!Mask.CompositeMask.singleInstance.scrollIfNecessary(Subject.position, Subject.dimension)){
+                description.positionate();
+                //Do a simple fade in for the description box
+                description.fadeIn();
+            }
+            
 
             //If a callback is passed, call it    
             if (callback) callback();
@@ -260,7 +263,7 @@
     Wizard.method("next", function(callback, nextStep) {
         if (!flags.changingStep || flags.skippingStep) {
             flags.changingStep = true;
-
+            var currentStep = this.currentStep;
             nextStep = nextStep || this._storyline.steps[this.getStepPosition(this.currentStep) + 1];
             var self = this;
 
@@ -269,6 +272,9 @@
                     if (callback) callback();
                 });
                 else {
+                    if (currentStep && currentStep.listeners && currentStep.listeners.afterStep)
+                        currentStep.listeners.afterStep();
+
                     var completedWizard = currentWizard;
                     currentWizard = null;
                     var listeners = self.listeners;
@@ -291,6 +297,7 @@
             DetailsPanel.singleInstance.hide();
         });
         Arrows.fadeOut();
+        Mask.SubjectMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
         Mask.SubjectMask.singleInstance.fadeIn(callback);
     });
 

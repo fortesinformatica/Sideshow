@@ -1,11 +1,13 @@
 //Colors
 $sideshow-light-color: #FFF !default;
 $sideshow-standout-color: #DA4435 !default;
+$sideshow-button-background-color: #DA4435 !default;
+$sideshow-button-foreground-color: $sideshow-light-color !default;
 
 $sideshow-mask-background-color: #222 !default;
-$sideshow-step-description-background-color: #777 !default;
-$sideshow-step-description-title-color: #888 !default;
-$sideshow-step-position-color: #CCC !default;
+$sideshow-step-description-background-color: lighten($sideshow-mask-background-color, 10) !default;
+$sideshow-step-description-title-color: $sideshow-light-color !default;
+$sideshow-step-position-color: lighten($sideshow-mask-background-color, 40) !default;
 $sideshow-step-text-color: $sideshow-light-color !default;
 $sideshow-wizard-menu-item-foreground-color: $sideshow-light-color !default;
 $sideshow-wizard-menu-title-color: $sideshow-light-color !default;
@@ -14,6 +16,7 @@ $sideshow-subject-arrow-color: $sideshow-standout-color !default;
 $sideshow-close-button-foreground-color: $sideshow-light-color !default;
 
 //Animation
+$sideshow-fast-transition-duration: 150ms !default;
 $sideshow-default-transition-duration: 300ms !default;
 $sideshow-long-transition-duration: 600ms !default;
 
@@ -24,9 +27,9 @@ $sideshow-big-font-size: 20px !default;
 $sideshow-default-light-font-family: OpenSans Light !default;
 $sideshow-default-semibold-font-family: OpenSans Semibold !default;
 //By default, In Sideshow font-face imports we're getting just two variants of the OpenSans font family (the light and semibold)
-//If you want the full family (e.g. For rich formatting using Markdown), you can enable the importing of the whole family
+//If you want all of them (e.g. For rich formatting using Markdown), you can enable the importing of the whole family
 $sideshow-enable-whole-opensans-family: false !default;
 
 //Others
-$sideshow-mask-opacity: 0.9 !default;
+$sideshow-mask-opacity: 0.95 !default;
 $sideshow-fonts-path: "../fonts" !default;

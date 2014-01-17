@@ -5,6 +5,8 @@
     @static
     **/
     SS.init = function() {
+        $window = $(global);
+        $document = $(global.document);
         $body = $("body", global.document);
         registerGlobalHotkeys();
         Polling.start();
@@ -139,6 +141,7 @@
             if (subj.length === 1) {
                 Subject.obj = subj;
                 Subject.updateInfo();
+                flags.lockMaskUpdate = false;
             } else
                 throw new SSException("101", "A subject must have only one element. Multiple elements by step will be supported in future versions of Sideshow.");
         } else {
@@ -274,5 +277,9 @@
 
             registerInnerHotkeys();
             flags.running = true;
+
+            Polling.enqueue("check_composite_mask_screen_changes", function() {
+                Mask.CompositeMask.singleInstance.pollForScreenChanges();
+            });
         }
     };

@@ -19,9 +19,9 @@ mkdir -p ../tmp
 
 remove_previous_output_files(){
 	if [ "$mode" == "dev" ] ; then
-		rm ../${library_name}-*.debug.js > /dev/null
+		rm ../distr/${library_name}-*.debug.js > /dev/null
 	else
-		rm ../${library_name}-*.js > /dev/null
+		rm ../distr/${library_name}-*.js > /dev/null
 	fi
 	rm ../tmp/* > /dev/null
 }

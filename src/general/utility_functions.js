@@ -44,7 +44,7 @@
     @@function registerInnerHotkeys
     **/
     function registerInnerHotkeys() {
-        $(document).keyup(innerHotkeysListener);
+        $document.keyup(innerHotkeysListener);
     }
 
     /**
@@ -53,7 +53,7 @@
     @@function Unregisters
     **/
     function unregisterInnerHotkeys() {
-        $(document).unbind("keyup", innerHotkeysListener);
+        $document.unbind("keyup", innerHotkeysListener);
     }
 
     function innerHotkeysListener(e) {
@@ -67,7 +67,7 @@
     @@function registerGlobalHotkeys
     **/
     function registerGlobalHotkeys() {
-        $(document).keyup(function(e) {
+        $document.keyup(function(e) {
             //F2
             if (e.keyCode == 113) {
                 if (e.shiftKey) SS.start({

@@ -122,9 +122,9 @@
 
     @method show
     **/
-    StepDescription.method("show", function() {
-        this.callSuper("show");
-        this.positionate();
+    StepDescription.method("show", function(displayButKeepTransparent) {
+        this.callSuper("show", displayButKeepTransparent);
+        //this.positionate();
     });
 
     /**
@@ -137,24 +137,29 @@
 
         if (dp.dimension.width >= 900)
             this.dimension.width = 900;
-        else if (dp.dimension.width <= 500)
-            this.dimension.width = 500;
         else
             this.dimension.width = dp.dimension.width * 0.9;
 
         this.$el.css("width", this.dimension.width);
 
+        var paddingLeftRight = (parsePxValue(this.$el.css("padding-left")) + parsePxValue(this.$el.css("padding-right"))) / 2;
+        var paddingTopBottom = (parsePxValue(this.$el.css("padding-top")) + parsePxValue(this.$el.css("padding-bottom"))) / 2;
+
         this.dimension.height = parsePxValue(this.$el.outerHeight());
 
         //Checks if the description dimension overflow the available space in the details panel
-        if (this.dimension.height > dp.dimension.height || this.dimension.width > dp.dimension.width) {
-            this.position.x = (Subject.dimension.width - this.dimension.width) / 2;
-            this.position.y = (Subject.dimension.height - this.dimension.height) / 2;
+        if (this.dimension.height > dp.dimension.height || this.dimension.width < 400) {
+            this.dimension.width = $window.width() * 0.9;
+            this.$el.css("width", this.dimension.width);
+            this.dimension.height = parsePxValue(this.$el.outerHeight());
+
+            this.position.x = ($window.width() - this.dimension.width) / 2;
+            this.position.y = ($window.height() - this.dimension.height) / 2;
         } else {
             this.position.x = (dp.dimension.width - this.dimension.width) / 2;
             this.position.y = (dp.dimension.height - this.dimension.height) / 2;
         }
 
-        this.$el.css("left", this.position.x);
-        this.$el.css("top", this.position.y);
+        this.$el.css("left", this.position.x - paddingLeftRight);
+        this.$el.css("top", this.position.y - paddingTopBottom);
     });

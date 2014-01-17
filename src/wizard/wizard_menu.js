@@ -43,7 +43,11 @@
                 var wiz = wizards[w];
                 var $wiz = $("<li>");
                 var $wizTitle = $("<h2>").text(wiz.title);
-                var $wizDescription = $("<span>").addClass("sideshow-wizard-menu-item-description").text(wiz.description);
+                
+                var description = wiz.description;
+                description.length > 100 && (description = description.substr(0, 100) + "...");
+
+                var $wizDescription = $("<span>").addClass("sideshow-wizard-menu-item-description").text(description);
                 var $wizEstimatedTime = $("<span>").addClass("sideshow-wizard-menu-item-estimated-time").text(wiz.estimatedTime);
                 $wiz.append($wizEstimatedTime, $wizTitle, $wizDescription);
                 $wizardsList.append($wiz);

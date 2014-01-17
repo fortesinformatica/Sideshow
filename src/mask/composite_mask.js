@@ -50,6 +50,38 @@
     });
 
     /**
+    Checks if the subject is fully visible, if not, scrolls 'til it became fully visible
+
+    @method scrollIfNecessary
+    @param {Object} position                              An object representing the positioning info for the mask
+    @param {Object} dimension                             An object representing the dimension info for the mask
+    **/
+    Mask.CompositeMask.method("scrollIfNecessary", function(position, dimension) {
+        function doSmoothScroll(scrollTop, callback){
+            $body.animate({
+                scrollTop: scrollTop
+            }, 300, callback);
+        }
+
+        if(!Subject.isSubjectVisible(position, dimension)) {
+            var description = StepDescription.singleInstance;
+            var y = dimension.height > ($window.height() - 50) ? position.y : position.y - 25;
+            y += $window.scrollTop();
+            
+            doSmoothScroll(y, function(){
+                setTimeout(function(){
+                    DetailsPanel.singleInstance.positionate();
+                    description.positionate();
+                    description.fadeIn();
+                }, 300);
+            });
+            
+            return true;
+        }
+        return false;
+    });
+
+    /**
     Updates the positioning and dimension of each part composing the whole mask, according to the subject coordinates
 
     @method update
@@ -59,7 +91,6 @@
     **/
     Mask.CompositeMask.method("update", function(position, dimension, borderRadius) {
         Mask.SubjectMask.singleInstance.update(position, dimension, borderRadius);
-
         //Aliases
         var left = position.x,
             top = position.y,
@@ -72,7 +103,7 @@
             x: 0,
             y: 0
         }, {
-            width: $body.width(),
+            width: $window.width(),
             height: top
         });
         this.parts.left.update({
@@ -86,15 +117,15 @@
             x: left + width,
             y: top
         }, {
-            width: $body.width() - (left + width),
+            width: $window.width() - (left + width),
             height: height
         });
         this.parts.bottom.update({
             x: 0,
             y: top + height
         }, {
-            width: $body.width(),
-            height: $body.height() - (top + height)
+            width: $window.width(),
+            height: $window.height() - (top + height)
         });
 
         //Updates the Rounded corners
@@ -119,9 +150,9 @@
     /**
     A Polling function to check if subject coordinates has changed
 
-    @method pollForChanges
+    @method pollForSubjectChanges
     **/
-    Mask.CompositeMask.method("pollForChanges", function() {
+    Mask.CompositeMask.method("pollForSubjectChanges", function() {
         if (!flags.lockMaskUpdate) {
             if (currentWizard && currentWizard.currentStep.subject) {
                 var subject = $(currentWizard.currentStep.subject);
@@ -133,7 +164,14 @@
                 this.update(Subject.position, Subject.dimension, Subject.borderRadius);
             }
         }
+    });
 
+    /**
+    A Polling function to check if screen dimension has changed
+
+    @method pollForScreenChanges
+    **/
+    Mask.CompositeMask.method("pollForScreenChanges", function() {
         if (Screen.hasChanged()) {
             Screen.updateInfo();
             this.update(Subject.position, Subject.dimension, Subject.borderRadius);

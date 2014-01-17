@@ -29,7 +29,7 @@
                 if (linearTimingFunction) item.$el.css("animation-timing-function", "ease");
                 if (callback) callback();
             }, longAnimationDuration);
-        }, 0); //<-- Yeap, I'm really scheduling a timeout for 0 second... this is the dirty trick =)
+        }, 20); //<-- Yeap, I'm really scheduling a timeout for 20 milliseconds... this is a dirty trick =)
     });
 
     /**

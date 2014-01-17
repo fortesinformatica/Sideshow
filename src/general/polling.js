@@ -28,12 +28,23 @@
     Pushes a polling function in the queue
 
     @method enqueue
-    @param {Function} fn                                  The polling function to enqueue
     @static
     **/
-    Polling.enqueue = function(fn) {
-        if (this.queue.indexOf(fn) < 0) {
-            this.queue.push(fn);
+    Polling.enqueue = function() {
+        var firstArg = arguments[0];
+        var fn;
+        var name = "";
+
+        if(typeof firstArg == "function")
+            fn = firstArg;
+        else{
+            name = arguments[0];
+            fn = arguments[1];
+        } 
+
+        if (this.getFunctionIndex(fn) < 0
+            && (name === "" || this.getFunctionIndex(name) < 0)) {
+            this.queue.push({ name: name, fn: fn, enabled: true });
         } else
             throw new SSException("301", "The function is already in the polling queue.");
     };
@@ -42,12 +53,48 @@
     Removes a polling function from the queue
 
     @method dequeue
-    @param {Function} fn                                  The polling function to dequeue
     @static
     **/
-    Polling.dequeue = function(fn) {
-        this.queue.splice(this.queue.indexOf(fn), 1);
+    Polling.dequeue = function() {
+        this.queue.splice(this.getFunctionIndex(arguments[0]), 1);
     };
+
+    /**
+    Enables an specific polling function
+
+    @method enable
+    @static
+    **/
+    Polling.enable = function(){
+        this.queue[this.getFunctionIndex(arguments[0])].enabled = true;
+    }
+
+    /**
+    Disables an specific polling function, but preserving it in the polling queue 
+
+    @method disable
+    @static
+    **/
+    Polling.disable = function(){
+        this.queue[this.getFunctionIndex(arguments[0])].enabled = false;
+    }
+
+    /**
+    Gets the position of a polling function in the queue based on its name or the function itself
+
+    @method getFunctionIndex
+    @static
+    **/
+    Polling.getFunctionIndex = function(){
+        var firstArg = arguments[0];
+
+        if(typeof firstArg == "function")
+            return this.queue.map(function(p){ return p.fn; }).indexOf(firstArg);
+        else if(typeof firstArg == "string")
+            return this.queue.map(function(p){ return p.name; }).indexOf(firstArg);
+
+        throw new SSException("302", "Invalid argument for getFunctionIndex method. Expected a string (the polling function name) or a function (the polling function itself).");
+    }
 
     /**
     Unlocks the polling and starts the checking process
@@ -96,7 +143,7 @@
             setTimeout(function() {
                 for (var fn = 0; fn < Polling.queue.length; fn++) {
                     var pollingFunction = Polling.queue[fn];
-                    pollingFunction();
+                    pollingFunction.enabled && pollingFunction.fn();
                 }
                 Polling.doPolling();
             }, pollingDuration);

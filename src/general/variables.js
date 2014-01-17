@@ -1,6 +1,8 @@
     var globalObjectName = "Sideshow",
+        $window,
         $body,
-        pollingDuration = 200,
+        $document,
+        pollingDuration = 150,
         longAnimationDuration = 600,
 
         /** 

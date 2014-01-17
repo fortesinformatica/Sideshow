@@ -42,8 +42,8 @@
     Arrow.method("positionate", function() {
         var target = this.target;
         target.position = {
-            x: target.$el.offset().left,
-            y: target.$el.offset().top
+            x: target.$el.offset().left - $window.scrollLeft(),
+            y: target.$el.offset().top - $window.scrollTop()
         };
         target.dimension = {
             width: target.$el.outerWidth(),
@@ -83,6 +83,6 @@
     Arrow.method("hasChanged", function() {
         return (this.target.dimension.width !== this.target.$el.outerWidth() ||
             this.target.dimension.height !== this.target.$el.outerHeight() ||
-            this.target.position.y !== this.target.$el.offset().top ||
-            this.target.position.x !== this.target.$el.offset().left);
+            this.target.position.y !== (this.target.$el.offset().top - $window.scrollTop())||
+            this.target.position.x !== (this.target.$el.offset().left - $window.scrollLeft()));
     });
