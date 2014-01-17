@@ -1614,7 +1614,7 @@
     **/
     Mask.CompositeMask.method("scrollIfNecessary", function(position, dimension) {
         function doSmoothScroll(scrollTop, callback) {
-            $body.animate({
+            $("body,html").animate({
                 scrollTop: scrollTop
             }, 300, callback);
         }
