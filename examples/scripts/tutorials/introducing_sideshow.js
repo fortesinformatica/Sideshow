@@ -137,7 +137,7 @@ Sideshow provides a way for detecting if your tutorial is ready to proceed to th
 		},
 		{
 			title: "Auto Continue",
-			text: "If you want Sideshow proceed automatically to the next step, you can use set **showNextButton** flag to false. This way, when your completing conditions are satisfied, Sideshow will continue to the next step.\n\nDrag the Dr. Brown photo again to its original place to continue.",
+			text: "If you want Sideshow proceed automatically to the next step, you can use set **autoContinue** flag to true. This way, when your completing conditions are satisfied, Sideshow will continue to the next step.\n\nDrag the Dr. Brown photo again to its original place to continue.",
 		    format: "markdown",
 		    listeners: {
 		    	beforeStep: function(){
@@ -169,7 +169,7 @@ Sideshow provides a way for detecting if your tutorial is ready to proceed to th
 		    },
 		    targets: "#bttf figure, #dr_brown",
 		    subject: "#bttf",
-		    showNextButton: false,
+		    autoContinue: true,
 		    completingConditions: [
 		    	function(){
 		    		return $("#bttf figure #dr_brown").length > 0; 
@@ -215,6 +215,33 @@ This way you could use:
 		{
 			title: "Related Tutorials",
 			text: "You can also define relationships between tutorials, this way, after finishing a tutorial, the user sees a list of others related to this.",
+			format: "markdown"
+		},
+		{
+			title: "Tutorial Eligibility Conditions", 
+			text: function(){/*
+It's possible to define if a tutorial is eligible for a specific context (a screen, URL, some specific application state, or any other thing which can be tested programmatically). If your tutorials are registered and imported globally, for your whole application, you can create rules for each one (if it will be listed in the Sideshow menu).
+
+For example, you may want to do something like this:
+
+<pre>
+	<code>
+affects: [
+	{ hash: "#/messages" },
+	{ route: "/adm/orders", caseSensitive: true },
+	function(){
+		return $(".grid").length > 0;
+	}
+]
+	</code>
+</pre>
+
+In the code above, we're making some fictional tutorial available in three differente situations: 
+
+*	When the URL hash is "#/messages"
+*	When the route is "/adm/orders". Note we're setting a caseSensitive flag to true (this is useful, for instance, for *nix based web servers), so this tutorial will not be listed in a route "#/ADM/routes".
+*	We've added a custom evaluator which just checks if there's some grid (or any element with a `grid` class attribute) in the page, if so, the tutorial is eligible for the current page.
+			*/},
 			format: "markdown"
 		},
 		{
