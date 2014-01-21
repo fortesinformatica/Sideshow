@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Sideshow by fortesinformatica</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Sideshow</h1>
+          <h2>Sideshow is a powerful javascript library which aims to reduce your user&#39;s learning curve by providing a way to create step-by-step interactive helps. Explain the features of your application, control your end-user&#39;s interaction with your UI, emphasize what you&#39;re explaining in each step by masking it. Just think! The sky is the limit!</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/fortesinformatica/Sideshow/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/fortesinformatica/Sideshow/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/fortesinformatica/Sideshow" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="sideshow" class="anchor" href="#sideshow"><span class="octicon octicon-link"></span></a>Sideshow</h1>
+
+<h1>
+<a name="" class="anchor" href="#"><span class="octicon octicon-link"></span></a><img src="https://raw2.github.com/fortesinformatica/sideshow/master/examples/images/sideshow-logo.png" alt="Sideshow Logo">
+</h1>
+
+<p><img src="https://ga-beacon.appspot.com/UA-34593010-2/Sideshow/README" alt="Google Analytics Beacon"></p>
+
+<p>Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps. </p>
+
+<ul>
+<li>  Explain the features of your application</li>
+<li>  Control your end-user's interaction with your UI</li>
+<li>  Use Markdown to create formatted step descriptions</li>
+<li>  Emphasize what you're explaining in each step (a button, grid, dropdown, form, the whole screen, and so forth) by surrounding it with a fully adaptable mask. </li>
+</ul><p><strong>Just think! The sky is the limit!</strong></p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>All the files needed to use Sideshow are located under the <code>distr</code> folder.</p>
+
+<p>1)  In your HTML, include Sideshow script, its dependencies (put the dependencies before the Sideshow script) and the stylesheet.</p>
+
+<p><strong>Note</strong>: The stylesheet must be in the <code>head</code> and all the scripts (including your own Tutorial scripts) in the bottom of your <code>body</code> tag.</p>
+
+<p><strong>Note 2</strong>: See the <code>example.html</code> file in the project root folder for a real example.</p>
+
+<p>2)  Copy the Sideshow fonts folder in the directory located above the folder where you copied Sideshow stylesheet.</p>
+
+<p>3)  Create (and also add a reference in your HTML) a <code>sideshow.config.js</code> file with this content:</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">language</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">;</span>
+<span class="nx">Sideshow</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+</pre></div>
+
+<p><strong>Note</strong>: For now, Sideshow only supports <code>en</code> (american english) and <code>pt-br</code> (brazilian portuguese)</p>
+
+<p>4)  Create your tutorials and import each one in your HTML after the Sideshow script </p>
+
+<h3>
+<a name="creating-a-tutorial" class="anchor" href="#creating-a-tutorial"><span class="octicon octicon-link"></span></a>Creating a Tutorial</h3>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"introducing_sideshow"</span><span class="p">,</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s2">"Introducing Sideshow"</span><span class="p">,</span>
+    <span class="nx">description</span><span class="o">:</span> <span class="s2">"Introducing the main features and concepts of Sideshow. "</span><span class="p">,</span>
+    <span class="nx">estimatedTime</span><span class="o">:</span> <span class="s2">"10 Minutes"</span><span class="p">,</span>
+    <span class="nx">affects</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nx">hash</span><span class="o">:</span> <span class="s2">"#messages"</span> <span class="p">},</span> <span class="c1">//This tutorial would be eligible for URLs like this "http://www.foo.com/bar#messages"</span>
+        <span class="p">{</span> <span class="nx">route</span><span class="o">:</span> <span class="s2">"/adm/orders"</span><span class="p">,</span> <span class="nx">caseSensitive</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>  <span class="c1">//This tutorial would be eligible for URLs like this "http://www.foo.com/adm/orders"</span>
+        <span class="kd">function</span><span class="p">(){</span>
+            <span class="c1">//Here we could do any checking to infer if this tutorial is eligible the current screen/context. </span>
+            <span class="c1">//After this checking, just return a boolean indicating if this tutorial will be available. </span>
+            <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="s2">".grid"</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>   
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="defining-a-storyline" class="anchor" href="#defining-a-storyline"><span class="octicon octicon-link"></span></a>Defining a Storyline</h3>
+
+<p>A storyline is the sequence of steps of some tutorial. </p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="nx">showStepPosition</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">steps</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s2">"Hello Sideshow."</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s2">"This is an oversimplified example."</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s2">"The end"</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s2">"What a pity =(."</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="step-a-complete-example" class="anchor" href="#step-a-complete-example"><span class="octicon octicon-link"></span></a>Step: A complete example</h3>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="nx">showStepPosition</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">steps</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s2">"The log out button."</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s2">"Click this button if you want to log out of the system."</span><span class="p">,</span>
+            <span class="nx">subject</span><span class="o">:</span> <span class="s2">"#user_details_panel"</span><span class="p">,</span>
+            <span class="nx">targets</span><span class="o">:</span> <span class="s2">"#user_details_panel &gt; .logout"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="using-markdown" class="anchor" href="#using-markdown"><span class="octicon octicon-link"></span></a>Using Markdown</h3>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="nx">showStepPosition</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">steps</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s2">"Markdown is pretty cool!"</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s2">"This step uses [Markdown](http://en.wikipedia.org/wiki/Markdown) for **text formatting**."</span><span class="p">,</span>
+            <span class="nx">format</span><span class="o">:</span> <span class="s2">"markdown"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="completing-conditions" class="anchor" href="#completing-conditions"><span class="octicon octicon-link"></span></a>Completing Conditions</h3>
+
+<p>Completing conditions are just (as the name suggests) conditions to be satisfied in order to proceed to the next step.</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="nx">showStepPosition</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">steps</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s2">"Choose a name for your project"</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s2">"Enter a name for your project."</span><span class="p">,</span>
+            <span class="nx">completingConditions</span><span class="o">:</span> <span class="p">[</span>
+                <span class="kd">function</span><span class="p">(){</span>
+                    <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#project_name"</span><span class="p">).</span><span class="nx">val</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="c1">//...</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="auto-continue" class="anchor" href="#auto-continue"><span class="octicon octicon-link"></span></a>Auto continue</h3>
+
+<p>By setting the autoContinue flag to true, Sideshow proceeds automaticaly when the completing conditions are satisfied.</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="nx">showStepPosition</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">steps</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s2">"Choose a name for your project"</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s2">"Enter a name for your project."</span><span class="p">,</span>
+            <span class="nx">completingConditions</span><span class="o">:</span> <span class="p">[</span>
+                <span class="kd">function</span><span class="p">(){</span>
+                    <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#project_name"</span><span class="p">).</span><span class="nx">val</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nx">autoContinue</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">//...</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h3>
+
+<p>You can perform some action or do some preparation for the next step, or anything you want which can be done programatically.</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+    <span class="nx">listeners</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">beforeWizardStarts</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="c1">//What goes here will be executed before the first step of this tutorial</span>
+        <span class="p">},</span>
+        <span class="nx">afterWizardEnds</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="c1">//What goes here will be executed after the last step of this tutorial</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="nx">showStepPosition</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">steps</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s2">"Foo bar"</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s2">"An example of step just to illustrate how to use step events."</span><span class="p">,</span>
+            <span class="nx">listeners</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">beforeStep</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+                    <span class="c1">//What goes here will be executed before this step </span>
+                <span class="p">},</span>
+                <span class="nx">afterStep</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+                    <span class="c1">//What goes here will be executed after this step </span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="c1">//...</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="skipping-a-step" class="anchor" href="#skipping-a-step"><span class="octicon octicon-link"></span></a>Skipping a step</h3>
+
+<p>When entering some step you can do some verification to skip the step automaticaly.</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="nx">showStepPosition</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">steps</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="c1">//...</span>
+            <span class="nx">skipIf</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+                <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#groups"</span><span class="p">).</span><span class="nx">children</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="c1">//...</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="jumping-to-other-step" class="anchor" href="#jumping-to-other-step"><span class="octicon octicon-link"></span></a>Jumping to other step</h3>
+
+<p>You can jump to other step by its position (1-based) or its unique name.</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="nx">showStepPosition</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">steps</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="c1">//...</span>
+            <span class="nx">listeners</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">beforeStep</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+                    <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">"#groups"</span><span class="p">).</span><span class="nx">children</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> 
+                        <span class="nx">Sideshow</span><span class="p">.</span><span class="nx">gotoStep</span><span class="p">(</span><span class="s2">"the_end"</span><span class="p">);</span> <span class="c1">//we're jumping to the step named "the_end"</span>
+                    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">"#people"</span><span class="p">).</span><span class="nx">children</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> 
+                        <span class="nx">Sideshow</span><span class="p">.</span><span class="nx">gotoStep</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span> <span class="c1">//we're jumping to the seventh step in this Wizard storyline</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="c1">//...</span>
+        <span class="p">{</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s2">"the_end"</span><span class="p">,</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s2">"The end"</span><span class="p">,</span>
+            <span class="c1">//...</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="tutorial-eligibility" class="anchor" href="#tutorial-eligibility"><span class="octicon octicon-link"></span></a>Tutorial Eligibility</h3>
+
+<p>When a user invokes Sideshow, a list with the tutorials available for the current screen/context is shown. Sideshow knows if a tutorial is eligible for some screen by testing the <code>affects</code> conditions of each registered tutorial. If one of the conditions are met, the tutorial is listed.</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+    <span class="nx">affects</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nx">hash</span><span class="o">:</span> <span class="s2">"#messages"</span> <span class="p">},</span> <span class="c1">//This tutorial would be eligible for URLs like this "http://www.foo.com/bar#messages"</span>
+        <span class="p">{</span> <span class="nx">route</span><span class="o">:</span> <span class="s2">"/adm/orders"</span><span class="p">,</span> <span class="nx">caseSensitive</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>  <span class="c1">//This tutorial would be eligible for URLs like this "http://www.foo.com/adm/orders"</span>
+        <span class="kd">function</span><span class="p">(){</span>
+            <span class="c1">//Here we could do any checking to infer if this tutorial is eligible the current screen/context. </span>
+            <span class="c1">//After this checking, just return a boolean indicating if this tutorial will be available. </span>
+            <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="s2">".grid"</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>   
+    <span class="p">]</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="tutorial-preparation-function" class="anchor" href="#tutorial-preparation-function"><span class="octicon octicon-link"></span></a>Tutorial Preparation Function</h3>
+
+<p>Even if a tutorial isn't eligible for some screen, by using a preparation function a user can access this tutorial from any point of your system/site (by pressing shift-F2).</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+    <span class="nx">preparation</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doneCallback</span><span class="p">){</span>
+        <span class="c1">//if your app is a SPA, you could do some sort of redirection and call the doneCallback function after the page is loaded</span>
+    <span class="p">}</span>
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="related-tutorials" class="anchor" href="#related-tutorials"><span class="octicon octicon-link"></span></a>Related Tutorials</h3>
+
+<p>You can also define relationships between tutorials, this way, after finishing a tutorial, the user sees a list of others related to this.</p>
+
+<div class="highlight highlight-Javascript"><pre><span class="nx">Sideshow</span><span class="p">.</span><span class="nx">registerWizard</span><span class="p">({</span>
+    <span class="c1">//...</span>
+    <span class="c1">//after finishing the current wizard, the user will be guided to related tutorials</span>
+    <span class="nx">relatedWizards</span><span class="o">:</span> <span class="p">[</span> <span class="s2">"creating_user"</span><span class="p">,</span> <span class="s2">"groups_and_permissions"</span><span class="p">,</span> <span class="s2">"security_settings"</span> <span class="p">]</span> 
+<span class="p">}).</span><span class="nx">storyLine</span><span class="p">({</span>
+    <span class="c1">//...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="invoking-sideshow" class="anchor" href="#invoking-sideshow"><span class="octicon octicon-link"></span></a>Invoking Sideshow</h2>
+
+<ul>
+<li>  The user can access the tutorials available for the current screen by pressing <code>F2</code>, . </li>
+<li>  The user can access the tutorials available for the current screen + tutorials for other screens with a preparation function by pressing <code>shift+F2</code>. </li>
+</ul><h2>
+<a name="fortes-inform%C3%A1tica" class="anchor" href="#fortes-inform%C3%A1tica"><span class="octicon octicon-link"></span></a>Fortes Informática</h2>
+
+<p>Sideshow was created at <a href="http://www.fortesinformatica.com.br">Fortes Informática</a>, a great technology company headquartered in Fortaleza, CE (Brazil). Fortes Informática has several offices across the country, and an impressive history of more than 20 years. Sideshow is making our software yet more easy to use and even more innovative.</p>
+
+<h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p>Alcides Queiroz Aguiar </p>
+
+<ul>
+<li>  E-mail: alcidesqueiroz(at)gmail(dot)com </li>
+<li>  Twitter: <a href="http://www.twitter.com/alcidesqueiroz">@alcidesqueiroz</a>
+</li>
+<li>  Stack Overflow: <a href="http://stackoverflow.com/users/1295666/alcides-queiroz-aguiar">http://is.gd/aqanso</a>
+</li>
+<li>  Github: <a href="https://github.com/alcidesqueiroz">alcidesqueiroz</a>
+</li>
+</ul><h2>
+<a name="license-and-copyright" class="anchor" href="#license-and-copyright"><span class="octicon octicon-link"></span></a>License and Copyright</h2>
+
+<p>Copyright 2013-2014 Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com] </p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+        </section>
+
+        <footer>
+          Sideshow is maintained by <a href="https://github.com/fortesinformatica">fortesinformatica</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+                  <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-34593010-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+      </div>
+    </div>
+  </body>
+</html>
