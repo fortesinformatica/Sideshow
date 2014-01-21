@@ -1,0 +1,10 @@
+//Variables
+$sideshow-example-base-color: #E4E4E4 !default; 
+$sideshow-example-base-color-dark: darken($sideshow-example-base-color, 20) !default; 
+$sideshow-example-base-color-darkest: darken($sideshow-example-base-color, 40) !default; 
+$sideshow-example-secondary-color: #C30 !default; 
+$sideshow-example-secondary-color-dark: darken($sideshow-example-secondary-color, 15) !default; 
+$sideshow-example-secondary-color-lighter: lighten($sideshow-example-secondary-color, 10) !default;
+
+
+$sideshow-fonts-path: "../fonts" !default;

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Sideshow Interactive Help Example</title>
+	<link rel="stylesheet" href="distr/stylesheets/sideshow.css">
+	<link rel="stylesheet" href="examples/stylesheets/example.css">
+</head>
+<body>
+    <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header>
+    	<div id="header_content" class="main-content">
+    		<img src="examples/images/sideshow-logo.png">
+    		<button id="run_example">Run Example</button>
+    		<div id="introducing_sideshow">
+    			Sideshow is a powerful javascript library which aims to <em>reduce your user's learning curve</em> by providing a way to create <em>step-by-step interactive helps</em>. Explain the features of your application, control your end-user's interaction with your UI, emphasize what you're explaining in each step by masking it. 
+    			<br><!-- <<< Here, you can see a well applied br!! \o/ -->
+    			<em>Just think! The sky is the limit!</em>
+    		</div>
+    	</div>
+	</header>
+	<div id="wrapper" class="main-content">
+    	<div id="bttf">
+    		<h1>Keep Calm and Generate 1.21 Gigawatts</h1>
+            <figure>
+                <img src="examples/images/doc_brown.png" id="dr_brown" draggable="true">
+            </figure>
+    		Bacon ipsum dolor sit amet biltong shankle flank ball tip drumstick jerky beef ribs tri-tip chicken boudin sausage. Turducken biltong meatball, doner pork beef tongue ground round drumstick kevin pork loin landjaeger pork belly andouille turkey. Jowl ground round ribeye capicola kielbasa, shoulder leberkas. Pork belly leberkas meatball, ribeye ball tip rump ham pig spare ribs ground round biltong capicola pork chop bresaola strip steak. Doner biltong tongue rump prosciutto venison sirloin ground round flank meatloaf pork loin shankle.
+    	</div>
+    	<div id="survey">
+    		<h1>A Form Example</h1>
+    		<fieldset>
+    			<ul>
+    				<li><label for="first_name">First Name</label><input type="text" id="first_name">
+    				<li><label for="last_name">Last Name</label><input type="text" id="last_name">
+    				<li><label for="email">E-mail</label><input type="text" id="email">
+    				<li><button>Do Nothing! =)</button>
+    			</ul>
+    		</fieldset>
+    	</div>
+        <div id="red_square"></div>
+    	<hr>
+    	<div id="godfather1">
+    		<h1>Leave the Gun. Take the Cannoli.</h1>
+    		<img src="examples/images/clemenza.jpg">
+    		<div class="columns-text">
+	    		<p>
+	    			Swine hamburger flank drumstick, beef capicola tongue landjaeger. Andouille shankle turkey corned beef, ribeye meatball tri-tip t-bone pancetta. Pork tenderloin t-bone turducken tongue biltong shoulder corned beef. Pork loin bacon fatback kielbasa, tail venison tongue flank swine pancetta beef ribs pork chop boudin ground round doner.
+	    		</p>
+	    		<p>
+					Rump shankle short loin corned beef t-bone ham hock. Kevin ground round swine chuck jowl salami ham shankle fatback landjaeger beef shank. Sirloin prosciutto beef sausage flank. Shankle spare ribs tail pork loin shoulder hamburger bresaola filet mignon biltong. 
+				</p>
+			</div>
+    	</div>
+	</div>
+	<a href="https://github.com/fortesinformatica/sideshow">
+		<img class="forkme" src="examples/images/forkme.png" alt="Fork me on GitHub">
+	</a>
+	<footer>
+		Sideshow is available under <a href="https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE">Apache License 2.0</a>. Copyright 2013-2014 <a href="http://www.twitter.com/alcidesqueiroz" target="_blank"> Alcides Queiroz</a>.
+	</footer>
+    <!--Scripts required for Sideshow to work properly-->
+	<script src="distr/dependencies/jquery-2.0.3.min.js"></script>
+	<script src="distr/dependencies/jazz-0.1.1.min.js"></script>
+	<script src="distr/dependencies/pagedown-1.1.0.min.js"></script>
+	<script src="distr/sideshow-0.3.3.debug.js"></script>
+
+    <!--Scripts for this page-->
+	<script src="examples/scripts/sideshow.config.js"></script>
+	<script src="examples/scripts/tutorials/introducing_sideshow.js"></script>
+	<script>
+		$("#run_example").click(function(){
+			Sideshow.start({ listAll: true });
+		});
+	</script>
+</body>
+</html>

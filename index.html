@@ -1,54 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+<head>
+    <meta charset="utf-8">
+    <title>Sideshow Interactive Help Example</title>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/main.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-34593010-2', 'ga-beacon.appspot.com');
+      ga('send', 'pageview');
+
+    </script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Sideshow by fortesinformatica</title>
-  </head>
-
-  <body>
-    <div id="container">
-      <div class="inner">
-
-        <header>
-          <h1>Sideshow</h1>
-          <h2>Sideshow is a powerful javascript library which aims to reduce your user&#39;s learning curve by providing a way to create step-by-step interactive helps. Explain the features of your application, control your end-user&#39;s interaction with your UI, emphasize what you&#39;re explaining in each step by masking it. Just think! The sky is the limit!</h2>
-        </header>
-
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/fortesinformatica/Sideshow/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/fortesinformatica/Sideshow/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/fortesinformatica/Sideshow" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h1>
-<a name="sideshow" class="anchor" href="#sideshow"><span class="octicon octicon-link"></span></a>Sideshow</h1>
-
-<h1>
-<a name="" class="anchor" href="#"><span class="octicon octicon-link"></span></a><img src="https://raw2.github.com/fortesinformatica/sideshow/master/examples/images/sideshow-logo.png" alt="Sideshow Logo">
-</h1>
-
-<p><img src="https://ga-beacon.appspot.com/UA-34593010-2/Sideshow/README" alt="Google Analytics Beacon"></p>
-
-<p>Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps. </p>
-
-<ul>
-<li>  Explain the features of your application</li>
-<li>  Control your end-user's interaction with your UI</li>
-<li>  Use Markdown to create formatted step descriptions</li>
-<li>  Emphasize what you're explaining in each step (a button, grid, dropdown, form, the whole screen, and so forth) by surrounding it with a fully adaptable mask. </li>
-</ul><p><strong>Just think! The sky is the limit!</strong></p>
-
+</head>
+<body>
+    <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header>
+        <div id="header_content" class="main-content">
+            <img src="https://raw2.github.com/fortesinformatica/Sideshow/master/examples/images/sideshow-logo.png">
+            <button id="example">See Sideshow in Action!</button>
+            <div id="social_buttons">
+                <div class="addthis_toolbox addthis_default_style">
+                <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                <a class="addthis_button_tweet"></a>
+                <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+                <a class="addthis_button_linkedin_counter"></a>
+                </div>
+                <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+                <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52dedf2d102c372a"></script>
+            </div>
+            <div id="introducing_sideshow">
+                Sideshow is a powerful javascript library which aims to <em>reduce your user's learning curve</em> by providing a way to create <em>step-by-step interactive helps</em>. Explain the features of your application, control your end-user's interaction with your UI, emphasize what you're explaining in each step by masking it. 
+                <br><!-- <<< Here, you can see a well applied br!! \o/ -->
+                <em>Just think! The sky is the limit!</em>
+            </div>
+        </div>
+    </header>
+    <div id="wrapper" class="main-content">
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
@@ -375,25 +371,18 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</p>
-        </section>
-
-        <footer>
-          Sideshow is maintained by <a href="https://github.com/fortesinformatica">fortesinformatica</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-                  <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-34593010-2");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-      </div>
     </div>
-  </body>
+    <a href="https://github.com/fortesinformatica/sideshow">
+        <img class="forkme" src="https://raw2.github.com/fortesinformatica/Sideshow/master/examples/images/forkme.png" alt="Fork me on GitHub">
+    </a>
+    <footer>
+        Sideshow is available under <a href="https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE">Apache License 2.0</a>. Copyright 2013-2014 <a href="http://www.twitter.com/alcidesqueiroz" target="_blank"> Alcides Queiroz</a>.
+    </footer>
+    <script src="distr/dependencies/jquery-2.0.3.min.js"></script>
+    <script>
+        $("#example").click(function(){
+            location.href = "example.html";
+        });
+    </script>
+</body>
 </html>

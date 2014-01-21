@@ -1,0 +1,160 @@
+//Compass Dependencies
+@import "compass/css3/border-radius";
+@import "compass/css3/text-shadow";
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+
+@import "variables";
+@import "github";
+@import "font-face";
+@import "font-awesome-4.0.3";
+
+
+//Layout rules
+*{
+	font-family: OpenSans Light;
+}
+
+header{
+	width: 100%;
+	height: 350px;
+	padding-top: 20px;
+	background-color: $sideshow-example-base-color;
+}
+
+body{
+	padding-bottom: 40px;
+	margin: 0;
+}
+
+#header_content{
+	height: 100%;
+}
+
+#introducing_sideshow{
+	position: absolute;
+	z-index: 10;
+	right: 0;
+	top: 80px;
+	width: 330px;
+	text-align: right;
+	color: $sideshow-example-secondary-color-dark;
+}
+
+#introducing_sideshow em{
+	color: #FFF;
+	font-style: normal;
+	background-color: $sideshow-example-secondary-color;
+	line-height: 25px;
+}
+
+header img{
+	position: absolute;
+	top: 20px;
+}
+
+.main-content{
+	position: relative;
+	width: 920px;
+	margin: auto;
+}
+
+#run_example, #example{
+	@include border-radius(4px);
+	@include transition(background-color 300ms ease, border-bottom-width 100ms ease);
+	@include fa-play;
+
+	border: solid 1px darken($sideshow-example-base-color, 80){
+		bottom-width: 5px;
+	};
+	font-size: 26px;
+	padding: 10px{
+		right: 15px;
+		left: 20px;
+	};
+	background-color: $sideshow-example-secondary-color-dark;
+	color: #FFF;
+	position: absolute;
+	left: 0;
+	bottom: 50px;
+
+	&:before{
+		margin-right: 10px;
+		font-size: 26px;
+	}
+
+	&:after{
+		content: '';
+		display: inline-block;
+		width: 5px;
+	}
+
+	&:hover{
+		background-color: $sideshow-example-secondary-color;
+		&:after{
+			content: "!";
+		}
+	}
+
+	&:active{
+		background-color: #777;
+		border-bottom-width: 1px;
+		outline-width: 0;
+	}
+}
+
+.forkme{
+	position: absolute;
+	top: 0; 
+	right: 0; 
+	border: 0;
+	z-index: 9;
+}
+
+.browsehappy{
+	@include fa-exclamation-triangle;
+	background-color: #700;
+	color: #FFF;
+	display: block;
+	margin: 0;
+	line-height: 50px;
+	padding-left: 30px;
+	height: 50px;
+	a{
+		color: #FFF;
+	}
+	&:before{
+		margin-right: 5px;
+	}
+}
+
+#wrapper{
+	padding-top: 20px;
+	#{headings()}{
+		font-family: OpenSans Semibold;
+		font-weight: normal;
+	}
+
+	h1{
+		font-size: 22px;
+		text-transform: uppercase;
+	}
+}
+
+footer{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding-right: 10px;
+	height: 30px;
+	background-color: rgba(#FFF, 0.8); 
+	font-size: 12px;
+	text-align: right;
+	a{
+		font-family: OpenSans Semibold;
+		color: #333;
+		text-decoration: none;
+	}
+}
+
