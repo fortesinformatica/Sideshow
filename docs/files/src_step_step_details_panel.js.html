@@ -172,14 +172,25 @@
         var parts = Mask.CompositeMask.singleInstance.parts;
 
         //Considering the four parts surrounding the current subject, gets the biggest one
-        var biggestSide = [
+        var sortedSides = [
             [parts.top, &quot;height&quot;],
             [parts.right, &quot;width&quot;],
             [parts.bottom, &quot;height&quot;],
             [parts.left, &quot;width&quot;]
         ].sort(function(a, b) {
             return a[0].dimension[a[1]] - b[0].dimension[b[1]];
-        }).slice(-1)[0];
+        });
+
+        var biggestSide = sortedSides.slice(-1)[0];
+
+        for(var i = 2; i &gt; 0; i--){
+            var side = sortedSides[i];
+            var dimension = side[0].dimension;
+            if(dimension.width &gt; 250 &amp;&amp; dimension.height &gt; 250){
+                if((dimension.width + dimension.height) &gt; ((biggestSide[0].dimension.width + biggestSide[0].dimension.height) * 2))
+                    biggestSide = side;
+            }
+        }
 
         if (biggestSide[1] == &quot;width&quot;) {
             this.$el
@@ -201,6 +212,8 @@
             y: parsePxValue(this.$el.css(&quot;top&quot;))
         };
     });
+
+
     </pre>
 </div>
 

@@ -186,7 +186,7 @@
     **/
     Mask.CompositeMask.method(&quot;scrollIfNecessary&quot;, function(position, dimension) {
         function doSmoothScroll(scrollTop, callback){
-            $body.animate({
+            $(&quot;body,html&quot;).animate({
                 scrollTop: scrollTop
             }, 300, callback);
         }
@@ -318,6 +318,7 @@
         this.position = position;
         this.dimension = dimension;
     }).extending(VisualItem);
+    
     </pre>
 </div>
 
