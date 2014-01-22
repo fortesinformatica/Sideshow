@@ -4,6 +4,8 @@
 ========
 ![Google Analytics Beacon](https://ga-beacon.appspot.com/UA-34593010-2/Sideshow/README)
 
+[Documentation and Live example](http://fortesinformatica.github.io/Sideshow)
+
 Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps. 
 
 *	Explain the features of your application
