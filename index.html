@@ -388,7 +388,10 @@ limitations under the License.</p>
     <script src="distr/dependencies/jquery-2.0.3.min.js"></script>
     <script>
         $("#get_sideshow").click(function(){
-            location.href = "sideshow-0.3.3.rar";
+            if(navigator.platform.indexOf("Win")!=-1)
+                location.href = "sideshow-0.3.3.zip";
+            else
+                location.href = "sideshow-0.3.3.tar.gz";
         });
 
         $("#live_example").click(function(){
