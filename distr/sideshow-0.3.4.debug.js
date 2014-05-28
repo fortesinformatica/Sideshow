@@ -1,8 +1,8 @@
 /**
  @license
  Sideshow - An incredible Javascript interactive help Library
- Version: 0.3.3
- Date: 2014-01-10 
+ Version: 0.3.4
+ Date: 2014-05-28
  Author: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]
  Available under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)
  **/
@@ -42,7 +42,7 @@
             @type String
             **/
             get VERSION() {
-                return "0.3.3";
+                return "0.3.4";
             }
         },
 
@@ -233,6 +233,15 @@
 	@type String
 	**/
     SS.config.language = "en";
+
+    /**
+	Defines if the intro screen (the tutorial list) will be	skipped when there's just one 
+	tutorial available. This way, when Sideshow is invoked, the first step is directly shown.
+
+	@@field autoSkipIntro
+	@type boolean
+	**/
+    SS.config.autoSkipIntro = false;
     /**
     Stores the variables used in step evaluators 
 
@@ -836,6 +845,20 @@
                 else currentWizard.next();
             }
         }
+    });
+
+
+    Wizard.method("prepareAndPlay", function() {
+        currentWizard = this;
+
+        if (!this.isEligible()) {
+            if (this.preparation)
+                this.preparation(function() {
+                    currentWizard.play();
+                });
+            else
+                throw new SSException("203", "This wizard is not eligible neither has a preparation function.");
+        } else this.play();
     });
     /**
     The panel that holds step description, is positionated over the biggest remaining space among the four parts of a composite mask
@@ -2100,15 +2123,7 @@
             function setClick($wiz, wizard) {
                 $wiz.click(function() {
                     WizardMenu.hide(function() {
-                        currentWizard = wizard;
-                        if (!currentWizard.isEligible()) {
-                            if (currentWizard.preparation)
-                                currentWizard.preparation(function() {
-                                    wizard.play();
-                                });
-                            else
-                                throw new SSException("203", "This wizard is not eligible neither has a preparation function.");
-                        } else wizard.play();
+                        wizard.prepareAndPlay();
                     });
                 });
             }
@@ -2144,15 +2159,20 @@
     @static
     **/
     WizardMenu.show = function(wizards, title) {
-        SS.setEmptySubject();
-        Mask.CompositeMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
-        Mask.CompositeMask.singleInstance.fadeIn();
-        WizardMenu.render(wizards);
+        if (wizards.length == 1 && SS.config.autoSkipIntro)
+            wizards[0].prepareAndPlay();
+        else {
+            SS.setEmptySubject();
+            Mask.CompositeMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
+            Mask.CompositeMask.singleInstance.fadeIn();
 
-        if (title)
-            this.setTitle(title);
-        else
-            this.setTitle(getString(strings.availableWizards));
+            WizardMenu.render(wizards);
+
+            if (title)
+                this.setTitle(title);
+            else
+                this.setTitle(getString(strings.availableWizards));
+        }
     };
 
     /**
@@ -2438,8 +2458,8 @@
     SS.start = function(config) {
         config = config || {};
         if (!flags.running) {
-            var onlyNew = "onlyNew" in config && !! config.onlyNew;
-            var listAll = "listAll" in config && !! config.listAll;
+            var onlyNew = "onlyNew" in config && !!config.onlyNew;
+            var listAll = "listAll" in config && !!config.listAll;
 
             if (listAll)
                 SS.showWizardsList(wizards.filter(function(w) {
