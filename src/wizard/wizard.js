@@ -378,3 +378,17 @@
             }
         }
     });
+
+
+    Wizard.method("prepareAndPlay", function(){
+        currentWizard = this;
+
+        if (!this.isEligible()) {
+            if (this.preparation)
+                this.preparation(function() {
+                    currentWizard.play();
+                });
+            else
+                throw new SSException("203", "This wizard is not eligible neither has a preparation function.");
+        } else this.play();
+    });

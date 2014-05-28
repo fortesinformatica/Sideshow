@@ -2,7 +2,7 @@
     "project": {
         "name": "Sideshow",
         "description": "An incredible Javascript interactive help Library",
-        "version": "0.3.3",
+        "version": "0.3.4",
         "url": "http://github.com/fortesinformatica/sideshow",
         "logo": "http://github.com/fortesinformatica/sideshow/examples/images/sideshow-logo.svg"
     },
@@ -581,6 +581,13 @@
             "line": 27,
             "description": "Chosen language for sideshow interface",
             "type": "String",
+            "class": "SSException"
+        },
+        {
+            "file": "src\\general\\config.js",
+            "line": 35,
+            "description": "Defines if the intro screen (the tutorial list) will be\tskipped when there's just one \ntutorial available. This way, when Sideshow is invoked, the first step is directly shown.",
+            "type": "boolean",
             "class": "SSException"
         },
         {
@@ -2113,7 +2120,7 @@
         },
         {
             "file": "src\\wizard\\wizard_menu.js",
-            "line": 65,
+            "line": 57,
             "description": "Shows the wizard menu",
             "itemtype": "method",
             "name": "show",
@@ -2130,7 +2137,7 @@
         },
         {
             "file": "src\\wizard\\wizard_menu.js",
-            "line": 84,
+            "line": 81,
             "description": "Hides the wizard menu",
             "itemtype": "method",
             "name": "hide",
@@ -2148,7 +2155,7 @@
         {
             "file": "src\\copyright_info.js",
             "line": 1,
-            "license": "Sideshow - An incredible Javascript interactive help Library\nVersion: 0.3.3\nDate: 2014-01-10 \nAuthor: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]\nAvailable under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)",
+            "license": "Sideshow - An incredible Javascript interactive help Library\nVersion: 0.3.4\nDate: 2014-05-28\nAuthor: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]\nAvailable under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)",
             "class": "",
             "namespace": "Mask"
         }
@@ -2173,6 +2180,10 @@
         {
             "message": "Missing item type\nChosen language for sideshow interface",
             "line": " src\\general\\config.js:27"
+        },
+        {
+            "message": "Missing item type\nDefines if the intro screen (the tutorial list) will be\tskipped when there's just one \ntutorial available. This way, when Sideshow is invoked, the first step is directly shown.",
+            "line": " src\\general\\config.js:35"
         },
         {
             "message": "Missing item type\nStrings Dictionary",

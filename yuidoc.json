@@ -1,7 +1,7 @@
 {
     "name": "Sideshow",
     "description": "An incredible Javascript interactive help Library",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "url": "http://github.com/fortesinformatica/sideshow",
     "logo": "http://github.com/fortesinformatica/sideshow/examples/images/sideshow-logo.svg",
     "options": {

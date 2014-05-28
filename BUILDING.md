@@ -43,6 +43,6 @@ OR
 ##How to compile stylesheets
 ```
 #in stylesheets folder
-compass watch .
+compass watch
 ```
 

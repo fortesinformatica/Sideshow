@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.3</em>
+            <em>API Docs for: 0.3.4</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -505,6 +505,20 @@
                 else currentWizard.next();
             }
         }
+    });
+
+
+    Wizard.method(&quot;prepareAndPlay&quot;, function(){
+        currentWizard = this;
+
+        if (!this.isEligible()) {
+            if (this.preparation)
+                this.preparation(function() {
+                    currentWizard.play();
+                });
+            else
+                throw new SSException(&quot;203&quot;, &quot;This wizard is not eligible neither has a preparation function.&quot;);
+        } else this.play();
     });
     </pre>
 </div>

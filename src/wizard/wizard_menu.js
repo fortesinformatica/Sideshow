@@ -26,15 +26,7 @@
             function setClick($wiz, wizard) {
                 $wiz.click(function() {
                     WizardMenu.hide(function() {
-                        currentWizard = wizard;
-                        if (!currentWizard.isEligible()) {
-                            if (currentWizard.preparation)
-                                currentWizard.preparation(function() {
-                                    wizard.play();
-                                });
-                            else
-                                throw new SSException("203", "This wizard is not eligible neither has a preparation function.");
-                        } else wizard.play();
+                        wizard.prepareAndPlay();
                     });
                 });
             }
@@ -70,15 +62,20 @@
     @static
     **/
     WizardMenu.show = function(wizards, title) {
-        SS.setEmptySubject();
-        Mask.CompositeMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
-        Mask.CompositeMask.singleInstance.fadeIn();
-        WizardMenu.render(wizards);
+        if(wizards.length == 1 && SS.config.autoSkipIntro)
+            wizards[0].prepareAndPlay();
+        else{
+            SS.setEmptySubject();
+            Mask.CompositeMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
+            Mask.CompositeMask.singleInstance.fadeIn();
 
-        if (title)
-            this.setTitle(title);
-        else
-            this.setTitle(getString(strings.availableWizards));
+            WizardMenu.render(wizards);
+
+            if (title)
+                this.setTitle(title);
+            else
+                this.setTitle(getString(strings.availableWizards));
+        }
     };
 
     /**

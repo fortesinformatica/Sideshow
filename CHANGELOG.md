@@ -1,3 +1,10 @@
+#Version 0.3.4 the-untouchables (2014-05-28)
+
+##General
+-Added a configuration option for skipping the intro screen (the tutorials list) if there's just one tutorial available for some context.
+
+------------------------------------------------------------
+
 #Version 0.3.3 raging-bull (2014-01-10)
 
 ##General

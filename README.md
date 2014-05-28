@@ -294,7 +294,14 @@ Sideshow.registerWizard({
 });
 ```
 
+###Skipping the Intro screen (the tutorial list) automatically if there's just one tutorial available for a given context
+In the sideshow.config.js file, set the `autoSkipIntro` option to true:
 
+```Javascript
+Sideshow.config.autoSkipIntro = true;
+//...other configuration options
+Sideshow.init();
+```
 
 
 ##Invoking Sideshow##
