@@ -177,6 +177,10 @@
 						$duration: $sideshow-long-transition-duration, 
 						$timing-function: ease, 
 						$iteration-count: infinite);
+
+	&:before{
+		line-height: 0.5;
+	}
 }
 
 //The initial sideshow menu where user chooses a tutorial

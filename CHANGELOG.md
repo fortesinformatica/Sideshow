@@ -1,3 +1,14 @@
+#Version 0.3.5 volver (2014-05-29)
+
+##General
+-Added a translation to spanish (thanks for this translation Luis Alfaro de la Fuente!)
+
+##Fixes
+-Fixing a bug with the option autoSkipIntro (when it's true), where in the end of a wizard an exception occurred and Sideshow couldn't close properly.
+-Lifted up the target arrows, to avoid them to cover the target content.
+
+------------------------------------------------------------
+
 #Version 0.3.4 the-untouchables (2014-05-28)
 
 ##General

@@ -86,10 +86,12 @@
     @static
     **/
     WizardMenu.hide = function(callback) {
-        var menu = this;
-        menu.$el.addClass("sideshow-menu-closed");
+        var menu = this, 
+            $el = menu.$el;
+
+        $el && $el.addClass("sideshow-menu-closed");
         setTimeout(function() {
-            menu.$el.hide();
+            $el && $el.hide();
             if (callback) callback();
         }, longAnimationDuration);
     };

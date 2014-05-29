@@ -1,8 +1,8 @@
 /**
  @license
  Sideshow - An incredible Javascript interactive help Library
- Version: 0.3.4
- Date: 2014-05-28
+ Version: 0.3.5
+ Date: 2014-05-29
  Author: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]
  Available under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)
  **/
@@ -42,7 +42,7 @@
             @type String
             **/
             get VERSION() {
-                return "0.3.4";
+                return "0.3.5";
             }
         },
 
@@ -173,31 +173,38 @@
     var strings = {
         availableWizards: {
             "en": "Available Tutorials",
-            "pt-br": "Tutoriais Disponíveis"
+            "pt-br": "Tutoriais Disponíveis",
+            "es": "Tutoriales Disponibles"
         },
         relatedWizards: {
             "en": "Related Wizards",
-            "pt-br": "Tutoriais Relacionados"
+            "pt-br": "Tutoriais Relacionados",
+            "es": "Tutoriales Relacionados"
         },
         noAvailableWizards: {
             "en": "There's no tutorials available.",
-            "pt-br": "Não há tutoriais disponíveis para esta tela."
+            "pt-br": "Não há tutoriais disponíveis para esta tela.",
+            "es": "No hay tutoriales disponibles."
         },
         close: {
             "en": "Close",
-            "pt-br": "Fechar"
+            "pt-br": "Fechar",
+            "es": "Cerrar"
         },
         estimatedTime: {
             "en": "Estimated Time",
-            "pt-br": "Tempo Estimado"
+            "pt-br": "Tempo Estimado",
+            "es": "Tiempo Estimado"
         },
         next: {
             "en": "Next",
-            "pt-br": "Continuar"
+            "pt-br": "Continuar",
+            "es": "Continuar"
         },
         finishWizard: {
             "en": "Finish Wizard",
-            "pt-br": "Concluir Tutorial"
+            "pt-br": "Concluir Tutorial",
+            "es": "Concluir Tutorial"
         }
     };
     /**
@@ -2183,10 +2190,12 @@
     @static
     **/
     WizardMenu.hide = function(callback) {
-        var menu = this;
-        menu.$el.addClass("sideshow-menu-closed");
+        var menu = this,
+            $el = menu.$el;
+
+        $el && $el.addClass("sideshow-menu-closed");
         setTimeout(function() {
-            menu.$el.hide();
+            $el && $el.hide();
             if (callback) callback();
         }, longAnimationDuration);
     };

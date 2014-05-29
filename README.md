@@ -33,7 +33,7 @@ Sideshow.config.language = "en";
 Sideshow.init();
 ```
 
-**Note**: For now, Sideshow only supports `en` (american english) and `pt-br` (brazilian portuguese)
+**Note**: For now, Sideshow only supports `en` (american english), `pt-br` (brazilian portuguese) and `es` (spanish, translated by Luis Alfaro de la Fuente, thanks!)
 
 4) 	Create your tutorials and import each one in your HTML after the Sideshow script 
 
