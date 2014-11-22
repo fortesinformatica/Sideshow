@@ -1,0 +1,362 @@
+//Elements which can fade
+//@abstract
+$sideshow-fadable-element{
+	transition: opacity sideshow-long-transition-duration ease;
+}
+
+//A Sideshow mask
+//@abstract
+$sideshow-mask{
+	@extends $sideshow-fadable-element;
+	position: fixed;
+	opacity: sideshow-mask-opacity;
+	background-color: sideshow-mask-background-color;
+}
+
+$sideshow-button{
+	border-radius: 3px;
+	transition: background-color sideshow-fast-transition-duration ease;
+	background-color: sideshow-button-background-color;
+	border: solid 1px darken(sideshow-button-background-color, 10);
+	padding: 5px;
+	text-transform: uppercase;
+	color: sideshow-button-foreground-color;
+	&:hover{
+		background-color: darken(sideshow-button-background-color, 10);
+	}
+	&:disabled{
+		background-color: #BBB !important; //No fade effects here
+		border-color: #999;
+	}
+}
+
+//Masks a subject
+//@extends $sideshow-mask
+.sideshow-subject-mask{
+	@extends $sideshow-mask;
+	absolute-full-size();
+	position: fixed;
+	z-index: 14999;
+	width: 0;
+	height: 0;
+}
+
+//A part of the composite mask (the mask used by Sideshow to surround a subject)
+//@extend $sideshow-mask
+.sideshow-mask-part{
+	@extends $sideshow-mask;
+	z-index: 15000;
+}
+
+//A part of the composite mask to be positionated at the corners of a subject (if the subject has rounded corners)
+//It uses a dynamically generated SVG to cover the white hole which remains when masking rounded corner subjects
+//@extends $sideshow-mask
+.sideshow-mask-corner-part{
+	@extends $sideshow-mask;
+	background-color: transparent;
+	z-index: 15001;
+	overflow: hidden;
+	svg{
+		position: absolute;
+		left: 0;
+		top: 0;
+		path {
+			fill: sideshow-mask-background-color;
+		}
+	}
+
+	&.leftTop{
+		transform: rotate(0deg);
+	}
+
+	&.rightTop{
+		transform: rotate(90deg);
+	}
+
+	&.leftBottom{
+		transform: rotate(270deg);
+	}
+
+	&.rightBottom{
+		transform: rotate(180deg);
+	}
+}
+
+//CSS way to make something invisible but holding space 
+.sideshow-invisible{
+	opacity: 0 !important;
+}
+
+//CSS way to avoid rendering something
+.sideshow-hidden{
+	display: none !important;
+}
+
+//Occupying the biggest of the four parts of the composite mask
+.sideshow-details-panel{
+	position: fixed;
+	z-index: 15001;
+}
+
+//An area positionaed over the .sideshow-details-panel where the step description text is shown
+//@extends $sideshow-fadable-element
+.sideshow-step-description{
+	@extends $sideshow-fadable-element;
+	position: absolute;
+	display: inline-block;
+	background-color: rgba(sideshow-step-description-background-color, 0.7);
+	padding: 21px;
+	font-size: 14px;
+
+	//The step title
+	h2{
+		display: inline-block;
+		font-size: sideshow-big-font-size;
+		text-transform: uppercase;
+		color: sideshow-step-description-title-color;
+		margin-bottom: 10px;
+	}
+
+	//The step position indicator (e.g. 3/11 -> The step 3 of 11)
+	.sideshow-step-position{
+		display: inline-block;
+		font-family: sideshow-default-semibold-font-family;
+		font-size: sideshow-big-font-size;
+		color: sideshow-step-position-color;
+		margin-right: 10px;
+	}
+
+	//The description itself
+	.sideshow-step-text{
+		clear: both;
+		display: block;
+		color: sideshow-step-text-color;
+		line-height: sideshow-default-font-size + 10px;
+
+		code{
+			font-family: monospace, courier;
+		}
+	}
+
+	//The "next/finish" button
+	.sideshow-next-step-button{
+		@extends $sideshow-button;
+		icon-play();
+		float: right;
+		margin-top: 10px;
+	}
+
+	//Lists (when using Markdown Syntax you can use lists in the step description)
+	ul, ol{
+		padding-left: 40px;
+	}
+
+	//An unordered list (when using Markdown Syntax you can use lists in the step description)
+	ul{
+		list-style-type: disc;
+	}
+
+	//An ordered list (when using Markdown Syntax you can use lists in the step description)
+	ol{
+		list-style-type: decimal;
+	}
+}
+
+//An arrow used for pointing to an item inside the highlighted subject which deserves attention at the moment
+//@extends $sideshow-fadable-element;
+.sideshow-subject-arrow{
+	@extends $sideshow-fadable-element;
+	icon-caret-down();
+	icon-font-size(40px);
+	only-icon-button();
+	color: sideshow-subject-arrow-color;
+	position: fixed;
+	z-index: 15003;
+	opacity: 0.8;
+	animation(  name: sideshow-subject-arrow-animation, 
+				duration: sideshow-long-transition-duration, 
+				timing-function: ease, 
+				iteration-count: infinite);
+
+	&:before{
+		line-height: 0.5;
+	}
+}
+
+//The initial sideshow menu where user chooses a tutorial
+.sideshow-wizard-menu{
+	absolute-full-size();
+	position: fixed;
+	margin: auto;
+	width: 750px;
+	height: 400px;
+	z-index: 15002;
+
+	//The initial menu title
+	.sideshow-wizard-menu-title{
+		animation(  name: sideshow-wizard-menu-title-slideright, 
+					duration: 2s, 
+					timing-function: ease, 
+					iteration-count: 1, 
+					fill-mode: forwards);
+
+		text-transform: uppercase;
+		color: sideshow-wizard-menu-title-color;
+		font-size: 32px;
+		font-family: sideshow-default-light-font-family;
+		position: relative;
+		font-weight: normal;
+	}
+
+	//The initial menu tutorial list
+	ul{
+		padding: 0;
+		margin: 0;
+		li{
+			clearfix();
+			list-style-type: none;
+			cursor: pointer;
+			opacity: 0;
+			position: relative;
+			left: -90px;
+			animation(  name: sideshow-wizard-menu-item-slidedown, 
+						duration: 2s, 
+						timing-function: ease, 
+						iteration-count: 1, 
+						fill-mode: forwards);
+
+	    	height: 50px;
+	    	overflow: hidden;
+			margin-top: 20px;
+
+			for i in (1..15){
+		    	&:nth-child({i}){
+		    		animation-delay: 300ms + (i * 300ms);
+		    		-webkit-animation-delay: 300ms + (i * 300ms);
+		    	}
+		    } 
+				
+			h2{
+				transition: color sideshow-default-transition-duration ease;
+				font-family: sideshow-default-light-font-family;
+				font-size: 12px;
+				font-weight: normal;
+				text-transform: uppercase;
+				color: sideshow-wizard-menu-item-foreground-color;
+				margin: 0;
+			}
+
+			.sideshow-wizard-menu-item-description{
+				color: sideshow-wizard-menu-item-foreground-color;
+				font-size: 12px;
+			}
+
+			.sideshow-wizard-menu-item-estimated-time{
+				icon-clock();
+				transition: border-right sideshow-default-transition-duration ease;
+				border-right: solid 0 sideshow-wizard-menu-item-foreground-color;
+				opacity: 0.5;
+				font-size: 10px;
+				color: sideshow-wizard-menu-item-foreground-color;
+				float: left;
+				height: 50px;
+				width: 80px;
+				margin-right: 10px;
+				position: relative;
+				&:before{
+					margin-right: 5px;
+				}
+			}
+
+			&:hover{
+				h2{
+					color: sideshow-wizard-menu-item-hover-foreground-color;
+				}
+				.sideshow-wizard-menu-item-estimated-time{
+					border-right: solid 20px sideshow-wizard-menu-item-foreground-color;
+				}
+			}
+		}
+	}
+
+	//This class rule defines the closing animation for Sideshow menu
+	&.sideshow-menu-closed{
+		h1{
+			animation(  name: sideshow-wizard-menu-title-fadeout, 
+						duration: sideshow-long-transition-duration, 
+						timing-function: ease, 
+						iteration-count: 1, 
+						fill-mode: forwards);
+		}
+		
+		ul{
+			li{
+				opacity: 1;
+				animation(  name: sideshow-wizard-menu-item-slideleft, 
+							duration: sideshow-long-transition-duration, 
+							timing-function: ease, 
+							iteration-count: 1, 
+							fill-mode: forwards);
+		    
+			    for i in (1..15){
+			    	&:nth-child({i}){
+			    		animation-delay: 150ms + (i * 100ms);
+			    		-webkit-animation-delay: 150ms + (i * 100ms);
+			    	}
+			    } 
+			}
+		}
+	}
+}
+
+//The Sideshow close button
+.sideshow-close-button{
+	icon-close();
+	icon-font-size(sideshow-medium-font-size);
+	text-shadow: 0 0 5px #030, 0 0 3px #000, 0 2px 3px #000;
+	transition: text-shadow sideshow-default-transition-duration ease;
+	border-width: 0;
+	background-color: transparent !important;
+	z-index: 15005;
+	position: fixed;
+	color: sideshow-close-button-foreground-color;
+	font-size: sideshow-medium-font-size;
+	bottom: 25px;
+	right: 25px;
+	cursor: pointer;
+	text-transform: uppercase;
+	
+	&:hover{
+		text-shadow: 0 0 10px #030, 0 0 6px #000, 0 2px 5px #000, 0 0 7px #000;
+		background-color: transparent !important;
+		left: auto;
+		top: auto;
+	}
+	
+	&:active{
+		outline-width: 0 !important;
+	}
+	
+	&:before{
+		margin-right: 5px;
+	}
+}
+
+//The Sideshow initial menu style when no tutorials are available
+.sideshow-no-wizards-available{
+	animation(  name: sideshow-wizard-menu-item-slidedown, 
+				duration: 2s, 
+				timing-function: ease, 
+				iteration-count: 1, 
+				fill-mode: forwards);
+	color: sideshow-wizard-menu-item-foreground-color;
+	opacity: 0;
+	position: relative;
+	height: 50px;
+	margin-top: 20px;
+}
+
+body{
+	margin: 0;
+	height: 100%;
+}

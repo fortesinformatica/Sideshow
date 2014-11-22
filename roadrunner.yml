@@ -1,8 +1,0 @@
-config:
-  polling_interval: 0.1
-  change_check_strategy: modification_time #You also can use 'checksum'
-  live_reload_port: 9876
-  web_server_port: 9875
-  files: [
-           "/distr/stylesheets/sideshow.css"
-         ]

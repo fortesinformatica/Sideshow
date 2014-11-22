@@ -1,9 +1,9 @@
 {
     "name": "Sideshow",
-    "description": "An incredible Javascript interactive help Library",
-    "version": "0.3.5",
-    "url": "http://github.com/fortesinformatica/sideshow",
-    "logo": "http://github.com/fortesinformatica/sideshow/examples/images/sideshow-logo.svg",
+    "description": "Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps.",
+    "version": "0.4.0",
+    "url": "http://github.com/fortesinformatica/Sideshow",
+    "logo": "https://raw.githubusercontent.com/fortesinformatica/Sideshow/master/examples/images/sideshow-logo.svg",
     "options": {
         "linkNatives": "true",
         "attributesEmit": "true",

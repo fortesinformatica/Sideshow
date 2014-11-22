@@ -1,4 +1,4 @@
-@include keyframes(sideshow-wizard-menu-title-slideright) {
++keyframes(sideshow-wizard-menu-title-slideright){
   0% {
     opacity: 0;
     left: -30px;
@@ -15,7 +15,7 @@
   } 
 }
 
-@include keyframes(sideshow-wizard-menu-title-fadeout) {
++keyframes(sideshow-wizard-menu-title-fadeout){
   0% {
     opacity: 1;
     text-shadow: none;
@@ -28,11 +28,15 @@
 
   100% {
   	opacity: 0;
-  	text-shadow: 0 0 7px $sideshow-wizard-menu-item-foreground-color, 0 0 3px $sideshow-wizard-menu-item-foreground-color;
+  	text-shadow: 0 0 7px sideshow-wizard-menu-item-foreground-color, 0 0 3px sideshow-wizard-menu-item-foreground-color;
   } 
 }
 
-@include keyframes(sideshow-wizard-menu-item-slidedown) {
+aaaa{
+    color: blue;
+}
+
++keyframes(sideshow-wizard-menu-item-slidedown){
   0% {
     opacity: 0;
     top: -100px;
@@ -49,7 +53,7 @@
   } 
 }
 
-@include keyframes(sideshow-wizard-menu-item-slideleft) {
++keyframes(sideshow-wizard-menu-item-slideleft){
   0% {
     opacity: 1;
     left: -90px;
@@ -67,13 +71,13 @@
 }
 
 
-@include keyframes(sideshow-subject-arrow-animation) {
++keyframes(sideshow-subject-arrow-animation){
   0% {
   	margin-top: 0;
   }
 
   50% {
-  	@include transform(scale(1, 0.7));
+  	transform: scale(1, 0.7);
   	margin-top: 10px;
   }
 

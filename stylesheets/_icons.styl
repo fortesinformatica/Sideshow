@@ -1,0 +1,27 @@
+sideshow-icon(unicode, pseudo-element)
+    &:{pseudo-element}
+        font-family: "sideshow-icons";
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+       
+        display: inline-block;
+        text-decoration: inherit;
+        width: 1em;
+        text-align: center;
+        if(pseudo-element == before){
+            margin-right: .4em;
+        } else {
+            margin-left: .4em;
+        }
+       
+        font-variant: normal;
+        text-transform: none;
+        content: unicode;
+
+
+icon-play(pseudo-element = before) { sideshow-icon('\e800', pseudo-element); }
+icon-warning(pseudo-element = before) { sideshow-icon('\e801', pseudo-element); }
+icon-caret-down(pseudo-element = before) { sideshow-icon('\e802', pseudo-element); }
+icon-clock(pseudo-element = before) { sideshow-icon('\e803', pseudo-element); }
+icon-close(pseudo-element = before) { sideshow-icon('\e804', pseudo-element); }

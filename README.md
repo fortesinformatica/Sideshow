@@ -1,6 +1,6 @@
 #Sideshow
 
-![Sideshow Logo](https://raw2.github.com/fortesinformatica/sideshow/master/examples/images/sideshow-logo.png)
+![Sideshow Logo](http://fortesinformatica.github.io/Sideshow/examples/images/sideshow-logo.png)
 ========
 ![Google Analytics Beacon](https://ga-beacon.appspot.com/UA-34593010-2/Sideshow/README)
 
@@ -324,7 +324,7 @@ Alcides Queiroz Aguiar
 
 ##License and Copyright
 
-Copyright 2013-2014 Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com] 
+Copyright 2013-2015 Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com] 
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

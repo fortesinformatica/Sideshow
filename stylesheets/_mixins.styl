@@ -1,0 +1,52 @@
+absolute-full-size(spacement = 0){
+  position: absolute;
+  top: spacement;
+  bottom: spacement;
+  left: spacement;
+  right: spacement;
+}
+
+only-icon-button{
+  &:before{
+    margin-right: 0 !important;
+  }
+}
+
+icon-font-size(size){
+  &:before{
+    font-size: size;
+  }
+}
+
+prefixify(property, value){
+  -webkit-{property}: value;
+  -moz-{property}: value;
+  -o-{property}: value;
+  {property}: value;
+}
+
+animation(name, duration, timing-function = linear, iteration-count = 1, fill-mode = none){
+  prefixify(animation-name, name);
+  prefixify(animation-duration, duration);
+  prefixify(animation-timing-function, timing-function);
+  prefixify(animation-iteration-count, iteration-count);
+  prefixify(animation-fill-mode, fill-mode);
+}
+
+keyframes(name) {
+  @-webkit-keyframes {name} {
+    {block}; 
+  }
+  
+  @-moz-keyframes {name} {
+    {block};
+  }
+  
+  @-ms-keyframes {name} {
+    {block};
+  }
+  
+  @keyframes {name} {
+    {block};
+  } 
+}

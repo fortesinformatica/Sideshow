@@ -1,2 +1,12 @@
-.sass-cache/
+#General
 tmp/
+
+#Node related
+node_modules
+npm-debug.log
+
+#Mac OS Files
+.DS_Store
+
+#Sublime specific
+*.sublime-workspace

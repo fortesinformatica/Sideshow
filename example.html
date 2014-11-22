@@ -3,8 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Sideshow Interactive Help Example</title>
-	<link rel="stylesheet" href="distr/stylesheets/sideshow.css">
-	<link rel="stylesheet" href="examples/stylesheets/example.css">
+    <link rel="stylesheet" href="distr/fonts/sideshow-fontface.min.css">
+	<link rel="stylesheet" href="distr/stylesheets/sideshow.min.css">
+	<link rel="stylesheet" href="examples/stylesheets/example.min.css">
 </head>
 <body>
     <!--[if lt IE 10]>
@@ -65,11 +66,12 @@
 	<script src="distr/dependencies/jquery-2.1.1.min.js"></script>
 	<script src="distr/dependencies/jazz-0.1.1.min.js"></script>
 	<script src="distr/dependencies/pagedown-1.1.0.min.js"></script>
-	<script src="distr/sideshow-0.3.5.debug.js"></script>
+	<script src="distr/sideshow.js"></script>
 
     <!--Scripts for this page-->
 	<script src="examples/scripts/sideshow.config.js"></script>
-	<script src="examples/scripts/tutorials/introducing_sideshow.js"></script>
+    <script src="examples/scripts/tutorials/introducing_sideshow.js"></script>
+	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
 	<script>
 		$("#run_example").click(function(){
 			Sideshow.start({ listAll: true });

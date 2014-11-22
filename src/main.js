@@ -1,6 +1,3 @@
-//Just preventing the worst... =D 
-//http://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function
-;
 (function(global, $, jazz, markdown) {
     //jQuery is needed
     if ($ === undefined) throw new SSException("2", "jQuery is required for Sideshow to work.");

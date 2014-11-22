@@ -1,0 +1,21 @@
+{
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"node_modules"
+			],
+			"follow_symlinks": true,
+			"path": "."
+		}
+	],
+    "build_systems":
+    [
+        {
+            "name": "Gulp",
+            "cmd": ["gulp"],
+            "shell": true
+        }
+    ]
+}

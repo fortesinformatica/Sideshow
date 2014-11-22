@@ -1,0 +1,27 @@
+# How could I live without http://EditorConfig.org ???
+root = true
+
+# All
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+# Scripts 
+[*.js]
+indent_size = 2
+
+#JSON configuration files
+[*.json]
+indent_size = 2
+
+# Ruby source files
+[*.rb]
+indent_size = 2
+
+# Stylesheets
+[*.css,*.scss]
+indent_size = 2
+
