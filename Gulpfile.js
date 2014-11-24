@@ -172,15 +172,17 @@ gulp.task('default', function() {
 });
 
 gulp.task('update-version', function(){
-  var version = util.env.version || (function(){ throw "A version number must be passed."; })(),
-      name = util.env.name || (function(){ throw "A version name must be passed."; })(),
+  var version = util.env.version || (function(){ throw "A version number must be passed. Please inform the '--version' argument."; })(),
+      name = util.env.name || (function(){ throw "A version name must be passed. Please inform the '--name' argument."; })(),
       appRoot = path.resolve('.'),
       versionFilePath = path.join(appRoot, 'VERSION'),
       yuidocFilePath = path.join(appRoot, 'yuidoc.json'),
       gemspecFilePath = path.join(appRoot, 'sideshow.gemspec'),
       packageJsonFilePath = path.join(appRoot, 'package.json'),
-      changelogFilePath = path.join(appRoot, 'CHANGELOG'),
-      variablesFilePath = path.join(appRoot, 'src', 'general', 'variables.js');
+      changelogFilePath = path.join(appRoot, 'CHANGELOG.md'),
+      copyrightInfoFilePath = path.join(appRoot, 'src', 'copyright_info.js'),
+      variablesFilePath = path.join(appRoot, 'src', 'general', 'variables.js'),
+      releaseDate = new Date().toISOString().slice(0,10);
 
   //VERSION file
   fs.readFile(versionFilePath, 'utf8', function(err, data) {
@@ -196,7 +198,7 @@ gulp.task('update-version', function(){
     var json = JSON.parse(data);
     json.version = version;
 
-    fs.writeFile(yuidocFilePath, json.stringify(json, null, 4));
+    fs.writeFile(yuidocFilePath, JSON.stringify(json, null, 4));
   });
 
   //package.json
@@ -206,7 +208,7 @@ gulp.task('update-version', function(){
     var json = JSON.parse(data);
     json.version = version;
 
-    fs.writeFile(packageJsonFilePath, json.stringify(json, null, 4));
+    fs.writeFile(packageJsonFilePath, JSON.stringify(json, null, 4));
   });
 
   //sideshow.gemspec
@@ -216,12 +218,21 @@ gulp.task('update-version', function(){
     fs.writeFile(gemspecFilePath, data.replace(/(s.version\s+=\s+)('[\d.]+')/, "$1'" + version + "'"));
   });
 
+  //copyright_info.js
+  fs.readFile(copyrightInfoFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    fs.writeFile(copyrightInfoFilePath, data
+                                        .replace(/(Version: )([\d.]+)/, '$1' + version)
+                                        .replace(/(Date: )([\d-]+)/, '$1' + releaseDate));
+  });
+
   //CHANGELOG file
   fs.readFile(changelogFilePath, 'utf8', function(err, data) {
     if (err) throw err;
 
     if(data.indexOf('#Version '+ version) == -1){
-      var versionChangelogText = '#Version ' + version + ' ' + name + ' (' + new Date().toISOString().slice(0,10) + ')' +
+      var versionChangelogText = '#Version ' + version + ' ' + name + ' (' + releaseDate + ')' +
                                  '\n\n##General' + 
                                  '\n\n##Fixes\n\n' +
                                  Array(61).join('-') + '\n\n';
@@ -233,7 +244,7 @@ gulp.task('update-version', function(){
   fs.readFile(variablesFilePath, 'utf8', function(err, data) {
     if (err) throw err;
 
-    fs.writeFile(variablesFilePath, data.replace(/(get VERSION\(\) {\n\s+return )("[\d.]+")/, '$1"' + version + '"'));
+    fs.writeFile(variablesFilePath, data.replace(/(get VERSION\(\) {\s+return )("[\d.]+")/, '$1"' + version + '"'));
   });
 });
 
