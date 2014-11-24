@@ -15,10 +15,13 @@ var gulp = require('gulp'),
     http = require('http'),
     ecstatic = require('ecstatic'),
     util = require('gulp-util'),
-    browserify = require('gulp-browserify'),
     prettify = require('gulp-prettify'),
     extender = require('./gulp/extensions/gulp-html-extend'),
-    stylus = require('gulp-stylus');
+    stylus = require('gulp-stylus'),
+    include = require('gulp-include'),
+    merge2 = require('merge2'),
+    fs = require('fs'),
+    path = require('path');
     //config = require('./gulp/config');
 
 
@@ -78,22 +81,31 @@ gulp.task('examples-partials', function(){
 
 //Bundle Nexit modules with Browserify
 gulp.task('bundle-scripts', function(){
-  gulp.src('src/main.js')
-  .pipe(browserify({
-    insertGlobals : false,
-    debug: true
-  }))
-  .on('error', function (err) { console.log(err.message); })
+  gulp.src('./src/main.js')
+  .pipe(include())
+  .on('error', errorHandler('jsbuild_error'))
   .pipe(rename('sideshow.js'))
   .pipe(gulp.dest('distr/'))
   .pipe(rename({suffix: '.min'}))
   .pipe(uglify())
-  .pipe(gulp.dest('distr/'));
+  .pipe(gulp.dest('./distr/'))
+  .on('end', function(){
+    //adding copyright message in the expanded version
+    gulp.src(['./src/copyright_info.js', './distr/sideshow.js'])
+    .pipe(concat('sideshow.js'))
+    .pipe(gulp.dest('./distr/'));
+
+    //adding copyright message in the minified version
+    gulp.src(['./src/copyright_info.js', './distr/sideshow.min.js'])
+    .pipe(concat('sideshow.min.js'))
+    .pipe(gulp.dest('./distr/'));
+  });
 });
+
 
 //Clean task
 gulp.task('clean', function(cb) {
-  del(['distr'], cb);
+  del(['distr/*.js', 'tmp/*', 'docs/**/*'], cb);
 });
 
 //Watch Task
@@ -133,15 +145,17 @@ function openInBrowser(browser){
     return open('http://localhost:' + webserverPort + '/example.html', browser);
   }
 
-  if(browser == 'all'){
-    go('firefox');
-    go('opera');
-    go('safari');
-    go('chrome');  
-  } else if (browser) 
-    go(browser);
-  else
-    go('firefox');
+  if (browser != 'none'){
+    if(browser == 'all'){
+      go('firefox');
+      go('opera');
+      go('safari');
+      go('chrome');  
+    } else if (browser) 
+      go(browser);
+    else
+      go('firefox');
+  }
 }
 
 //Default task
@@ -157,14 +171,93 @@ gulp.task('default', function() {
   }, 3000);
 });
 
-//Complete-build task
-gulp.task('complete-build', ['clean'], function() {
-  gulp.start('style');
+gulp.task('update-version', function(){
+  var version = util.env.version || (function(){ throw "A version number must be passed."; })(),
+      name = util.env.name || (function(){ throw "A version name must be passed."; })(),
+      appRoot = path.resolve('.'),
+      versionFilePath = path.join(appRoot, 'VERSION'),
+      yuidocFilePath = path.join(appRoot, 'yuidoc.json'),
+      gemspecFilePath = path.join(appRoot, 'sideshow.gemspec'),
+      packageJsonFilePath = path.join(appRoot, 'package.json'),
+      changelogFilePath = path.join(appRoot, 'CHANGELOG'),
+      variablesFilePath = path.join(appRoot, 'src', 'general', 'variables.js');
+
+  //VERSION file
+  fs.readFile(versionFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    fs.writeFile(versionFilePath, version);
+  });
+
+  //yuidoc.json
+  fs.readFile(yuidocFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    var json = JSON.parse(data);
+    json.version = version;
+
+    fs.writeFile(yuidocFilePath, json.stringify(json, null, 4));
+  });
+
+  //package.json
+  fs.readFile(packageJsonFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    var json = JSON.parse(data);
+    json.version = version;
+
+    fs.writeFile(packageJsonFilePath, json.stringify(json, null, 4));
+  });
+
+  //sideshow.gemspec
+  fs.readFile(gemspecFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    fs.writeFile(gemspecFilePath, data.replace(/(s.version\s+=\s+)('[\d.]+')/, "$1'" + version + "'"));
+  });
+
+  //CHANGELOG file
+  fs.readFile(changelogFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    if(data.indexOf('#Version '+ version) == -1){
+      var versionChangelogText = '#Version ' + version + ' ' + name + ' (' + new Date().toISOString().slice(0,10) + ')' +
+                                 '\n\n##General' + 
+                                 '\n\n##Fixes\n\n' +
+                                 Array(61).join('-') + '\n\n';
+
+      fs.writeFile(changelogFilePath, versionChangelogText + data);
+    }
+  });
+
+  fs.readFile(variablesFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    fs.writeFile(variablesFilePath, data.replace(/(get VERSION\(\) {\n\s+return )("[\d.]+")/, '$1"' + version + '"'));
+  });
+});
+
+gulp.task('generate-docs', function() {
+  gulp.src("./distr/sideshow.js")
+  .pipe(yuidoc())
+  .pipe(gulp.dest("./docs"));
+});
+
+gulp.task('prepare-build', ['update-version', 'clean'], function() {
+  console.log('Remember to edit the CHANGELOG file before doing a complete build.');
+});
+
+gulp.task('complete-build', function() {
+  if(prompt.confirm('Did you run the prepare-build before this?')){
+    gulp.start('style');
+    gulp.start('bundle-scripts');  
+    gulp.start('generate-docs');  
+  } 
 });
 
 function errorHandler(title){
   return function(error){
-    console.log(error.message); 
+    console.log((title || 'Error') + ': ' + error.message); 
     notify((title || 'Error') + ': ' + error.message); 
   };
 }
