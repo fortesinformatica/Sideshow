@@ -156,7 +156,7 @@
         if (!flags.lockMaskUpdate) {
             if (currentWizard && currentWizard.currentStep.subject) {
                 var subject = $(currentWizard.currentStep.subject);
-                if (Subject.obj[0] !== subject[0]) SS.setSubject(subject);
+                if (Subject.obj[0] !== subject[0]) SS.setSubject(subject, true);
             }
 
             if (Subject.hasChanged()) {

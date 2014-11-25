@@ -21,10 +21,17 @@ Sideshow.registerWizard({
 		    title: "More than a tour... we can do much more.",
 		    text: "Sideshow can much more than just walk users through your site/web application. Sideshow can mediate the interaction between users and your UI. Go ahead and let's see some powerful features."
 		},
-		{
-		    title: "The Subject",
-		    text: "In each step of a tutorial/wizard/tour/help (you can call it the way you want =D ) you're talking about something. Sometimes you're just explaining a concept, but at the most part of time, you're explaining some visual part of a screen or a page (e.g. a form, button, div, grid and so forth). We call these visual parts subjects. A subject of a step is just an element of your page you're aiming to stand out from the rest (when user is seeing that especific step) to comment/explain something about it."
-		},
+    {
+        title: "The Subject",
+        text: "In each step of a tutorial/wizard/tour/help (you can call it the way you want =D ) you're talking about something. Sometimes you're just explaining a concept, but at the most part of time, you're explaining some visual part of a screen or a page (e.g. a form, button, div, grid and so forth). We call these visual parts subjects. A subject of a step is just an element of your page you're aiming to stand out from the rest (when user is seeing that especific step) to comment/explain something about it."
+    },
+    {
+        title: "The Subject",
+        text: "In each step of a tutorial/wizard/tour/help (you can call it the way you want =D ) you're talking about something. Sometimes you're just explaining a concept, but at the most part of time, you're explaining some visual part of a screen or a page (e.g. a form, button, div, grid and so forth). We call these visual parts subjects. A subject of a step is just an element of your page you're aiming to stand out from the rest (when user is seeing that especific step) to comment/explain something about it.",
+        skipIf: function(){
+          return true;
+        }
+    },
 		{
 		    title: "Masking a Subject",
 		    text: "An example could be this text: in this step, this text is the subject. As you can see, we're surrounding it with a dark mask. This make you look at the subject with no doubt where it's located. If you're curious how we make it work: for the moment, you just need to know we're not using `z-index` to pull the subject above the mask. Some tour libraries do this, we see a plenty of drawbacks in this approach. \n\n When writing a tutorial, each subject is represented by a jQuery-like/querySelectorAll-like/CSS-like selector. For this step, for instance, the subject is a `div`, and its selector is `#introducing_sideshow`, but could be any other valid selector returning the same element.\n\nP.S: for now, Sideshow only supports single subjects per step. If you define a subject selector which returns more than one element, Sideshow will throw an exception. Multiple steps will (propably) be available in future versions of Sideshow.",

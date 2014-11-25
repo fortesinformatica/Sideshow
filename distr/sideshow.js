@@ -635,7 +635,7 @@
       });
 
       Polling.enqueue("check_arrow_changes", function () {
-        Arrows.pollForArrowsChanges();
+        Arrows.pollForArrowsChanges(true);
       });
 
       //Checks if the wizard has a storyline
@@ -673,6 +673,7 @@
      @param {Function} callback                            A callback function to be called
      **/
     Wizard.method("showStep", function (step, callback) {
+      var wizard = this;
       flags.skippingStep = false;
 
       Arrows.clear();
@@ -681,7 +682,7 @@
 
       function skipStep(wiz) {
         flags.skippingStep = true;
-        this.next();
+        wizard.next();
       }
 
       if (step && step.listeners && step.listeners.beforeStep) step.listeners.beforeStep();
@@ -999,7 +1000,7 @@
      @method setTargets
      @static
      **/
-    Arrows.setTargets = function (targets) {
+    Arrows.setTargets = function (targets, targetsChanged) {
       if (targets.constructor === String) targets = $(targets);
 
       if (targets instanceof $ && targets.length > 0) {
@@ -1011,9 +1012,8 @@
             arrow.onceVisible = true;
           }
         });
-      } else {
-        throw new SSException("150", "Invalid targets.");
       }
+      else if (!targetsChanged) throw new SSException("150", "Invalid targets.");
     };
 
     Arrows.recreateDOMReferences = function () {
@@ -1023,7 +1023,7 @@
       }
 
       Arrows.clear();
-      Arrows.setTargets(currentWizard.currentStep.targets);
+      Arrows.setTargets(currentWizard.currentStep.targets, true);
       Arrows.render();
       Arrows.positionate();
       Arrows.show();
@@ -1128,6 +1128,7 @@
 
       if (brokenReference) this.recreateDOMReferences();
     };
+
 
     /**
      A single arrow for pointing individual items in current subject 
@@ -1756,7 +1757,7 @@
       if (!flags.lockMaskUpdate) {
         if (currentWizard && currentWizard.currentStep.subject) {
           var subject = $(currentWizard.currentStep.subject);
-          if (Subject.obj[0] !== subject[0]) SS.setSubject(subject);
+          if (Subject.obj[0] !== subject[0]) SS.setSubject(subject, true);
         }
 
         if (Subject.hasChanged()) {
@@ -1790,6 +1791,7 @@
       this.position = position;
       this.dimension = dimension;
     }).extending(VisualItem);
+
 
 
     /**
@@ -2324,7 +2326,7 @@
      @param {Object} subj
      @static
      **/
-    SS.setSubject = function (subj) {
+    SS.setSubject = function (subj, subjectChanged) {
       if (subj.constructor === String) subj = $(subj);
 
       if (subj instanceof $ && subj.length > 0) {
@@ -2333,9 +2335,9 @@
           Subject.updateInfo();
           flags.lockMaskUpdate = false;
         } else throw new SSException("101", "A subject must have only one element. Multiple elements by step will be supported in future versions of Sideshow.");
-      } else {
-        throw new SSException("100", "Invalid subject.");
       }
+      else if (subjectChanged) SS.setEmptySubject();
+      else throw new SSException("100", "Invalid subject.");
     };
 
     /**
@@ -2468,6 +2470,7 @@
         });
       }
     };
+
 
 
     //Tries to register the Global Access Point

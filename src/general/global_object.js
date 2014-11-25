@@ -134,7 +134,7 @@
     @param {Object} subj
     @static
     **/
-    SS.setSubject = function(subj) {
+    SS.setSubject = function(subj, subjectChanged) {
         if (subj.constructor === String) subj = $(subj);
 
         if (subj instanceof $ && subj.length > 0) {
@@ -144,9 +144,11 @@
                 flags.lockMaskUpdate = false;
             } else
                 throw new SSException("101", "A subject must have only one element. Multiple elements by step will be supported in future versions of Sideshow.");
-        } else {
+        } 
+        else if (subjectChanged) 
+            SS.setEmptySubject();
+        else
             throw new SSException("100", "Invalid subject.");
-        }
     };
 
     /**

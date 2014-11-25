@@ -24,7 +24,7 @@
     @method setTargets
     @static
     **/
-    Arrows.setTargets = function(targets) {
+    Arrows.setTargets = function(targets, targetsChanged) {
         if (targets.constructor === String) targets = $(targets);
 
         if (targets instanceof $ && targets.length > 0) {
@@ -36,9 +36,9 @@
                     arrow.onceVisible = true;
                 }
             });
-        } else {
+        } 
+        else if(!targetsChanged) 
             throw new SSException("150", "Invalid targets.");
-        }
     };
 
     Arrows.recreateDOMReferences = function() {
@@ -48,7 +48,7 @@
         }
 
         Arrows.clear();
-        Arrows.setTargets(currentWizard.currentStep.targets);
+        Arrows.setTargets(currentWizard.currentStep.targets, true);
         Arrows.render();
         Arrows.positionate();
         Arrows.show();

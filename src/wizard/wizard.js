@@ -128,7 +128,7 @@
         });
 
         Polling.enqueue("check_arrow_changes", function() {
-            Arrows.pollForArrowsChanges();
+            Arrows.pollForArrowsChanges(true);
         });
 
         //Checks if the wizard has a storyline
@@ -167,6 +167,7 @@
     @param {Function} callback                            A callback function to be called
     **/
     Wizard.method("showStep", function(step, callback) {
+        var wizard = this;
         flags.skippingStep = false;
 
         Arrows.clear();
@@ -176,7 +177,7 @@
 
         function skipStep(wiz) {
             flags.skippingStep = true;
-            this.next();
+            wizard.next();
         }
 
         if (step && step.listeners && step.listeners.beforeStep)
