@@ -16,100 +16,165 @@ var gulp = require('gulp'),
     ecstatic = require('ecstatic'),
     util = require('gulp-util'),
     prettify = require('gulp-prettify'),
+    beautify = require('gulp-beautify'),
     extender = require('./gulp/extensions/gulp-html-extend'),
     stylus = require('gulp-stylus'),
     include = require('gulp-include'),
     merge2 = require('merge2'),
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    prompt = require('gulp-prompt'),
+    yuidoc = require('gulp-yuidoc'),
+    webserverPort = 8080;
     //config = require('./gulp/config');
 
 
 
 /* Tasks (will be extracted to separated files) */
 
-//Style task
+//Sideshow's main stylesheet
 gulp.task('style', function(){
-  //Sideshow's main stylesheet
-  gulp.src('stylesheets/sideshow.styl')
-  .pipe(stylus())
-  .on('error', errorHandler('sideshow_stylesheet_compiling_error'))
-  .pipe(autoPrefixerConfig())
-  .on('error', errorHandler('sideshow_stylesheet_autoprefixing_error'))
-  .pipe(rename('sideshow.css'))
-  .pipe(gulp.dest('tmp'))
-  .pipe(csslint('.csslintrc'))
-  .pipe(csslint.reporter())
-  .pipe(rename({suffix: '.min'}))
-  .pipe(minifycss())
-  .pipe(gulp.dest('distr/stylesheets'));
-
-  //Font face stylesheet
-  gulp.src('stylesheets/sideshow-fontface.styl')
-  .pipe(stylus())
-  .on('error', errorHandler('fontface_stylesheet_compiling_error'))
-  .pipe(autoPrefixerConfig())
-  .on('error', errorHandler('fontface_stylesheet_autoprefixing_error'))
-  .pipe(rename('sideshow-fontface.min.css'))
-  .pipe(minifycss())
-  .pipe(gulp.dest('distr/fonts'));
+  compileSideshowStylesheets()
 });
 
 //Examples pages Style task
 gulp.task('examples-style', function(){
-  gulp.src('examples/stylesheets/styl/example.styl')
-  .pipe(stylus())
-  .on('error', errorHandler('examples_stylesheet_compiling_error'))
-  .pipe(autoPrefixerConfig())
-  .on('error', errorHandler('examples_stylesheet_autoprefixing_error'))
-  .pipe(rename('example.css'))
-  .pipe(gulp.dest('tmp'))
-  .pipe(csslint('.csslintrc'))
-  .pipe(csslint.reporter())
-  .pipe(rename({suffix: '.min'}))
-  .pipe(minifycss())
-  .pipe(gulp.dest('examples/stylesheets'));
+  compileExamplesStylesheet();
 });
 
 //Compiles the partials for the Examples Pages
 gulp.task('examples-partials', function(){
-  gulp.src('examples/partials/*.html')
-  .pipe(extender())
-  .pipe(prettify({indent_size: 4}))
-  .pipe(gulp.dest('./examples'));
+  // gulp.src('examples/partials/*.html')
+  // .pipe(extender())
+  // .pipe(prettify({indent_size: 4}))
+  // .pipe(gulp.dest('./examples'));
 });
 
 //Bundle Nexit modules with Browserify
 gulp.task('bundle-scripts', function(){
-  gulp.src('./src/main.js')
-  .pipe(include())
-  .on('error', errorHandler('jsbuild_error'))
-  .pipe(rename('sideshow.js'))
-  .pipe(gulp.dest('distr/'))
-  .pipe(rename({suffix: '.min'}))
-  .pipe(uglify())
-  .pipe(gulp.dest('./distr/'))
-  .on('end', function(){
-    //adding copyright message in the expanded version
-    gulp.src(['./src/copyright_info.js', './distr/sideshow.js'])
-    .pipe(concat('sideshow.js'))
-    .pipe(gulp.dest('./distr/'));
-
-    //adding copyright message in the minified version
-    gulp.src(['./src/copyright_info.js', './distr/sideshow.min.js'])
-    .pipe(concat('sideshow.min.js'))
-    .pipe(gulp.dest('./distr/'));
-  });
+  bundleScripts();
 });
-
 
 //Clean task
 gulp.task('clean', function(cb) {
-  del(['distr/*.js', 'tmp/*', 'docs/**/*'], cb);
+  cleanFiles(cb);
 });
 
 //Watch Task
 gulp.task('watch', function() {
+  pollForChanges();
+});
+
+//Webserver task
+gulp.task('webserver', function(){
+  runDevelopmentWebServer();
+});
+
+//Default task
+gulp.task('default', function() {
+  compileSideshowStylesheets();
+  compileExamplesStylesheet();
+  // gulp.start('examples-partials');
+  runDevelopmentWebServer();
+  pollForChanges();
+
+  setTimeout(function(){
+    openInBrowser(util.env.browser);
+  }, 3000);
+});
+
+gulp.task('update-version', function(){
+  updateVersionNumberReferences();
+});
+
+gulp.task('generate-docs', function() {
+  generateDocumentation();
+});
+
+gulp.task('prepare-build', ['update-version', 'clean'], function() {
+  console.log('Remember to edit the CHANGELOG file before doing a complete build.');
+});
+
+gulp.task('complete-build', function() {
+  if(prompt.confirm('Did you run the prepare-build before this?')){
+    compileSideshowStylesheets();
+    compileExamplesStylesheet();
+    bundleScripts(function(){
+      generateDocumentation();
+    });
+  } 
+});
+
+function compileSideshowStylesheets(){
+  return gulp.src('stylesheets/sideshow.styl')
+        .pipe(stylus())
+        .on('error', errorHandler('sideshow_stylesheet_compiling_error'))
+        .pipe(autoPrefixerConfig())
+        .on('error', errorHandler('sideshow_stylesheet_autoprefixing_error'))
+        .pipe(rename('sideshow.css'))
+        .pipe(gulp.dest('tmp'))
+        .pipe(csslint('.csslintrc'))
+        .pipe(csslint.reporter())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(minifycss())
+        .pipe(gulp.dest('distr/stylesheets'));
+
+        //Font face stylesheet
+        gulp.src('stylesheets/sideshow-fontface.styl')
+        .pipe(stylus())
+        .on('error', errorHandler('fontface_stylesheet_compiling_error'))
+        .pipe(autoPrefixerConfig())
+        .on('error', errorHandler('fontface_stylesheet_autoprefixing_error'))
+        .pipe(rename('sideshow-fontface.min.css'))
+        .pipe(minifycss())
+        .pipe(gulp.dest('distr/fonts'));
+}
+
+function compileExamplesStylesheet(){
+  return gulp.src('examples/stylesheets/styl/example.styl')
+        .pipe(stylus())
+        .on('error', errorHandler('examples_stylesheet_compiling_error'))
+        .pipe(autoPrefixerConfig())
+        .on('error', errorHandler('examples_stylesheet_autoprefixing_error'))
+        .pipe(rename('example.css'))
+        .pipe(gulp.dest('tmp'))
+        .pipe(csslint('.csslintrc'))
+        .pipe(csslint.reporter())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(minifycss())
+        .pipe(gulp.dest('examples/stylesheets'));
+}
+
+function bundleScripts(endCallback){
+  return gulp.src('./src/main.js')
+        .pipe(include())
+        .on('error', errorHandler('jsbuild_error'))
+        .pipe(rename('sideshow.js'))
+        .pipe(beautify({indentSize: 2}))
+        .pipe(gulp.dest('distr/'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest('./distr/'))
+        .on('end', function(){
+          //adding copyright message in the expanded version
+          gulp.src(['./src/copyright_info.js', './distr/sideshow.js'])
+          .pipe(concat('sideshow.js'))
+          .pipe(gulp.dest('./distr/'));
+
+          //adding copyright message in the minified version
+          gulp.src(['./src/copyright_info.js', './distr/sideshow.min.js'])
+          .pipe(concat('sideshow.min.js'))
+          .pipe(gulp.dest('./distr/'));
+
+          if(endCallback) endCallback();
+        });
+}
+
+function cleanFiles(cb){
+  del(['distr/*.js', 'tmp/*', 'docs/**/*'], cb);
+}
+
+function pollForChanges(){
   gulp.watch('src/**/*.js', ['bundle-scripts']);
   gulp.watch('stylesheets/**/*.styl', ['style', 'examples-style']);
   gulp.watch('examples/stylesheets/styl/**/*.styl', ['examples-style']);
@@ -125,21 +190,16 @@ gulp.task('watch', function() {
   });
 
   notify('Running livereload.');
-});
+}
 
-
-var webserverPort = 8080;
-
-//Webserver task
-gulp.task('webserver', function(){
+function runDevelopmentWebServer(){
   http.createServer(
     ecstatic({ root: __dirname })
   ).listen(webserverPort);
 
   notify('Web server started. Listening on port ' + webserverPort + '.');
-});
+}
 
-//Open-browser task
 function openInBrowser(browser){
   function go(browser){
     return open('http://localhost:' + webserverPort + '/example.html', browser);
@@ -158,20 +218,7 @@ function openInBrowser(browser){
   }
 }
 
-//Default task
-gulp.task('default', function() {
-  gulp.start('style');
-  gulp.start('examples-style');
-  gulp.start('examples-partials');
-  gulp.start('webserver');
-  gulp.start('watch');
-
-  setTimeout(function(){
-    openInBrowser(util.env.browser);
-  }, 3000);
-});
-
-gulp.task('update-version', function(){
+function updateVersionNumberReferences(){
   var version = util.env.version || (function(){ throw "A version number must be passed. Please inform the '--version' argument."; })(),
       name = util.env.name || (function(){ throw "A version name must be passed. Please inform the '--name' argument."; })(),
       appRoot = path.resolve('.'),
@@ -246,25 +293,13 @@ gulp.task('update-version', function(){
 
     fs.writeFile(variablesFilePath, data.replace(/(get VERSION\(\) {\s+return )("[\d.]+")/, '$1"' + version + '"'));
   });
-});
+}
 
-gulp.task('generate-docs', function() {
-  gulp.src("./distr/sideshow.js")
-  .pipe(yuidoc())
-  .pipe(gulp.dest("./docs"));
-});
-
-gulp.task('prepare-build', ['update-version', 'clean'], function() {
-  console.log('Remember to edit the CHANGELOG file before doing a complete build.');
-});
-
-gulp.task('complete-build', function() {
-  if(prompt.confirm('Did you run the prepare-build before this?')){
-    gulp.start('style');
-    gulp.start('bundle-scripts');  
-    gulp.start('generate-docs');  
-  } 
-});
+function generateDocumentation(){
+  return gulp.src("./distr/sideshow.js")
+        .pipe(yuidoc())
+        .pipe(gulp.dest("./docs"));
+}
 
 function errorHandler(title){
   return function(error){
