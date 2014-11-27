@@ -3,7 +3,7 @@ $:.push File.expand_path('distr', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'sideshow'
-  s.version     = '0.4.0'
+  s.version     = '0.4.1'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Alcides Queiroz']
   s.email       = ['alcidesqueiroz@gmail.com']

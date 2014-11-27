@@ -135,7 +135,7 @@ function generatePackages(){
       fs.readFile(versionFilePath, 'utf8', function(err, version) {
         gulp.src('./')
         .pipe(run('git tag -a ' + version + ' -m \'' + version + '\''))
-        .pipe(run('git push origin --tags'))
+        .pipe(run('git push --all origin'))
         .on('end', function(){
           
           console.log('Building and pushing Sideshow gem');
@@ -295,6 +295,7 @@ function updateVersionNumberReferences(){
       appRoot = path.resolve('.'),
       versionFilePath = path.join(appRoot, 'VERSION'),
       yuidocFilePath = path.join(appRoot, 'yuidoc.json'),
+      bowerFilePath = path.join(appRoot, 'bower.json'),
       gemspecFilePath = path.join(appRoot, 'sideshow.gemspec'),
       nuspecFilePath = path.join(appRoot, 'sideshow.nuspec'),
       packageJsonFilePath = path.join(appRoot, 'package.json'),
@@ -318,6 +319,16 @@ function updateVersionNumberReferences(){
     json.version = version;
 
     fs.writeFile(yuidocFilePath, JSON.stringify(json, null, 4));
+  });
+
+  //bower.json
+  fs.readFile(bowerFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    var json = JSON.parse(data);
+    json.version = version;
+
+    fs.writeFile(bowerFilePath, JSON.stringify(json, null, 4));
   });
 
   //package.json

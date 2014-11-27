@@ -1,7 +1,7 @@
 /**
  @license
  Sideshow - An incredible Javascript interactive help Library
- Version: 0.4.0
+ Version: 0.4.1
  Date: 2014-11-27
  Author: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]
  Available under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)
@@ -27,49 +27,100 @@
     //Pagedown (the Markdown parser used by Sideshow) is needed
     if (markdown === undefined) throw new SSException("4", "Pagedown (the Markdown parser used by Sideshow) is required for Sideshow to work.");
     var globalObjectName = "Sideshow",
-        $window, $body, $document, pollingDuration = 150,
+        
+        
+        $window,
+        
+        $body,
+        
+        $document,
+        
+        pollingDuration = 150,
+        
+        
         longAnimationDuration = 600,
         
         
         
+        
+        
         /** 
+         
          The main class for Sideshow
          
+         
+         
          @class SS 
+         
          @static
+         
          **/
         
+        
+        
         SS = {
+
         /**
+         
          The current Sideshow version
          
+         
+         
          @property VERSION
+         
          @type String
+         
          **/
+
         get VERSION() {
-          return "0.4.0";
+
+          return "0.4.1";
+
         }
+
         },
+        
+        
         
         
         controlVariables = [],
+        
+        
         flags = {
+
         lockMaskUpdate: false,
+
         changingStep: false,
+
         skippingStep: false,
+
         running: false
+
         },
+        
+        
         wizards = [],
+        
+        
         currentWizard,
         
         
+        
+        
         /**
+         
          Possible statuses for an animation
          
+         
+         
          @@enum AnimationStatus
+         
          **/
         
+        
+        
         AnimationStatus = jazz.Enum("VISIBLE", "FADING_IN", "FADING_OUT", "NOT_DISPLAYED", "NOT_RENDERED", "TRANSPARENT");
+
 
 
 
@@ -89,7 +140,6 @@
 
     SSException.prototype = new Error();
     SSException.prototype.constructor = SSException;
-
 
     /**
      Shows a warning  in a pre-defined format
@@ -187,7 +237,6 @@
       $("[class*=\"sideshow\"]").not(".sideshow-mask-part, .sideshow-mask-corner-part, .sideshow-subject-mask").remove();
     }
 
-
     /**
      Strings Dictionary
      
@@ -230,7 +279,6 @@
         "es": "Concluir Tutorial"
       }
     };
-
     /**
      Sideshow Settings
      
@@ -273,7 +321,6 @@
      @type boolean
      **/
     SS.config.autoSkipIntro = false;
-
 
     /**
      Stores the variables used in step evaluators 
@@ -371,7 +418,6 @@
       controlVariables = [];
     };
 
-
     /**
      A visual item 
      
@@ -414,7 +460,6 @@
     VisualItem.method("destroy", function () {
       this.$el.remove();
     });
-
     /**
      A visual item which can be shown and hidden
      
@@ -447,7 +492,6 @@
       this.$el.addClass("sideshow-invisible");
       this.status = AnimationStatus.NOT_DISPLAYED;
     });
-
     /**
      A visual item which holds fading in and out capabilities
      
@@ -503,7 +547,6 @@
         }, longAnimationDuration);
       }
     });
-
 
     /**
      Represents a tutorial
@@ -656,6 +699,7 @@
       this.showStep(steps[0], function () {
         //Releases the polling for checking any changes in the current subject
         //flags.lockMaskUpdate = false;
+
         //Register the function that checks the completing of a step in the polling queue
         Polling.enqueue("check_completed_step", function () {
           wiz.pollForCheckCompletedStep();
@@ -891,7 +935,6 @@
       } else this.play();
     });
 
-
     /**
      The panel that holds step description, is positionated over the biggest remaining space among the four parts of a composite mask
      
@@ -971,7 +1014,6 @@
         y: parsePxValue(this.$el.css("top"))
       };
     });
-
 
 
     /**
@@ -1129,7 +1171,6 @@
       if (brokenReference) this.recreateDOMReferences();
     };
 
-
     /**
      A single arrow for pointing individual items in current subject 
      
@@ -1211,7 +1252,6 @@
     Arrow.method("hasChanged", function () {
       return (this.target.dimension.width !== this.target.$el.outerWidth() || this.target.dimension.height !== this.target.$el.outerHeight() || this.target.position.y !== (this.target.$el.offset().top - $window.scrollTop()) || this.target.position.x !== (this.target.$el.offset().left - $window.scrollLeft()));
     });
-
     /**
      Represents a panel holding the step description
      
@@ -1373,7 +1413,6 @@
       this.$el.css("top", this.position.y - paddingTopBottom);
     });
 
-
     /**
      Step next button 
      
@@ -1429,7 +1468,6 @@
       this.$el = $("<button>").addClass("sideshow-next-step-button");
       this.callSuper("render", $stepDescriptionEl);
     });
-
     /**
      Represents the current available area in the browser
      
@@ -1468,7 +1506,6 @@
       this.dimension.width = $window.width();
       this.dimension.height = $window.height();
     };
-
     /**
      The current subject (the object being shown by the current wizard)
      
@@ -1561,14 +1598,12 @@
       }
       return true;
     };
-
     /**
      Namespace to hold classes for mask control
      
      @namespace Mask
      **/
     var Mask = {};
-
     /**
      Controls the mask that covers the subject during a step transition
      
@@ -1598,7 +1633,6 @@
     Mask.SubjectMask.method("update", function (position, dimension, borderRadius) {
       this.$el.css("left", position.x).css("top", position.y).css("width", dimension.width).css("height", dimension.height).css("border-radius", borderRadius.leftTop + "px " + borderRadius.rightTop + "px " + borderRadius.leftBottom + "px " + borderRadius.rightBottom + "px ");
     });
-
     /**
      Controls the mask surrounds the subject (the step focussed area)
      
@@ -1793,7 +1827,6 @@
     }).extending(VisualItem);
 
 
-
     /**
      @@alias Part
      @@to Mask.CompositeMask.Part
@@ -1838,7 +1871,6 @@
       this.dimension = dimension;
       this.$el.css("left", position.x).css("top", position.y).css("width", dimension.width).css("height", dimension.height);
     });
-
     /**
      A corner part composing the mask
      
@@ -1937,7 +1969,6 @@
 
       $(this.$el).find("path").attr("d", CornerPart.SVGPathPointsTemplate(borderRadius));
     };
-
     /**
      Controls the polling functions needed by Sideshow
      
@@ -2092,7 +2123,6 @@
         }, pollingDuration);
       }
     };
-
     /**
      The main menu, where the available wizards are listed
      
@@ -2192,7 +2222,6 @@
     WizardMenu.setTitle = function (title) {
       this.$el.find(".sideshow-wizard-menu-title").text(title);
     };
-
 
     /**
      Initializes Sideshow
