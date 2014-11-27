@@ -27,7 +27,12 @@ var gulp = require('gulp'),
     yuidoc = require('gulp-yuidoc'),
     bower = require('gulp-bower'),
     unzip = require('gulp-unzip'),
-    webserverPort = 8080;
+    run = require('gulp-run'),
+    git = require('gift'),
+    repo = git('./'),
+    webserverPort = 8080,
+    isWin = /^win/.test(process.platform),
+    appRoot = path.resolve('.');
     //config = require('./gulp/config');
 
 
@@ -116,7 +121,34 @@ gulp.task('pack', function() {
 });
 
 function generatePackages(){
+  repo.status(function(err, status){
+    if(Object.keys(status.files).length === 0){
+      var versionFilePath = path.join(appRoot, 'VERSION');
 
+      fs.readFile(versionFilePath, 'utf8', function(err, version) {
+        gulp.src('./')
+        .pipe(run('git tag -a ' + version + ' -m \'' + version + '\''))
+        .pipe(run('git push origin --tags'))
+        .on('end', function(){
+          
+          console.log('Building and pushing Sideshow gem');
+          gulp.src('./')
+          .pipe(run('gem build sideshow.gemspec'))
+          .pipe(run('gem push sideshow*.gem'));
+
+          if(isWin){
+            console.log('Packing and pushing Sideshow nuget package');
+            gulp.src('./')
+            .pipe(run('nuget pack sideshow.nuspec'))
+            .pipe(run('nuget push sideshow*.nupkg'));
+          }
+        });
+      });
+    } else {
+      console.log('Before packing a new version you must commit your changes.')
+    }
+  });
+  
 }
 
 function updateBowerDependencies(){
@@ -257,6 +289,7 @@ function updateVersionNumberReferences(){
       versionFilePath = path.join(appRoot, 'VERSION'),
       yuidocFilePath = path.join(appRoot, 'yuidoc.json'),
       gemspecFilePath = path.join(appRoot, 'sideshow.gemspec'),
+      nuspecFilePath = path.join(appRoot, 'sideshow.nuspec'),
       packageJsonFilePath = path.join(appRoot, 'package.json'),
       changelogFilePath = path.join(appRoot, 'CHANGELOG.md'),
       copyrightInfoFilePath = path.join(appRoot, 'src', 'copyright_info.js'),
@@ -267,7 +300,7 @@ function updateVersionNumberReferences(){
   fs.readFile(versionFilePath, 'utf8', function(err, data) {
     if (err) throw err;
 
-    fs.writeFile(versionFilePath, version);
+    fs.writeFile(versionFilePath, 'v' + version + '-' + name);
   });
 
   //yuidoc.json
@@ -324,6 +357,12 @@ function updateVersionNumberReferences(){
     if (err) throw err;
 
     fs.writeFile(variablesFilePath, data.replace(/(get VERSION\(\) {\s+return )("[\d.]+")/, '$1"' + version + '"'));
+  });
+
+  fs.readFile(nuspecFilePath, 'utf8', function(err, data) {
+    if (err) throw err;
+
+    fs.writeFile(nuspecFilePath, data.replace(/(<version>)([\d.]+)(<\/version>)/, '$1' + version + '$3'));
   });
 }
 

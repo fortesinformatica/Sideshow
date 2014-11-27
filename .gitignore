@@ -16,3 +16,6 @@ bower_components/
 
 #NuGet Files
 *.nupkg
+
+#Ruby files
+*.gem
