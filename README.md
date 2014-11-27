@@ -3,6 +3,9 @@
 ![Sideshow Logo](http://fortesinformatica.github.io/Sideshow/examples/images/sideshow-logo.png)
 ========
 ![Google Analytics Beacon](https://ga-beacon.appspot.com/UA-34593010-2/Sideshow/README)
+[![Gem Version](https://badge.fury.io/rb/sideshow.svg)](http://badge.fury.io/rb/sideshow)
+[![NuGet version](https://badge.fury.io/nu/sideshow.svg)](http://badge.fury.io/nu/sideshow)
+[![Bower version](https://badge.fury.io/bo/sideshow.svg)](http://badge.fury.io/bo/sideshow)
 
 [Documentation and Live example](http://fortesinformatica.github.io/Sideshow)
 
