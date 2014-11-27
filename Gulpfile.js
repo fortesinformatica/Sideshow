@@ -8,7 +8,6 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
-    cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     open = require('open'),
     del = require('del'),
@@ -17,16 +16,17 @@ var gulp = require('gulp'),
     util = require('gulp-util'),
     prettify = require('gulp-prettify'),
     beautify = require('gulp-beautify'),
-    extender = require('./gulp/extensions/gulp-html-extend'),
     stylus = require('gulp-stylus'),
     include = require('gulp-include'),
-    merge2 = require('merge2'),
     fs = require('fs'),
     path = require('path'),
     prompt = require('gulp-prompt'),
     yuidoc = require('gulp-yuidoc'),
     bower = require('gulp-bower'),
     unzip = require('gulp-unzip'),
+    zip = require('gulp-zip'),
+    gzip = require('gulp-gzip'),
+    tar = require('gulp-tar'),
     run = require('gulp-run'),
     git = require('gift'),
     repo = git('./'),
@@ -47,14 +47,6 @@ gulp.task('style', function(){
 //Examples pages Style task
 gulp.task('examples-style', function(){
   compileExamplesStylesheet();
-});
-
-//Compiles the partials for the Examples Pages
-gulp.task('examples-partials', function(){
-  // gulp.src('examples/partials/*.html')
-  // .pipe(extender())
-  // .pipe(prettify({indent_size: 4}))
-  // .pipe(gulp.dest('./examples'));
 });
 
 //Bundle Nexit modules with Browserify
@@ -116,9 +108,24 @@ gulp.task('complete-build', function() {
   } 
 });
 
+
 gulp.task('pack', function() {
+  zipDistributableFiles();
   generatePackages();
 });
+
+function zipDistributableFiles(){
+  var distr = gulp.src(['./distr*/**/*', './examples*/**/*', 'example.html']);
+
+  distr
+  .pipe(zip('sideshow.zip'))
+  .pipe(gulp.dest('./'));
+
+  distr
+  .pipe(tar('sideshow.tar'))
+  .pipe(gzip())
+  .pipe(gulp.dest('./'));
+}
 
 function generatePackages(){
   repo.status(function(err, status){
@@ -165,7 +172,7 @@ function updateBowerDependencies(){
     });
 
     gulp.src('./bower_components/jquery/dist/jquery.min.js')
-    .pipe(gulp.dest("./distr/dependencies"));
+    .pipe(gulp.dest('./distr/dependencies'));
   });
 }
 
