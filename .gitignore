@@ -1,2 +1,21 @@
-.sass-cache/
+#General
 tmp/
+
+#Node/NPM related
+node_modules
+npm-debug.log
+
+#Bower related
+bower_components/
+
+#Mac OS Files
+.DS_Store
+
+#Sublime specific
+*.sublime-workspace
+
+#NuGet Files
+*.nupkg
+
+#Ruby files
+*.gem
