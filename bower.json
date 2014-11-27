@@ -1,0 +1,44 @@
+{
+  "name": "Sideshow",
+  "version": "0.4.0",
+  "homepage": "http://fortesinformatica.github.io/Sideshow",
+  "authors": [
+    "Alcides Queiroz <alcidesqueiroz@gmail.com>"
+  ],
+  "description": "Sideshow is a powerful javascript library which aims to reduce your user''s learning curve by providing a way to create step-by-step interactive helps.",
+  "main": "distr/sideshow.js",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "sideshow",
+    "interactive",
+    "tutorial",
+    "tour",
+    "help",
+    "wizard",
+    "step-by-step",
+    "library",
+    "script",
+    "javascript"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "docs",
+    "node_modules",
+    "gulp",
+    "bower_components",
+    "icons",
+    "src",
+    "stylesheets",
+    "tmp",
+    "./.*",
+    "./*.*",
+    "./VERSION"
+  ],
+  "dependencies": {
+    "jquery": "latest",
+    "pagedown": "http://pagedown.googlecode.com/archive/2a8c75ce3fb50b88165efae9d48a8bc87dc4fb2b.zip"
+  }
+}

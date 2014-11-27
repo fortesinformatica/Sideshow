@@ -25,6 +25,8 @@ var gulp = require('gulp'),
     path = require('path'),
     prompt = require('gulp-prompt'),
     yuidoc = require('gulp-yuidoc'),
+    bower = require('gulp-bower'),
+    unzip = require('gulp-unzip'),
     webserverPort = 8080;
     //config = require('./gulp/config');
 
@@ -87,11 +89,15 @@ gulp.task('update-version', function(){
   updateVersionNumberReferences();
 });
 
+gulp.task('update-bower', function(){
+  updateBowerDependencies();
+});
+
 gulp.task('generate-docs', function() {
   generateDocumentation();
 });
 
-gulp.task('prepare-build', ['update-version', 'clean'], function() {
+gulp.task('prepare-build', ['update-version', 'update-bower','clean'], function() {
   console.log('Remember to edit the CHANGELOG file before doing a complete build.');
 });
 
@@ -104,6 +110,32 @@ gulp.task('complete-build', function() {
     });
   } 
 });
+
+gulp.task('pack', function() {
+  generatePackages();
+});
+
+function generatePackages(){
+
+}
+
+function updateBowerDependencies(){
+  bower()
+  .on('end', function(){
+    gulp.src('./bower_components/pagedown/index.zip')
+    .pipe(unzip())
+    .pipe(gulp.dest('./bower_components/pagedown'))
+    .on('end', function(){
+      gulp.src('./bower_components/pagedown/pagedown-*/Markdown.Converter.js')
+      .pipe(uglify())
+      .pipe(rename('pagedown.min.js'))
+      .pipe(gulp.dest('./distr/dependencies'));
+    });
+
+    gulp.src('./bower_components/jquery/dist/jquery.min.js')
+    .pipe(gulp.dest("./distr/dependencies"));
+  });
+}
 
 function compileSideshowStylesheets(){
   return gulp.src('stylesheets/sideshow.styl')
