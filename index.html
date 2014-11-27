@@ -388,10 +388,11 @@ limitations under the License.</p>
     <script src="distr/dependencies/jquery.min.js"></script>
     <script>
         $("#get_sideshow").click(function(){
+            var baseUrl = "https://github.com/fortesinformatica/Sideshow/raw/master/sideshow";
             if(navigator.platform.indexOf("Win")!=-1)
-                location.href = "sideshow.zip";
+                location.href = baseUrl + ".zip";
             else
-                location.href = "sideshow.tar.gz";
+                location.href = baseUrl + ".tar.gz";
         });
 
         $("#live_example").click(function(){
