@@ -128,16 +128,17 @@ function zipDistributableFiles(){
 }
 
 function generatePackages(){
-  repo.status(function(err, status){
-    if(Object.keys(status.files).length === 0){
-      var versionFilePath = path.join(appRoot, 'VERSION');
+  del(['*.gem', '*.nupkg'], function(){
+    repo.status(function(err, status){
+      if(Object.keys(status.files).length === 0){
+        var versionFilePath = path.join(appRoot, 'VERSION');
 
-      fs.readFile(versionFilePath, 'utf8', function(err, version) {
-        gulp.src('./')
-        .pipe(run('git tag -a ' + version + ' -m \'' + version + '\''))
-        .pipe(run('git push --all origin'))
-        .on('end', function(){
+        fs.readFile(versionFilePath, 'utf8', function(err, version) {
+          gulp.src('./')
+          .pipe(run('git tag -a ' + version + ' -m \'' + version + '\''))
+          .pipe(run('git push --all origin'));
           
+
           console.log('Building and pushing Sideshow gem');
           gulp.src('./')
           .pipe(run('gem build sideshow.gemspec'))
@@ -150,12 +151,11 @@ function generatePackages(){
             .pipe(run('nuget push sideshow*.nupkg'));
           }
         });
-      });
-    } else {
-      console.log('Before packing a new version you must commit your changes.')
-    }
+      } else {
+        console.log('Before packing a new version you must commit your changes.')
+      }
+    });
   });
-  
 }
 
 function updateBowerDependencies(){
