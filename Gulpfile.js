@@ -131,7 +131,8 @@ function generatePackages(){
   del(['*.gem', '*.nupkg'], function(){
     repo.status(function(err, status){
       if(Object.keys(status.files).length === 0){
-        var versionFilePath = path.join(appRoot, 'VERSION');
+        var versionFilePath = path.join(appRoot, 'VERSION'),
+            versionNumber = versionFilePath.match(/[\d.]+/);
 
         fs.readFile(versionFilePath, 'utf8', function(err, version) {
           gulp.src('./')
@@ -142,13 +143,13 @@ function generatePackages(){
           console.log('Building and pushing Sideshow gem');
           gulp.src('./')
           .pipe(run('gem build sideshow.gemspec'))
-          .pipe(run('gem push sideshow*.gem'));
+          .pipe(run('gem push sideshow- ' + versionNumber + '.gem'));
 
           if(isWin){
             console.log('Packing and pushing Sideshow nuget package');
             gulp.src('./')
             .pipe(run('nuget pack sideshow.nuspec'))
-            .pipe(run('nuget push sideshow*.nupkg'));
+            .pipe(run('nuget push sideshow.' + versionNumber + '.nupkg'));
           }
         });
       } else {
