@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.authors     = ['Alcides Queiroz']
   s.email       = ['alcidesqueiroz@gmail.com']
   s.homepage    = 'http://fortesinformatica.github.io/Sideshow'
-  s.summary     = 'Sideshow is a powerful javascript library which aims to reduce your user''s learning curve by providing a way to create step-by-step interactive helps.'
+  s.summary     = 'An incredible Javascript interactive help Library'
   s.license     = 'Apache 2.0'
-  s.description = s.summary
+  s.description = 'Sideshow is a powerful javascript library which aims to reduce your user''s learning curve by providing a way to create step-by-step interactive helps.'
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ['distr']
 

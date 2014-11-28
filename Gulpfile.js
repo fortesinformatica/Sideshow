@@ -131,10 +131,11 @@ function generatePackages(){
   del(['*.gem', '*.nupkg'], function(){
     repo.status(function(err, status){
       if(Object.keys(status.files).length === 0){
-        var versionFilePath = path.join(appRoot, 'VERSION'),
-            versionNumber = versionFilePath.match(/[\d.]+/);
+        var versionFilePath = path.join(appRoot, 'VERSION');
 
         fs.readFile(versionFilePath, 'utf8', function(err, version) {
+          var versionNumber = version.match(/[\d.]+/);
+
           gulp.src('./')
           .pipe(run('git tag -a ' + version + ' -m \'' + version + '\''))
           .pipe(run('git push --all origin'));
@@ -143,7 +144,7 @@ function generatePackages(){
           console.log('Building and pushing Sideshow gem');
           gulp.src('./')
           .pipe(run('gem build sideshow.gemspec'))
-          .pipe(run('gem push sideshow- ' + versionNumber + '.gem'));
+          .pipe(run('gem push sideshow-' + versionNumber + '.gem'));
 
           if(isWin){
             console.log('Packing and pushing Sideshow nuget package');
@@ -158,6 +159,7 @@ function generatePackages(){
     });
   });
 }
+
 
 function updateBowerDependencies(){
   bower()
