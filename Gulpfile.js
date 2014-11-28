@@ -28,6 +28,7 @@ var gulp = require('gulp'),
     gzip = require('gulp-gzip'),
     tar = require('gulp-tar'),
     run = require('gulp-run'),
+    wait = require('gulp-wait'),
     git = require('gift'),
     repo = git('./'),
     webserverPort = 8080,
@@ -128,6 +129,8 @@ function zipDistributableFiles(){
 }
 
 function generatePackages(){
+  var target = util.env.target || 'all';
+
   del(['*.gem', '*.nupkg'], function(){
     repo.status(function(err, status){
       if(Object.keys(status.files).length === 0){
@@ -136,20 +139,27 @@ function generatePackages(){
         fs.readFile(versionFilePath, 'utf8', function(err, version) {
           var versionNumber = version.match(/[\d.]+/);
 
-          gulp.src('./')
-          .pipe(run('git tag -a ' + version + ' -m \'' + version + '\''))
-          .pipe(run('git push --all origin'));
+          if(['all', 'github'].indexOf(target) > -1){
+            console.log('Generating git tag and push everything.');
+            gulp.src('./')
+            .pipe(run('git tag -a ' + version + ' -m \'' + version + '\''))
+            .pipe(wait(5000))
+            .pipe(run('git push --all origin'));
+          }
           
+          if(['all', 'gem'].indexOf(target) > -1){
+            console.log('Building and pushing Sideshow gem');
+            gulp.src('./')
+            .pipe(run('gem build sideshow.gemspec'))
+            .pipe(wait(5000))
+            .pipe(run('gem push sideshow-' + versionNumber + '.gem'));
+          }
 
-          console.log('Building and pushing Sideshow gem');
-          gulp.src('./')
-          .pipe(run('gem build sideshow.gemspec'))
-          .pipe(run('gem push sideshow-' + versionNumber + '.gem'));
-
-          if(isWin){
+          if(isWin && ['all', 'nuget'].indexOf(target) > -1){
             console.log('Packing and pushing Sideshow nuget package');
             gulp.src('./')
             .pipe(run('nuget pack sideshow.nuspec'))
+            .pipe(wait(5000))
             .pipe(run('nuget push sideshow.' + versionNumber + '.nupkg'));
           }
         });
