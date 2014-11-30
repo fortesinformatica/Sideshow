@@ -8,6 +8,8 @@
 [![Bower version](https://badge.fury.io/bo/sideshow.svg)](http://badge.fury.io/bo/sideshow)
 [![Node.js devDependency Status](https://david-dm.org/fortesinformatica/sideshow/dev-status.svg)](https://david-dm.org/fortesinformatica/sideshow#info=devDependencies)
 [![License](http://img.shields.io/badge/license-Apache_2.0-red.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
+
 [Documentation and Live example](http://fortesinformatica.github.io/Sideshow)
 
 Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps. 
