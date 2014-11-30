@@ -8,13 +8,13 @@ After yanking the version 0.4.0 of the gem and removed the NuGet package too, I'
 #Version 0.4.0 citizen-kane (2014-11-27)
 
 ##General
-Replaced old shell script build with Gulp
-Replaced Sass+Compass with Stylus
-Removed any Ruby dependency
-Distributing Sideshow as a NuGet package, a Ruby Gem and a Bower component.
+- Replaced old shell script build with Gulp
+- Replaced Sass+Compass with Stylus
+- Removed any Ruby dependency
+- Distributing Sideshow as a NuGet package, a Ruby Gem and a Bower component.
 
 ##Fixes
-Fixed a bug in the polling functions for monitoring subject and targets changes. 
+- Fixed a bug in the polling functions for monitoring subject and targets changes. 
 
 ------------------------------------------------------------
 

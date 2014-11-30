@@ -1,16 +1,16 @@
 {
-	"folders":
-	[
-		{
-			"folder_exclude_patterns":
-			[
+    "folders":
+    [
+        {
+            "folder_exclude_patterns":
+            [
                 "node_modules",
-				"bower_components"
-			],
-			"follow_symlinks": true,
-			"path": "."
-		}
-	],
+                "bower_components"
+            ],
+            "follow_symlinks": true,
+            "path": "."
+        }
+    ],
     "build_systems":
     [
         {
