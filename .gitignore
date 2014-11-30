@@ -1,7 +1,5 @@
 #General
 tmp/
-sideshow.zip
-sideshow.tar.gz
 
 #Node/NPM related
 node_modules

@@ -115,6 +115,10 @@ gulp.task('pack', function() {
   generatePackages();
 });
 
+gulp.task('zip', function() {
+  zipDistributableFiles();
+});
+
 function zipDistributableFiles(){
   var distr = gulp.src(['./distr*/**/*', './examples*/**/*', 'example.html']);
 
