@@ -1,8 +1,8 @@
 /**
  @license
  Sideshow - An incredible Javascript interactive help Library
- Version: 0.4.1
- Date: 2014-11-27
+ Version: 0.4.2
+ Date: 2015-03-10
  Author: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]
  Available under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)
  **/
@@ -74,7 +74,7 @@
 
         get VERSION() {
 
-          return "0.4.1";
+          return "0.4.2";
 
         }
 
@@ -152,6 +152,18 @@
     function showWarning(code, message) {
       console.warn("[SIDESHOW_W#" + ("00000000" + code).substr(-8) + "] " + message);
     }
+
+    /**
+     Shows a deprecation warning in a pre-defined format
+     
+     @@function showDeprecationWarning
+     @param {String} message                               The warning message
+     **/
+
+    function showDeprecationWarning(message) {
+      console.warn("[DEPRECATION_WARNING] " + message);
+    }
+
 
     /**
      Parses a string in the format "#px" in a number
@@ -2281,7 +2293,14 @@
       flags.running = false;
     };
 
+    /**
+     @deprecated
+     @method runWizard
+     @static
+     **/
     SS.runWizard = function (name) {
+      showDeprecationWarning("This method is deprecated and will be removed until the next major version of Sideshow.");
+
       var wiz = wizards.filter(function (w) {
         return w.name === name
       })[0];
@@ -2294,7 +2313,7 @@
           }, 1000);
         });
         else throw new SSException("204", "This wizard hasn't preparation.");
-      } else throw new SSException("204", "There's no wizard with name " + name + ".");
+      } else throw new SSException("205", "There's no wizard with name " + name + ".");
     };
 
     SS.gotoStep = function () {
@@ -2479,13 +2498,24 @@
      **/
     SS.start = function (config) {
       config = config || {};
+
       if (!flags.running) {
         var onlyNew = "onlyNew" in config && !! config.onlyNew;
         var listAll = "listAll" in config && !! config.listAll;
+        var wizardName = config.wizardName;
 
         if (listAll) SS.showWizardsList(wizards.filter(function (w) {
           return w.isEligible() || w.preparation;
         }));
+        else if (wizardName) {
+          var wizard = wizards.filter(function (w) {
+            return w.name === wizardName;
+          })[0];
+
+          if (!wizard) throw new SSException("205", "There's no wizard with name '" + wizardName + "'.");
+
+          wizard.prepareAndPlay();
+        }
         else SS.showWizardsList(onlyNew);
 
         this.CloseButton.singleInstance.render();
@@ -2499,6 +2529,7 @@
         });
       }
     };
+
 
 
 

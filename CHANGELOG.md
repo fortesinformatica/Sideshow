@@ -1,7 +1,14 @@
+#Version 0.4.2 platoon (2015-03-10)
+
+##General
+- Now, you can start a wizard directly, by calling the `Sideshow.start` method passing the option `wizardName`, which is the unique name for the wizard you want to start.
+
+------------------------------------------------------------
+
 #Version 0.4.1 the-hobbit (2014-11-27)
 
 ##Fixes
-After yanking the version 0.4.0 of the gem and removed the NuGet package too, I'm republishing them...
+- After yanking the version 0.4.0 of the gem and removed the NuGet package too, I'm republishing them...
 
 ------------------------------------------------------------
 

@@ -10,6 +10,18 @@
     }
 
     /**
+     Shows a deprecation warning in a pre-defined format
+     
+     @@function showDeprecationWarning
+     @param {String} message                               The warning message
+     **/
+
+    function showDeprecationWarning(message) {
+        console.warn("[DEPRECATION_WARNING] " + message);
+    }
+
+
+    /**
     Parses a string in the format "#px" in a number
 
     @@function parsePxValue
