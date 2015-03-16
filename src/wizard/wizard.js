@@ -211,10 +211,13 @@
             var description = StepDescription.singleInstance;
             var text = step.text;
             text = text instanceof Function ? SS.heredoc(text) : text;
-            if (step.format == "markdown") {
+            if(step.format == "html") {
+                description.setHTML(text);
+            } else if (step.format == "markdown") {
                 description.setHTML(new markdown.Converter().makeHtml(text));
-            } else
+            } else {
                 description.setText(text);
+            }
 
             description.setTitle(step.title);
             description.setStepPosition((this.getStepPosition() + 1) + "/" + this._storyline.steps.length);
