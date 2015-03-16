@@ -238,7 +238,7 @@
 
             if (step.targets && step.targets.length > 0) {
                 Arrows.setTargets(step.targets);
-                Arrows.render();
+                Arrows.render(step.arrowPosition);
                 Arrows.positionate();
                 Arrows.fadeIn();
             }

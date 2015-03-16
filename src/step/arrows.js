@@ -131,9 +131,10 @@
     @method render
     @static
     **/
-    Arrows.render = function() {
+    Arrows.render = function(arrowPosition) {
         for (var a = 0; a < this.arrows.length; a++) {
             var arrow = this.arrows[a];
+            arrow.position = arrowPosition || "top";
             arrow.render();
         }
     };

@@ -14,6 +14,15 @@
     Arrow.field("target", {});
 
     /**
+    The position of the arrow. Valid values are "top", "right", "bottom" or "left". Defaults to "top"
+
+    @@field position
+    @type String
+    **/
+
+    Arrow.field("position", "");
+
+    /**
     Flag created to set if the arrow was visible once, this is used for recreating references to the targets DOM objects
 
     @@field onceVisible
@@ -29,9 +38,11 @@
     Arrow.method("render", function() {
         this.$el = $("<div>")
             .addClass("sideshow-subject-arrow")
+            .addClass(this.position)
             .addClass("sideshow-hidden")
             .addClass("sideshow-invisible");
         this.callSuper("render");
+      //
     });
 
     /**
@@ -40,18 +51,38 @@
     @method positionate
     **/
     Arrow.method("positionate", function() {
-        var target = this.target;
+        var target = this.target,
+            position = this.position;
+
         target.position = {
             x: target.$el.offset().left - $window.scrollLeft(),
             y: target.$el.offset().top - $window.scrollTop()
         };
         target.dimension = {
-            width: target.$el.outerWidth(),
-            height: target.$el.outerHeight()
+            width: parsePxValue(target.$el.outerWidth()),
+            height: parsePxValue(target.$el.outerHeight())
         };
 
-        this.$el.css("top", target.position.y - 30 + "px")
-            .css("left", target.position.x + (parsePxValue(target.dimension.width) / 2) - 12 + "px");
+        var coordinates = { // a dictionary with each of the coordinates used for positioning Arrow
+            top: {
+                x: target.position.x + target.dimension.width / 2 - 20 + "px",
+                y: target.position.y - 30 + "px"
+            },
+            right: {
+                x: target.position.x + target.dimension.width - 12 + "px",
+                y: target.position.y + target.dimension.height / 2 - 6 + "px"
+            },
+            bottom: {
+                x: target.position.x + target.dimension.width / 2 - 35 + "px",
+                y: target.position.y + target.dimension.height + 2 + "px"
+            },
+            left: {
+                x: target.position.x - 35 + "px",
+                y: target.position.y + target.dimension.height / 2 - 22 + "px"
+            }
+        };
+
+      this.$el.css({left: coordinates[position].x, top: coordinates[position].y});
     });
 
     /**
