@@ -173,10 +173,26 @@ $sideshow-button{
 	position: fixed;
 	z-index: 15003;
 	opacity: 0.8;
+	backface-visibility: hidden;
 	animation(  name: sideshow-subject-arrow-animation, 
 				duration: sideshow-long-transition-duration, 
 				timing-function: ease, 
 				iteration-count: infinite);
+
+	&.right {
+        animation-name: sideshow-subject-arrow-animation-right;
+		transform: rotate(90deg);
+	}
+
+	&.bottom {
+		transform: rotate(180deg);
+        animation-name: sideshow-subject-arrow-animation-bottom;
+	}
+
+	&.left {
+		transform: rotate(270deg);
+        animation-name: sideshow-subject-arrow-animation-left;
+	}
 
 	&:before{
 		line-height: 0.5;

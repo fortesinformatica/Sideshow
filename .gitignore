@@ -19,3 +19,5 @@ bower_components/
 
 #Ruby files
 *.gem
+
+.idea/*
