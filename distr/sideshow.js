@@ -2294,7 +2294,7 @@
      **/
     SS.heredoc = function (fn) {
       return fn.toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
-    }
+    };
 
     /**
      Stops and Closes Sideshow
@@ -2316,6 +2316,9 @@
         Mask.SubjectMask.singleInstance.fadeOut();
 
       }, longAnimationDuration);
+
+      // if it is a premature close, make sure to call handler
+      SS.isPrematureClose() && currentWizard.listeners.onPrematureClose();
 
       removeDOMGarbage();
       Polling.clear();
@@ -2564,6 +2567,43 @@
       }
     };
 
+    /**
+     * Check if the current step is the last step of the wizard
+     * @returns {boolean}
+     */
+    SS.isLastStep = function () {
+      if (!currentWizard) return; // no current wizard, no steps to check
+      return currentWizard.currentStep == currentWizard._storyline.steps[currentWizard._storyline.steps.length - 1];
+    };
+
+    /**
+     * Check if prematureClose handler should fire
+     * @returns {boolean}
+     */
+    SS.isPrematureClose = function () {
+      // no, there's no wizard
+      if (!currentWizard) {
+        return;
+      }
+
+      // no, this is the last step
+      if (SS.isLastStep()) {
+        return;
+      }
+
+      // no, there are no listeners
+      if (!currentWizard.listeners) {
+        return;
+      }
+
+      // no, there is no onPrematureClose handler
+      if (!currentWizard.listeners.onPrematureClose) {
+        return;
+      }
+
+      // yes, this is a premature close
+      return true;
+    };
 
 
 
