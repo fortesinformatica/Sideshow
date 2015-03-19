@@ -6,7 +6,7 @@
 [![Gem Version](https://badge.fury.io/rb/sideshow.svg)](http://badge.fury.io/rb/sideshow)
 [![NuGet version](https://badge.fury.io/nu/sideshow.svg)](http://badge.fury.io/nu/sideshow)
 [![Bower version](https://badge.fury.io/bo/sideshow.svg)](http://badge.fury.io/bo/sideshow)
-[![Node.js devDependency Status](https://david-dm.org/fortesinformatica/sideshow/dev-status.svg)](https://david-dm.org/fortesinformatica/sideshow#info=devDependencies)
+[![Node.js devDependency Status](https://david-dm.org/sideshowjs/sideshow/dev-status.svg)](https://david-dm.org/sideshowjs/sideshow#info=devDependencies)
 [![License](http://img.shields.io/badge/license-Apache_2.0-red.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 
