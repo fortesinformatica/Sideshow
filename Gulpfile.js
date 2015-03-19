@@ -148,9 +148,10 @@ function generatePackages(){
             gulp.src('./')
             .pipe(run('git tag -a ' + version + ' -m \'' + version + '\''))
             .pipe(wait(5000))
-            .pipe(run('git push --all origin'));
+            .pipe(run('git push --all origin'))
+            .pipe(run('git push --tags origin'));
           }
-          
+
           if(['all', 'gem'].indexOf(target) > -1){
             console.log('Building and pushing Sideshow gem');
             gulp.src('./')
