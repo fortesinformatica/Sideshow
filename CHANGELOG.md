@@ -1,3 +1,10 @@
+#Version 0.4.3 taxi-driver (2015-03-19)
+
+##General
+- Position the arrows which point at `targets`, by providing the `arrowPosition` property to the step object. Valid values are `top`, `right`, `bottom` and `left`.
+
+------------------------------------------------------------
+
 #Version 0.4.2 platoon (2015-03-10)
 
 ##General
