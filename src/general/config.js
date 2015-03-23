@@ -40,3 +40,12 @@
 	@type boolean
 	**/
 	SS.config.autoSkipIntro = false;
+
+    /**
+     Defines where to place the close button. Default is "bottom-right".
+     When set to "step", it will position on the step description
+
+     @@field showClose
+     @type boolean
+     **/
+    SS.config.closePosition = 'bottom-right';

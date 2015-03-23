@@ -108,6 +108,18 @@
         this.$el.append(stepPosition);
         if (currentWizard.showStepPosition === false) stepPosition.hide();
 
+        // Check if close button should be on step
+        if (SS.config.closePosition === 'step') {
+            // render the close button on the step
+            var $closeStep = $("<button>")
+                .addClass("sideshow-close-step")
+                .click(function () {
+                    SS.close();
+                });
+
+            this.$el.append($closeStep);
+        }
+
         this.$el.append($("<h2>"));
         this.$el.append($("<div>").addClass("sideshow-step-text"));
         this.nextButton.render(this.$el);

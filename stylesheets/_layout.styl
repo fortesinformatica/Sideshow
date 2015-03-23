@@ -325,21 +325,29 @@ $sideshow-button{
 	}
 }
 
+$close-button{
+  icon-close();
+  icon-font-size(sideshow-medium-font-size);
+  color: sideshow-close-button-foreground-color;
+  font-size: sideshow-medium-font-size;
+  border-width: 0;
+  cursor: pointer;
+
+  &:active{
+    outline-width: 0 !important;
+  }
+}
+
 //The Sideshow close button
 .sideshow-close-button{
-	icon-close();
-	icon-font-size(sideshow-medium-font-size);
+    @extends $close-button;
 	text-shadow: 0 0 5px #030, 0 0 3px #000, 0 2px 3px #000;
 	transition: text-shadow sideshow-default-transition-duration ease;
-	border-width: 0;
 	background-color: transparent !important;
 	z-index: 15005;
 	position: fixed;
-	color: sideshow-close-button-foreground-color;
-	font-size: sideshow-medium-font-size;
 	bottom: 25px;
 	right: 25px;
-	cursor: pointer;
 	text-transform: uppercase;
 	
 	&:hover{
@@ -348,14 +356,29 @@ $sideshow-button{
 		left: auto;
 		top: auto;
 	}
-	
-	&:active{
-		outline-width: 0 !important;
-	}
-	
-	&:before{
-		margin-right: 5px;
-	}
+
+    &:before{
+      margin-right: 5px;
+    }
+}
+
+.sideshow-close-step {
+    @extends $close-button;
+    background: rgba(black, 0.1);
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-top:-21px;
+    margin-right: -21px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: rgba(black, 0.3);
+    }
+
+    &:before{
+      margin-right: 0;
+    }
 }
 
 //The Sideshow initial menu style when no tutorials are available

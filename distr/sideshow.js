@@ -286,6 +286,15 @@
      **/
     SS.config.autoSkipIntro = false;
 
+    /**
+     Defines where to place the close button. Default is "bottom-right".
+     When set to "step", it will position on the step description
+     
+     @@field showClose
+     @type boolean
+     **/
+    SS.config.closePosition = 'bottom-right';
+
 
     /**
      Stores the variables used in step evaluators 
@@ -1370,6 +1379,16 @@
       var stepPosition = $("<span>").addClass("sideshow-step-position");
       this.$el.append(stepPosition);
       if (currentWizard.showStepPosition === false) stepPosition.hide();
+
+      // Check if close button should be on step
+      if (SS.config.closePosition === 'step') {
+        // render the close button on the step
+        var $closeStep = $("<button>").addClass("sideshow-close-step").click(function () {
+          SS.close();
+        });
+
+        this.$el.append($closeStep);
+      }
 
       this.$el.append($("<h2>"));
       this.$el.append($("<div>").addClass("sideshow-step-text"));
@@ -2530,8 +2549,10 @@
         }
         else SS.showWizardsList(onlyNew);
 
-        this.CloseButton.singleInstance.render();
-        this.CloseButton.singleInstance.fadeIn();
+        if (SS.config.closePosition !== 'step') {
+          this.CloseButton.singleInstance.render();
+          this.CloseButton.singleInstance.fadeIn();
+        }
 
         registerInnerHotkeys();
         flags.running = true;

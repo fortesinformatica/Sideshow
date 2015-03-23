@@ -290,8 +290,10 @@
             } 
             else SS.showWizardsList(onlyNew);
 
-            this.CloseButton.singleInstance.render();
-            this.CloseButton.singleInstance.fadeIn();
+            if (SS.config.closePosition !== 'step') {
+                this.CloseButton.singleInstance.render();
+                this.CloseButton.singleInstance.fadeIn();
+            }
 
             registerInnerHotkeys();
             flags.running = true;
