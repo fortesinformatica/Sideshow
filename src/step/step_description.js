@@ -109,7 +109,7 @@
         if (currentWizard.showStepPosition === false) stepPosition.hide();
 
         // Check if close button should be on step
-        if (SS.config.closePosition === 'step') {
+        if (SS.config.closeButtonPosition === 'description-box') {
             // render the close button on the step
             var $closeStep = $("<button>")
                 .addClass("sideshow-close-step")

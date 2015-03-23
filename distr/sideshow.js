@@ -287,13 +287,13 @@
     SS.config.autoSkipIntro = false;
 
     /**
-     Defines where to place the close button. Default is "bottom-right".
-     When set to "step", it will position on the step description
+     Defines where to place the close button. Default is "screen-corner".
+     When set to "description-box", it will position on the step description
      
      @@field showClose
      @type boolean
      **/
-    SS.config.closePosition = 'bottom-right';
+    SS.config.closeButtonPosition = "screen-corner";
 
 
     /**
@@ -1381,7 +1381,7 @@
       if (currentWizard.showStepPosition === false) stepPosition.hide();
 
       // Check if close button should be on step
-      if (SS.config.closePosition === 'step') {
+      if (SS.config.closeButtonPosition === 'description-box') {
         // render the close button on the step
         var $closeStep = $("<button>").addClass("sideshow-close-step").click(function () {
           SS.close();
@@ -2549,7 +2549,7 @@
         }
         else SS.showWizardsList(onlyNew);
 
-        if (SS.config.closePosition !== 'step') {
+        if (SS.config.closeButtonPosition !== 'description-box') {
           this.CloseButton.singleInstance.render();
           this.CloseButton.singleInstance.fadeIn();
         }
@@ -2560,6 +2560,7 @@
         Polling.enqueue("check_composite_mask_screen_changes", function () {
           Mask.CompositeMask.singleInstance.pollForScreenChanges();
         });
+        //
       }
     };
 

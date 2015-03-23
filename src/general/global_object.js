@@ -290,7 +290,7 @@
             } 
             else SS.showWizardsList(onlyNew);
 
-            if (SS.config.closePosition !== 'step') {
+            if (SS.config.closeButtonPosition !== 'description-box') {
                 this.CloseButton.singleInstance.render();
                 this.CloseButton.singleInstance.fadeIn();
             }
