@@ -107,6 +107,7 @@
         var stepPosition = $("<span>").addClass("sideshow-step-position");
         this.$el.append(stepPosition);
         if (currentWizard.showStepPosition === false) stepPosition.hide();
+        currentWizard.name && this.$el.attr('data-name', currentWizard.name);
 
         // Check if close button should be on step
         if (SS.config.closeButtonPosition === 'description-box') {

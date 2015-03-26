@@ -7,15 +7,6 @@
  Available under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)
  **/
 
-/**
- @license
- Sideshow - An incredible Javascript interactive help Library
- Version: 0.4.3
- Date: 2015-03-19
- Author: Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]
- Available under Apache License 2.0 (https://raw2.github.com/fortesinformatica/sideshow/master/LICENSE)
- **/
-
 ;
 (function (global, $, jazz, markdown) {
   (function (name, module) {
@@ -1388,6 +1379,7 @@
       var stepPosition = $("<span>").addClass("sideshow-step-position");
       this.$el.append(stepPosition);
       if (currentWizard.showStepPosition === false) stepPosition.hide();
+      currentWizard.name && this.$el.attr('data-name', currentWizard.name);
 
       // Check if close button should be on step
       if (SS.config.closeButtonPosition === 'description-box') {
