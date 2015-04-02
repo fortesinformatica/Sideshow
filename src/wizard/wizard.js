@@ -180,81 +180,82 @@
             wizard.next();
         }
 
-        if (step && step.listeners && step.listeners.beforeStep)
-            step.listeners.beforeStep();
-
         //The shown step is, of course, the current
         this.currentStep = step;
 
         //If the step has a skipIf evaluator and it evaluates to true, we'll skip to the next step!
         if (step.skipIf && step.skipIf())
             skipStep(this);
+        
+        if(!flags.skippingStep){
+          if (step && step.listeners && step.listeners.beforeStep)
+              step.listeners.beforeStep();
 
-        if (flags.changingStep && !flags.skippingStep) {
-            //Sets the current subject and updates its dimension and position
-            if (step.subject)
-                SS.setSubject(step.subject);
-            else
-                SS.setEmptySubject();
-            //Updates the mask
-            Mask.CompositeMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
+          if (flags.changingStep) {
+              //Sets the current subject and updates its dimension and position
+              if (step.subject)
+                  SS.setSubject(step.subject);
+              else
+                  SS.setEmptySubject();
+              //Updates the mask
+              Mask.CompositeMask.singleInstance.update(Subject.position, Subject.dimension, Subject.borderRadius);
 
-            var sm = Mask.SubjectMask.singleInstance;
-            sm.fadeOut(function() {
-                if (step.lockSubject) sm.show(true);
-            });
-            //The details panel (that wraps the step description and arrow) is shown
-            DetailsPanel.singleInstance.show();
-            //Repositionate the details panel depending on the remaining space in the screen
-            DetailsPanel.singleInstance.positionate();
-            //Sets the description properties (text, title and step position)
-            var description = StepDescription.singleInstance;
-            var text = step.text;
-            text = text instanceof Function ? SS.heredoc(text) : text;
-            if(step.format == "html") {
-                description.setHTML(text);
-            } else if (step.format == "markdown") {
-                description.setHTML(new markdown.Converter().makeHtml(text));
-            } else {
-                description.setText(text);
-            }
+              var sm = Mask.SubjectMask.singleInstance;
+              sm.fadeOut(function() {
+                  if (step.lockSubject) sm.show(true);
+              });
+              //The details panel (that wraps the step description and arrow) is shown
+              DetailsPanel.singleInstance.show();
+              //Repositionate the details panel depending on the remaining space in the screen
+              DetailsPanel.singleInstance.positionate();
+              //Sets the description properties (text, title and step position)
+              var description = StepDescription.singleInstance;
+              var text = step.text;
+              text = text instanceof Function ? SS.heredoc(text) : text;
+              if(step.format == "html") {
+                  description.setHTML(text);
+              } else if (step.format == "markdown") {
+                  description.setHTML(new markdown.Converter().makeHtml(text));
+              } else {
+                  description.setText(text);
+              }
 
-            description.setTitle(step.title);
-            description.setStepPosition((this.getStepPosition() + 1) + "/" + this._storyline.steps.length);
-            //If this step doesn't have its own passing conditions/evaluators, or the flag "showNextButton" is true, then, the button is visible
-            if (step.showNextButton || step.autoContinue === false || !(step.completingConditions && step.completingConditions.length > 0)) {
-                var nextStep = this._storyline.steps[this.getStepPosition() + 1];
-                if (nextStep) {
-                    description.nextButton.setText(getString(strings.next) + ": " + this._storyline.steps[this.getStepPosition() + 1].title);
-                } else {
-                    description.nextButton.setText(getString(strings.finishWizard));
-                }
-                description.nextButton.show();
+              description.setTitle(step.title);
+              description.setStepPosition((this.getStepPosition() + 1) + "/" + this._storyline.steps.length);
+              //If this step doesn't have its own passing conditions/evaluators, or the flag "showNextButton" is true, then, the button is visible
+              if (step.showNextButton || step.autoContinue === false || !(step.completingConditions && step.completingConditions.length > 0)) {
+                  var nextStep = this._storyline.steps[this.getStepPosition() + 1];
+                  if (nextStep) {
+                      description.nextButton.setText(getString(strings.next) + ": " + this._storyline.steps[this.getStepPosition() + 1].title);
+                  } else {
+                      description.nextButton.setText(getString(strings.finishWizard));
+                  }
+                  description.nextButton.show();
 
-                if (step.autoContinue === false) description.nextButton.disable();
-            } else {
-                description.nextButton.hide();
-            }
+                  if (step.autoContinue === false) description.nextButton.disable();
+              } else {
+                  description.nextButton.hide();
+              }
 
-            if (step.targets && step.targets.length > 0) {
-                Arrows.setTargets(step.targets);
-                Arrows.render(step.arrowPosition);
-                Arrows.positionate();
-                Arrows.fadeIn();
-            }
+              if (step.targets && step.targets.length > 0) {
+                  Arrows.setTargets(step.targets);
+                  Arrows.render(step.arrowPosition);
+                  Arrows.positionate();
+                  Arrows.fadeIn();
+              }
 
-            //Step Description is shown, but is transparent yet (since we need to know its dimension to positionate it properly)
-            description.show(true);
-            if(!Mask.CompositeMask.singleInstance.scrollIfNecessary(Subject.position, Subject.dimension)){
-                description.positionate();
-                //Do a simple fade in for the description box
-                description.fadeIn();
-            }
-            
-
-            //If a callback is passed, call it    
-            if (callback) callback();
-            flags.changingStep = false;
+              //Step Description is shown, but is transparent yet (since we need to know its dimension to positionate it properly)
+              description.show(true);
+              if(!Mask.CompositeMask.singleInstance.scrollIfNecessary(Subject.position, Subject.dimension)){
+                  description.positionate();
+                  //Do a simple fade in for the description box
+                  description.fadeIn();
+              }
+              
+                //If a callback is passed, call it    
+              if (callback) callback();
+              flags.changingStep = false;
+          }
         }
     });
 
