@@ -104,9 +104,11 @@
             .addClass("sideshow-hidden")
             .addClass("sideshow-invisible");
 
+        var hasPaths = currentWizard._storyline.paths && currentWizard._storyline.paths.length > 0;
         var stepPosition = $("<span>").addClass("sideshow-step-position");
+
         this.$el.append(stepPosition);
-        if (currentWizard.showStepPosition === false) stepPosition.hide();
+        if (currentWizard.showStepPosition === false || hasPaths) stepPosition.hide();
         currentWizard.name && this.$el.attr('data-name', currentWizard.name);
 
         // Check if close button should be on step

@@ -86,7 +86,7 @@
 
     SS.gotoStep = function() {
         var firstArg = arguments[0],
-            steps = currentWizard._storyline.steps,
+            steps = currentWizard._getSteps(),
             destination;
 
         flags.skippingStep = true;
@@ -108,6 +108,25 @@
         setTimeout(function() {
             currentWizard.next(null, destination);
         }, 100);
+    };
+
+    /**
+    Changes the current step sequence by jumping to another path
+
+    @method gotoPath
+    @static
+    **/
+    SS.gotoPath = function(pathName){
+      var storyline = currentWizard._storyline;
+      if(!storyline.paths) throw new SSException("402", "There's no paths in this tutorial's storyline.");
+      
+      var path = storyline.paths.filter(function(p){ return p.name === pathName; });
+      
+      if(!path) throw new SSException("403", "There's no path called '" + pathName + "' in this tutorial's storyline.");
+      if(path.length > 1) throw new SSException("404", "There are multiple paths called '" + pathName + "' in this tutorial's storyline.");
+
+      currentWizard._currentPath = path[0];
+      SS.gotoStep(1);
     };
 
     /**
@@ -313,7 +332,7 @@
      */
     SS.isLastStep = function () {
         if(!currentWizard) return; // no current wizard, no steps to check
-        return currentWizard.currentStep == currentWizard._storyline.steps[currentWizard._storyline.steps.length -1];
+        return currentWizard.currentStep == currentWizard._getSteps()[currentWizard._storyline.steps.length -1];
     };
 
     /**

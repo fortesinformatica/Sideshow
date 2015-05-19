@@ -585,6 +585,7 @@
       this.preparation = wizardConfig.preparation;
       this.listeners = wizardConfig.listeners;
       this.showStepPosition = wizardConfig.showStepPosition;
+      this.enableNextButtonTitle = wizardConfig.enableNextButtonTitle;
       this.relatedWizards = wizardConfig.relatedWizards;
     });
 
@@ -694,6 +695,8 @@
     Wizard.method("play", function () {
       var wiz = this;
 
+      wiz._currentPath = null;
+
       Polling.enqueue("check_composite_mask_subject_changes", function () {
         Mask.CompositeMask.singleInstance.pollForSubjectChanges();
       });
@@ -704,7 +707,7 @@
 
       //Checks if the wizard has a storyline
       if (!this._storyline) throw new SSException("201", "A wizard needs to have a storyline.");
-      var steps = this._storyline.steps;
+      var steps = this._getSteps();
 
       //Checks if the storyline has at least one step
       if (steps.length === 0) throw new SSException("202", "A storyline must have at least one step.");
@@ -720,7 +723,6 @@
       this.showStep(steps[0], function () {
         //Releases the polling for checking any changes in the current subject
         //flags.lockMaskUpdate = false;
-
         //Register the function that checks the completing of a step in the polling queue
         Polling.enqueue("check_completed_step", function () {
           wiz.pollForCheckCompletedStep();
@@ -787,12 +789,16 @@
           }
 
           description.setTitle(step.title);
-          description.setStepPosition((this.getStepPosition() + 1) + "/" + this._storyline.steps.length);
+
+          description.setStepPosition((this.getStepPosition() + 1) + "/" + this._getSteps().length);
+
+          var hasPaths = wizard._storyline.paths && wizard._storyline.paths.length > 0;
+
           //If this step doesn't have its own passing conditions/evaluators, or the flag "showNextButton" is true, then, the button is visible
           if (step.showNextButton || step.autoContinue === false || !(step.completingConditions && step.completingConditions.length > 0)) {
-            var nextStep = this._storyline.steps[this.getStepPosition() + 1];
+            var nextStep = this._getSteps()[this.getStepPosition() + 1];
             if (nextStep) {
-              description.nextButton.setText(getString(strings.next) + ": " + this._storyline.steps[this.getStepPosition() + 1].title);
+              description.nextButton.setText(getString(strings.next) + (hasPaths || !wizard.enableNextButtonTitle ? "" : ": " + this._getSteps()[this.getStepPosition() + 1].title));
             } else {
               description.nextButton.setText(getString(strings.finishWizard));
             }
@@ -835,7 +841,7 @@
       if (!flags.changingStep || flags.skippingStep) {
         flags.changingStep = true;
         var currentStep = this.currentStep;
-        nextStep = nextStep || this._storyline.steps[this.getStepPosition(this.currentStep) + 1];
+        nextStep = nextStep || this._getSteps()[this.getStepPosition(this.currentStep) + 1];
         var self = this;
 
         this.hideStep(function () {
@@ -878,7 +884,7 @@
      @param {Object} step                                  The step object to get position
      **/
     Wizard.method("getStepPosition", function (step) {
-      return this._storyline.steps.indexOf(step || this.currentStep);
+      return this._getSteps().indexOf(step || this.currentStep);
     });
 
     /**
@@ -926,6 +932,10 @@
     Wizard.method("isAlreadyWatched", function () {
       //ToDo
       return false;
+    });
+
+    Wizard.method("_getSteps", function () {
+      return (this._currentPath && this._currentPath.steps) || this._storyline.steps;
     });
 
     /**
@@ -1417,9 +1427,11 @@
     StepDescription.method("render", function () {
       this.$el = $("<div>").addClass("sideshow-step-description").addClass("sideshow-hidden").addClass("sideshow-invisible");
 
+      var hasPaths = currentWizard._storyline.paths && currentWizard._storyline.paths.length > 0;
       var stepPosition = $("<span>").addClass("sideshow-step-position");
+
       this.$el.append(stepPosition);
-      if (currentWizard.showStepPosition === false) stepPosition.hide();
+      if (currentWizard.showStepPosition === false || hasPaths) stepPosition.hide();
       currentWizard.name && this.$el.attr('data-name', currentWizard.name);
 
       // Check if close button should be on step
@@ -2382,7 +2394,7 @@
 
     SS.gotoStep = function () {
       var firstArg = arguments[0],
-          steps = currentWizard._storyline.steps,
+          steps = currentWizard._getSteps(),
           destination;
 
       flags.skippingStep = true;
@@ -2402,6 +2414,27 @@
       setTimeout(function () {
         currentWizard.next(null, destination);
       }, 100);
+    };
+
+    /**
+     Changes the current step sequence by jumping to another path
+     
+     @method gotoPath
+     @static
+     **/
+    SS.gotoPath = function (pathName) {
+      var storyline = currentWizard._storyline;
+      if (!storyline.paths) throw new SSException("402", "There's no paths in this tutorial's storyline.");
+
+      var path = storyline.paths.filter(function (p) {
+        return p.name === pathName;
+      });
+
+      if (!path) throw new SSException("403", "There's no path called '" + pathName + "' in this tutorial's storyline.");
+      if (path.length > 1) throw new SSException("404", "There are multiple paths called '" + pathName + "' in this tutorial's storyline.");
+
+      currentWizard._currentPath = path[0];
+      SS.gotoStep(1);
     };
 
     /**
@@ -2602,7 +2635,7 @@
      */
     SS.isLastStep = function () {
       if (!currentWizard) return; // no current wizard, no steps to check
-      return currentWizard.currentStep == currentWizard._storyline.steps[currentWizard._storyline.steps.length - 1];
+      return currentWizard.currentStep == currentWizard._getSteps()[currentWizard._storyline.steps.length - 1];
     };
 
     /**
