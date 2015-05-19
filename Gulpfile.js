@@ -1,41 +1,37 @@
 //All Requires
-var gulp = require('gulp'),
-    autoprefixer = require('gulp-autoprefixer'),
-    minifycss = require('gulp-minify-css'),
-    jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),
-    csslint = require('gulp-csslint'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
-    notify = require('gulp-notify'),
-    livereload = require('gulp-livereload'),
-    open = require('open'),
-    del = require('del'),
-    http = require('http'),
-    ecstatic = require('ecstatic'),
-    util = require('gulp-util'),
-    prettify = require('gulp-prettify'),
-    beautify = require('gulp-beautify'),
-    stylus = require('gulp-stylus'),
-    include = require('gulp-include'),
-    fs = require('fs'),
-    path = require('path'),
-    prompt = require('gulp-prompt'),
-    yuidoc = require('gulp-yuidoc'),
-    bower = require('gulp-bower'),
-    unzip = require('gulp-unzip'),
-    zip = require('gulp-zip'),
-    gzip = require('gulp-gzip'),
-    tar = require('gulp-tar'),
-    run = require('gulp-run'),
-    wait = require('gulp-wait'),
-    git = require('gift'),
-    repo = git('./'),
-    webserverPort = 8080,
-    isWin = /^win/.test(process.platform),
-    appRoot = path.resolve('.');
-    //config = require('./gulp/config');
-
+var gulp = require('gulp');
+var autoprefixer = require('gulp-autoprefixer');
+var minifycss = require('gulp-minify-css');
+var uglify = require('gulp-uglify');
+var csslint = require('gulp-csslint');
+var rename = require('gulp-rename');
+var concat = require('gulp-concat');
+var notify = require('gulp-notify');
+var livereload = require('gulp-livereload');
+var open = require('open');
+var del = require('del');
+var http = require('http');
+var ecstatic = require('ecstatic');
+var util = require('gulp-util');
+var beautify = require('gulp-beautify');
+var stylus = require('gulp-stylus');
+var include = require('gulp-include');
+var fs = require('fs');
+var path = require('path');
+var prompt = require('gulp-prompt');
+var yuidoc = require('gulp-yuidoc');
+var bower = require('gulp-bower');
+var unzip = require('gulp-unzip');
+var zip = require('gulp-zip');
+var gzip = require('gulp-gzip');
+var tar = require('gulp-tar');
+var run = require('gulp-run');
+var wait = require('gulp-wait');
+var git = require('gift');
+var repo = git('./');
+var webserverPort = 8080;
+var isWin = /^win/.test(process.platform);
+var appRoot = path.resolve('.');
 
 
 /* Tasks (will be extracted to separated files) */
@@ -195,43 +191,52 @@ function updateBowerDependencies(){
 }
 
 function compileSideshowStylesheets(){
-  return gulp.src('stylesheets/sideshow.styl')
-        .pipe(stylus())
-        .on('error', errorHandler('sideshow_stylesheet_compiling_error'))
-        .pipe(autoPrefixerConfig())
-        .on('error', errorHandler('sideshow_stylesheet_autoprefixing_error'))
-        .pipe(rename('sideshow.css'))
-        .pipe(gulp.dest('tmp'))
-        .pipe(csslint('.csslintrc'))
-        .pipe(csslint.reporter())
-        .pipe(rename({suffix: '.min'}))
+  var stream =  gulp.src('stylesheets/sideshow.styl')
+                    .pipe(stylus())
+                    .on('error', errorHandler('sideshow_stylesheet_compiling_error'))
+                    .pipe(autoPrefixerConfig())
+                    .on('error', errorHandler('sideshow_stylesheet_autoprefixing_error'))
+                    .pipe(rename('sideshow.css'))
+                    .pipe(gulp.dest('tmp'));
+
+  if(util.env.csslint){
+    stream.pipe(csslint('.csslintrc'))
+          .pipe(csslint.reporter());
+  }
+
+  stream.pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
         .pipe(gulp.dest('distr/stylesheets'));
 
-        //Font face stylesheet
-        gulp.src('stylesheets/sideshow-fontface.styl')
-        .pipe(stylus())
-        .on('error', errorHandler('fontface_stylesheet_compiling_error'))
-        .pipe(autoPrefixerConfig())
-        .on('error', errorHandler('fontface_stylesheet_autoprefixing_error'))
-        .pipe(rename('sideshow-fontface.min.css'))
-        .pipe(minifycss())
-        .pipe(gulp.dest('distr/fonts'));
+  //Font face stylesheet
+  gulp.src('stylesheets/sideshow-fontface.styl')
+      .pipe(stylus())
+      .on('error', errorHandler('fontface_stylesheet_compiling_error'))
+      .pipe(autoPrefixerConfig())
+      .on('error', errorHandler('fontface_stylesheet_autoprefixing_error'))
+      .pipe(rename('sideshow-fontface.min.css'))
+      .pipe(minifycss())
+      .pipe(gulp.dest('distr/fonts'));
 }
 
 function compileExamplesStylesheet(){
-  return gulp.src('examples/stylesheets/styl/example.styl')
-        .pipe(stylus())
-        .on('error', errorHandler('examples_stylesheet_compiling_error'))
-        .pipe(autoPrefixerConfig())
-        .on('error', errorHandler('examples_stylesheet_autoprefixing_error'))
-        .pipe(rename('example.css'))
-        .pipe(gulp.dest('tmp'))
-        .pipe(csslint('.csslintrc'))
-        .pipe(csslint.reporter())
-        .pipe(rename({suffix: '.min'}))
+  var stream = gulp.src('examples/stylesheets/styl/example.styl')
+                   .pipe(stylus())
+                   .on('error', errorHandler('examples_stylesheet_compiling_error'))
+                   .pipe(autoPrefixerConfig())
+                   .on('error', errorHandler('examples_stylesheet_autoprefixing_error'))
+                   .pipe(rename('example.css'))
+                   .pipe(gulp.dest('tmp'));
+
+  if(util.env.csslint){
+    stream.pipe(csslint('.csslintrc'))
+          .pipe(csslint.reporter());
+  }
+
+  stream.pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
         .pipe(gulp.dest('examples/stylesheets'));
+
 }
 
 function bundleScripts(endCallback){

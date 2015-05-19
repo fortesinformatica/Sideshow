@@ -2,7 +2,7 @@
     "name": "Sideshow",
     "description": "Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps.",
     "version": "0.4.3",
-    "url": "http://github.com/fortesinformatica/Sideshow",
+    "url": "http://github.com/SideshowJS/Sideshow",
     "logo": "https://raw.githubusercontent.com/fortesinformatica/Sideshow/master/examples/images/sideshow-logo.svg",
     "options": {
         "linkNatives": "true",

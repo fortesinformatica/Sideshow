@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>sideshow</id>
@@ -7,7 +7,7 @@
         <authors>Alcides Queiroz</authors>
         <owners>Fortes Informática</owners>
         <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-        <projectUrl>https://github.com/fortesinformatica/Sideshow</projectUrl>
+        <projectUrl>https://github.com/SideshowJS/Sideshow</projectUrl>
         <iconUrl>http://fortesinformatica.github.io/Sideshow/favicon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <developmentDependency>true</developmentDependency>
