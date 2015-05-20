@@ -2361,6 +2361,11 @@
       // if it is a premature close, make sure to call handler
       SS.isPrematureClose() && currentWizard.listeners.onPrematureClose();
 
+      if (SS.onClose) {
+        if (typeof SS.onClose !== "function") throw new SSException("207", "Sideshow's listener 'onClose' must be a function.");
+        SS.onClose();
+      }
+
       removeDOMGarbage();
       Polling.clear();
       SS.ControlVariables.clear();
@@ -2595,6 +2600,12 @@
      **/
     SS.start = function (config) {
       config = config || {};
+
+      if (SS.onStart) {
+        if (typeof SS.onStart !== "function") throw new SSException("206", "Sideshow's listener 'onStart' must be a function.");
+
+        SS.onStart();
+      }
 
       if (!flags.running) {
         var onlyNew = "onlyNew" in config && !! config.onlyNew;
