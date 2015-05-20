@@ -41,11 +41,11 @@
 	**/
 	SS.config.autoSkipIntro = false;
 
-    /**
-     Defines where to place the close button. Default is "screen-corner".
-     When set to "description-box", it will position on the step description
+  /**
+   Defines where to place the close button. Default is "screen-corner".
+   When set to "description-box", it will position on the step description
 
-     @@field showClose
-     @type boolean
-     **/
-    SS.config.closeButtonPosition = "screen-corner";
+   @@field showClose
+   @type boolean
+   **/
+  SS.config.closeButtonPosition = "screen-corner";

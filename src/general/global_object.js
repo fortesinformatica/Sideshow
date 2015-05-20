@@ -280,13 +280,19 @@
     @method render
     **/
     SS.CloseButton.method("render", function() {
+        var buttonInDescriptionBox = SS.config.closeButtonPosition === 'description-box';
+
         this.$el = $("<button>")
-            .addClass("sideshow-close-button")
-            .text(getString(strings.close));
-        this.$el.click(function() {
-            SS.close();
-        });
-        this.callSuper("render");
+            .addClass("sideshow-close-button" + (buttonInDescriptionBox ? "--no-text" : ""))
+            .click(function() {
+                SS.close();
+            });
+
+        if(!buttonInDescriptionBox){
+            this.$el.text(getString(strings.close));
+            this.callSuper("render");
+        } else
+          this.callSuper("render", WizardMenu.$el);
     });
 
     /**
@@ -298,10 +304,10 @@
     SS.start = function (config) {
         config = config || {};
 
-        if(SS.onStart){
-          if(typeof SS.onStart !== "function") throw new SSException("206", "Sideshow's listener 'onStart' must be a function.");
+        if(this.onStart){
+          if(typeof this.onStart !== "function") throw new SSException("206", "Sideshow's listener 'onStart' must be a function.");
 
-          SS.onStart();
+          this.onStart();
         }
 
         if (!flags.running) {
@@ -309,7 +315,7 @@
             var listAll = "listAll" in config && !! config.listAll;
             var wizardName = config.wizardName;
 
-            if (listAll) SS.showWizardsList(wizards.filter(function (w) {
+            if (listAll) this.showWizardsList(wizards.filter(function (w) {
                 return w.isEligible() || w.preparation;
             }));
             else if(wizardName){
@@ -321,12 +327,10 @@
 
                 wizard.prepareAndPlay();
             } 
-            else SS.showWizardsList(onlyNew);
+            else this.showWizardsList(onlyNew);
 
-            if (SS.config.closeButtonPosition !== 'description-box') {
-                this.CloseButton.singleInstance.render();
-                this.CloseButton.singleInstance.fadeIn();
-            }
+            this.CloseButton.singleInstance.render();
+            this.CloseButton.singleInstance.fadeIn();
 
             registerInnerHotkeys();
             flags.running = true;

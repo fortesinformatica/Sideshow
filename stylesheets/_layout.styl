@@ -211,6 +211,13 @@ $sideshow-button{
 	width: 750px;
 	height: 400px;
 	z-index: 15002;
+ 
+    .sideshow-close-button--no-text{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        margin: 0;
+    }   
 
 	//The initial menu title
 	.sideshow-wizard-menu-title{
@@ -366,7 +373,7 @@ $close-button{
     }
 }
 
-.sideshow-close-step {
+.sideshow-close-button--no-text{
     @extends $close-button;
     background: rgba(black, 0.1);
     width: 40px;

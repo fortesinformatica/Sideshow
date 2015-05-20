@@ -115,7 +115,7 @@
         if (SS.config.closeButtonPosition === 'description-box') {
             // render the close button on the step
             var $closeStep = $("<button>")
-                .addClass("sideshow-close-step")
+                .addClass("sideshow-close-button--no-text")
                 .click(function () {
                     SS.close();
                 });

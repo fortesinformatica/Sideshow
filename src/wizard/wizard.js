@@ -233,7 +233,7 @@
               if (step.showNextButton || step.autoContinue === false || !(step.completingConditions && step.completingConditions.length > 0)) {
                   var nextStep = this._getSteps()[this.getStepPosition() + 1];
                   if (nextStep) {
-                      description.nextButton.setText(getString(strings.next) + (hasPaths || !wizard.enableNextButtonTitle ? "" : ": " + this._getSteps()[this.getStepPosition() + 1].title));
+                      description.nextButton.setText(getString(strings.next) + (hasPaths || wizard.enableNextButtonTitle === false ? "" : ": " + this._getSteps()[this.getStepPosition() + 1].title));
                   } else {
                       description.nextButton.setText(getString(strings.finishWizard));
                   }
