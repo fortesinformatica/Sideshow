@@ -317,28 +317,11 @@ Sideshow.init();
 
 ##Fortes Informática
 
-Sideshow was created by [Alcides Queiroz](https://github.com/alcidesqueiroz), at [Fortes Informática](http://www.fortesinformatica.com.br), a great technology company headquartered in Fortaleza, CE (Brazil). Fortes Informática has several offices across the country, and an impressive history of more than 20 years. Sideshow is making our software yet more easy to use and even more innovative.
-
-##The Sideshow Team (maintainers)
-
-Alcides Queiroz Aguiar 
-
--	E-mail: alcidesqueiroz(at)gmail(dot)com 
--	Twitter: [@alcidesqueiroz](http://www.twitter.com/alcidesqueiroz)
--	Stack Overflow: [http://stackoverflow.com/users/1295666/alcides-queiroz-aguiar](http://stackoverflow.com/users/1295666/alcides-queiroz-aguiar)
--	Github: [alcidesqueiroz](https://github.com/alcidesqueiroz)
-	
-Daniel Apt
-
--	E-mail: info(at)iamapt(dot)com 
--	Twitter: [@danielapt](http://www.twitter.com/danielapt)
--	Stack Overflow: [http://stackoverflow.com/users/1639675/daniel-apt](http://stackoverflow.com/users/1639675/daniel-apt)
--	Github: [danielapt](https://github.com/danielapt)
-	
+Sideshow was created by [Fortes Informática](http://www.fortesinformatica.com.br), a great technology company headquartered in Fortaleza, CE (Brazil). Fortes Informática has several offices across the country, and an impressive history of more than 20 years. Sideshow is making our software yet more easy to use and even more innovative.
 
 ##License and Copyright
 
-Copyright 2013-2015 Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com] 
+Copyright 2013-2015 Fortes Informática
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

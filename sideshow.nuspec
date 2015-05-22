@@ -4,7 +4,7 @@
         <id>sideshow</id>
         <version>0.4.3</version>
         <title>Sideshow</title>
-        <authors>Alcides Queiroz</authors>
+        <authors>Fortes Informática</authors>
         <owners>Fortes Informática</owners>
         <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
         <projectUrl>https://github.com/fortesinformatica/Sideshow</projectUrl>
@@ -13,7 +13,7 @@
         <developmentDependency>true</developmentDependency>
         <description>Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps.</description>
         <summary>An incredible Javascript interactive help Library</summary>
-        <copyright>Copyright 2013-2015 Alcides Queiroz [alcidesqueiroz(at)gmail(dot)com]</copyright>
+        <copyright>Copyright 2013-2015 Fortes Informática</copyright>
         <tags>sideshow, interactive, tutorial, tour, help, wizard, step-by-step, library, script, javascript</tags>
     </metadata>
     <files>

@@ -3,7 +3,7 @@
     "version": "0.4.3",
     "homepage": "http://fortesinformatica.github.io/Sideshow",
     "authors": [
-        "Alcides Queiroz <alcidesqueiroz@gmail.com>"
+        "Fortes Informática"
     ],
     "description": "Sideshow is a powerful javascript library which aims to reduce your user''s learning curve by providing a way to create step-by-step interactive helps.",
     "main": "distr/sideshow.js",

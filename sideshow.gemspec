@@ -5,8 +5,7 @@ Gem::Specification.new do |s|
   s.name        = 'sideshow'
   s.version     = '0.4.3'
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Alcides Queiroz']
-  s.email       = ['alcidesqueiroz@gmail.com']
+  s.authors     = ['Fortes Informática']
   s.homepage    = 'http://fortesinformatica.github.io/Sideshow'
   s.summary     = 'An incredible Javascript interactive help Library'
   s.license     = 'Apache 2.0'
