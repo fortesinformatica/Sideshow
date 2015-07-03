@@ -887,10 +887,12 @@
           var completingCondition = conditions[fn];
           if (!completingCondition()) completed = false;
         }
-
+        StepDescription.singleInstance.nextButton.enable();
         if (completed) {
-          if (this.currentStep.autoContinue === false) StepDescription.singleInstance.nextButton.enable();
-          else currentWizard.next();
+            if (this.currentStep.autoContinue === false) StepDescription.singleInstance.nextButton.enable();
+            else currentWizard.next();
+        } else {
+            StepDescription.singleInstance.nextButton.disable();
         }
       }
     });
