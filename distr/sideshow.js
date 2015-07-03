@@ -882,18 +882,22 @@
     Wizard.method("pollForCheckCompletedStep", function () {
       var conditions = this.currentStep.completingConditions;
       if (conditions && conditions.length > 0 && !flags.skippingStep) {
-        var completed = true;
-        for (var fn = 0; fn < conditions.length; fn++) {
-          var completingCondition = conditions[fn];
-          if (!completingCondition()) completed = false;
-        }
-        StepDescription.singleInstance.nextButton.enable();
-        if (completed) {
-            if (this.currentStep.autoContinue === false) StepDescription.singleInstance.nextButton.enable();
-            else currentWizard.next();
-        } else {
-            StepDescription.singleInstance.nextButton.disable();
-        }
+          var completed = true;
+          for (var fn = 0; fn < conditions.length; fn++) {
+              var completingCondition = conditions[fn];
+              if (!completingCondition()) completed = false;
+          }
+          if (completed) {
+              if (this.currentStep.autoContinue === false) {
+                  StepDescription.singleInstance.nextButton.enable();
+              } else {
+                  currentWizard.next();
+              }
+          } else {
+              StepDescription.singleInstance.nextButton.disable();
+          }
+      } else {
+          StepDescription.singleInstance.nextButton.enable();
       }
     });
 
