@@ -56,6 +56,6 @@
     ],
     "dependencies": {
         "jquery": "latest",
-        "pagedown": "http://pagedown.googlecode.com/archive/2a8c75ce3fb50b88165efae9d48a8bc87dc4fb2b.zip"
+        "pagedown": "https://github.com/ujifgc/pagedown.git"
     }
 }
