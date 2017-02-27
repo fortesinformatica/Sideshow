@@ -12,12 +12,12 @@
 
 [Documentation and Live example](http://fortesinformatica.github.io/Sideshow)
 
-Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps. 
+Sideshow is a powerful javascript library which aims to reduce your user's learning curve by providing a way to create step-by-step interactive helps.
 
 *	Explain the features of your application
 *	Control your end-user's interaction with your UI
 *	Use Markdown to create formatted step descriptions
-*	Emphasize what you're explaining in each step (a button, grid, dropdown, form, the whole screen, and so forth) by surrounding it with a fully adaptable mask. 
+*	Emphasize what you're explaining in each step (a button, grid, dropdown, form, the whole screen, and so forth) by surrounding it with a fully adaptable mask.
 
 **Just think! The sky is the limit!**
 
@@ -39,9 +39,9 @@ Sideshow.config.language = "en";
 Sideshow.init();
 ```
 
-**Note**: For now, Sideshow only supports `en` (american english), `pt-br` (brazilian portuguese) and `es` (spanish, translated by Luis Alfaro de la Fuente, thanks!)
+**Note**: For now, Sideshow only supports `en` (american english), `pt-br` (brazilian portuguese), `es` (spanish, translated by Luis Alfaro de la Fuente, thanks!) and `fr`.
 
-4) 	Create your tutorials and import each one in your HTML after the Sideshow script 
+4) 	Create your tutorials and import each one in your HTML after the Sideshow script
 
 ###Creating a Tutorial
 
@@ -55,16 +55,16 @@ Sideshow.registerWizard({
 		{ hash: "#messages" }, //This tutorial would be eligible for URLs like this "http://www.foo.com/bar#messages"
 		{ route: "/adm/orders", caseSensitive: true },  //This tutorial would be eligible for URLs like this "http://www.foo.com/adm/orders"
 		function(){
-			//Here we could do any checking to infer if this tutorial is eligible the current screen/context. 
-			//After this checking, just return a boolean indicating if this tutorial will be available. 
+			//Here we could do any checking to infer if this tutorial is eligible the current screen/context.
+			//After this checking, just return a boolean indicating if this tutorial will be available.
 			return $(".grid").length > 0;
-		}	
+		}
     ]
 });
 ```
 
 ###Defining a Storyline
-A storyline is the sequence of steps of some tutorial. 
+A storyline is the sequence of steps of some tutorial.
 
 ```Javascript
 Sideshow.registerWizard({
@@ -188,10 +188,10 @@ Sideshow.registerWizard({
 		    text: "An example of step just to illustrate how to use step events.",
 		    listeners: {
 		    	beforeStep: function(){
-		    		//What goes here will be executed before this step 
+		    		//What goes here will be executed before this step
 		    	},
 		    	afterStep: function(){
-		    		//What goes here will be executed after this step 
+		    		//What goes here will be executed after this step
 		    	}
 			}
 		},
@@ -233,9 +233,9 @@ Sideshow.registerWizard({
 		    //...
 		    listeners: {
 		    	beforeStep: function(){
-			    	if($("#groups").children().length > 0) 
+			    	if($("#groups").children().length > 0)
 			    		Sideshow.gotoStep("the_end"); //we're jumping to the step named "the_end"
-			    	else if($("#people").children().length > 0) 
+			    	else if($("#people").children().length > 0)
 			    		Sideshow.gotoStep(7); //we're jumping to the seventh step in this Wizard storyline
 				}
 			}
@@ -261,10 +261,10 @@ Sideshow.registerWizard({
 		{ hash: "#messages" }, //This tutorial would be eligible for URLs like this "http://www.foo.com/bar#messages"
 		{ route: "/adm/orders", caseSensitive: true },  //This tutorial would be eligible for URLs like this "http://www.foo.com/adm/orders"
 		function(){
-			//Here we could do any checking to infer if this tutorial is eligible the current screen/context. 
-			//After this checking, just return a boolean indicating if this tutorial will be available. 
+			//Here we could do any checking to infer if this tutorial is eligible the current screen/context.
+			//After this checking, just return a boolean indicating if this tutorial will be available.
 			return $(".grid").length > 0;
-		}	
+		}
 	]
 }).storyLine({
 	//...
@@ -294,7 +294,7 @@ You can also define relationships between tutorials, this way, after finishing a
 Sideshow.registerWizard({
 	//...
 	//after finishing the current wizard, the user will be guided to related tutorials
-    relatedWizards: [ "creating_user", "groups_and_permissions", "security_settings" ] 
+    relatedWizards: [ "creating_user", "groups_and_permissions", "security_settings" ]
 }).storyLine({
 	//...
 });
@@ -312,8 +312,8 @@ Sideshow.init();
 
 ##Invoking Sideshow##
 
-*	The user can access the tutorials available for the current screen by pressing `F2`, . 
-*	The user can access the tutorials available for the current screen + tutorials for other screens with a preparation function by pressing `shift+F2`. 
+*	The user can access the tutorials available for the current screen by pressing `F2`, .
+*	The user can access the tutorials available for the current screen + tutorials for other screens with a preparation function by pressing `shift+F2`.
 
 ##Fortes Informática
 
