@@ -209,39 +209,47 @@
       availableWizards: {
         "en": "Available Tutorials",
         "pt-br": "Tutoriais Disponíveis",
-        "es": "Tutoriales Disponibles"
+        "es": "Tutoriales Disponibles",
+        "fr": "Tutoriels Disponibles"
       },
       relatedWizards: {
         "en": "Related Wizards",
         "pt-br": "Tutoriais Relacionados",
-        "es": "Tutoriales Relacionados"
+        "es": "Tutoriales Relacionados",
+        "fr": "Tutoriels Similaires"
       },
       noAvailableWizards: {
         "en": "There's no tutorials available.",
         "pt-br": "Não há tutoriais disponíveis para esta tela.",
-        "es": "No hay tutoriales disponibles."
+        "es": "No hay tutoriales disponibles.",
+        "fr": "Il n'y a pas de tutoriels disponibles"
       },
       close: {
         "en": "Close",
         "pt-br": "Fechar",
-        "es": "Cerrar"
+        "es": "Cerrar",
+        "fr": "Fermer"
       },
       estimatedTime: {
         "en": "Estimated Time",
         "pt-br": "Tempo Estimado",
-        "es": "Tiempo Estimado"
+        "es": "Tiempo Estimado",
+        "fr": "Temps estimées"
       },
       next: {
         "en": "Next",
         "pt-br": "Continuar",
-        "es": "Continuar"
+        "es": "Continuar",
+        "fr": "Continuer"
       },
       finishWizard: {
         "en": "Finish Wizard",
         "pt-br": "Concluir Tutorial",
-        "es": "Concluir Tutorial"
+        "es": "Concluir Tutorial",
+        "fr": "Terminer Tutoriel"
       }
     };
+
 
     /**
      Sideshow Settings
@@ -2185,14 +2193,15 @@
           var $wiz = $("<li>");
           var $wizTitle = $("<h2>").text(wiz.title);
 
-          var description = wiz.description;
-          description.length > 100 && (description = description.substr(0, 100) + "...");
+          if (wiz.title || wiz.description) {
+            var description = wiz.description;
+            description.length > 100 && (description = description.substr(0, 100) + "...");
 
-          var $wizDescription = $("<span>").addClass("sideshow-wizard-menu-item-description").text(description);
-          var $wizEstimatedTime = $("<span>").addClass("sideshow-wizard-menu-item-estimated-time").text(wiz.estimatedTime);
-          $wiz.append($wizEstimatedTime, $wizTitle, $wizDescription);
-          $wizardsList.append($wiz);
-
+            var $wizDescription = $("<span>").addClass("sideshow-wizard-menu-item-description").text(description);
+            var $wizEstimatedTime = $("<span>").addClass("sideshow-wizard-menu-item-estimated-time").text(wiz.estimatedTime);
+            $wiz.append($wizEstimatedTime, $wizTitle, $wizDescription);
+            $wizardsList.append($wiz);
+          }
           setClick($wiz, wiz);
         }
         $menu.append($wizardsList);
