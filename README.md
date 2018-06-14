@@ -1,4 +1,4 @@
-#Sideshow
+# Sideshow
 
 ![Sideshow Logo](http://fortesinformatica.github.io/Sideshow/examples/images/sideshow-logo.png)
 ========
@@ -21,7 +21,7 @@ Sideshow is a powerful javascript library which aims to reduce your user's learn
 
 **Just think! The sky is the limit!**
 
-##Usage
+## Usage
 All the files needed to use Sideshow are located under the `distr` folder.
 
 1) 	In your HTML, include Sideshow script, its dependencies (put the dependencies before the Sideshow script) and the stylesheet.
@@ -43,7 +43,7 @@ Sideshow.init();
 
 4) 	Create your tutorials and import each one in your HTML after the Sideshow script
 
-###Creating a Tutorial
+### Creating a Tutorial
 
 ```Javascript
 Sideshow.registerWizard({
@@ -63,7 +63,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Defining a Storyline
+### Defining a Storyline
 A storyline is the sequence of steps of some tutorial.
 
 ```Javascript
@@ -84,7 +84,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Step: A complete example
+### Step: A complete example
 
 ```Javascript
 Sideshow.registerWizard({
@@ -102,7 +102,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Using Markdown
+### Using Markdown
 
 ```Javascript
 Sideshow.registerWizard({
@@ -119,7 +119,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Completing Conditions
+### Completing Conditions
 Completing conditions are just (as the name suggests) conditions to be satisfied in order to proceed to the next step.
 
 ```Javascript
@@ -142,7 +142,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Auto continue
+### Auto continue
 By setting the autoContinue flag to true, Sideshow proceeds automaticaly when the completing conditions are satisfied.
 
 ```Javascript
@@ -166,7 +166,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Events
+### Events
 You can perform some action or do some preparation for the next step, or anything you want which can be done programatically.
 
 ```Javascript
@@ -200,7 +200,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Skipping a step
+### Skipping a step
 When entering some step you can do some verification to skip the step automaticaly.
 
 ```Javascript
@@ -220,7 +220,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Jumping to other step
+### Jumping to other step
 You can jump to other step by its position (1-based) or its unique name.
 
 ```Javascript
@@ -250,7 +250,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Tutorial Eligibility
+### Tutorial Eligibility
 When a user invokes Sideshow, a list with the tutorials available for the current screen/context is shown. Sideshow knows if a tutorial is eligible for some screen by testing the `affects` conditions of each registered tutorial. If one of the conditions are met, the tutorial is listed.
 
 
@@ -271,7 +271,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Tutorial Preparation Function
+### Tutorial Preparation Function
 Even if a tutorial isn't eligible for some screen, by using a preparation function a user can access this tutorial from any point of your system/site (by pressing shift-F2).
 
 
@@ -286,7 +286,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Related Tutorials
+### Related Tutorials
 You can also define relationships between tutorials, this way, after finishing a tutorial, the user sees a list of others related to this.
 
 
@@ -300,7 +300,7 @@ Sideshow.registerWizard({
 });
 ```
 
-###Skipping the Intro screen (the tutorial list) automatically if there's just one tutorial available for a given context
+### Skipping the Intro screen (the tutorial list) automatically if there's just one tutorial available for a given context
 In the sideshow.config.js file, set the `autoSkipIntro` option to true:
 
 ```Javascript
@@ -310,16 +310,16 @@ Sideshow.init();
 ```
 
 
-##Invoking Sideshow##
+## Invoking Sideshow
 
 *	The user can access the tutorials available for the current screen by pressing `F2`, .
 *	The user can access the tutorials available for the current screen + tutorials for other screens with a preparation function by pressing `shift+F2`.
 
-##Fortes Informática
+## Fortes Informática
 
 Sideshow was created by [Fortes Informática](http://www.fortesinformatica.com.br), a great technology company headquartered in Fortaleza, CE (Brazil). Fortes Informática has several offices across the country, and an impressive history of more than 20 years. Sideshow is making our software yet more easy to use and even more innovative.
 
-##License and Copyright
+## License and Copyright
 
 Copyright 2013-2015 Fortes Informática
 
